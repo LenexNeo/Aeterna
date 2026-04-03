@@ -136,7 +136,11 @@ document.addEventListener('mousemove',e=>{
   ring.style.transform=`translate(${x-16}px,${y-16}px)`;
 });
 const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.08});
-document.querySelectorAll('.reveal').forEach(r=>observer.observe(r));
+document.querySelectorAll('.reveal').forEach(r=>{
+  const rect=r.getBoundingClientRect();
+  if(rect.top < window.innerHeight) r.classList.add('visible');
+  else observer.observe(r);
+});
 </script>
 </body>
 </html>
