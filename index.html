@@ -105,7 +105,8 @@
     min-height: 100vh;
     display: flex; flex-direction: column;
     justify-content: center; align-items: flex-start;
-    padding: 140px 48px 80px;
+    gap: 0;
+    padding: 140px 48px 60px;
     position: relative; overflow: hidden;
   }
 
@@ -176,6 +177,7 @@
   }
 
   .hero-actions {
+    margin-bottom: 60px;
     display: flex; gap: 14px; align-items: center;
     opacity: 0; animation: fadein 0.9s 0.8s forwards;
   }
@@ -197,9 +199,9 @@
   .btn-ghost:hover { border-color: var(--purple); color: var(--purple); }
 
   .hero-stat-row {
-    position: absolute; bottom: 48px; left: 48px; right: 48px;
-    display: flex; gap: 48px;
-    opacity: 0; animation: fadein 0.9s 1s forwards;
+    position: relative; bottom: auto; left: auto; right: auto; margin-top: auto;
+    display: flex; gap: 40px; border-top: 0.5px solid var(--border); padding-top: 24px; width: 100%; margin-top: 40px;
+    opacity: 1;
     border-top: 0.5px solid var(--border); padding-top: 28px;
   }
   .hero-stat { display: flex; flex-direction: column; gap: 4px; }
