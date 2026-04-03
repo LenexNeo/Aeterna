@@ -95,9 +95,9 @@
 </div>
 <div class="dash-content">
   <div class="tabs-row">
-    <button class="dash-tab active">All capsules</button>
-    <button class="dash-tab">Sealed</button>
-    <button class="dash-tab">Unlocked</button>
+    <button class="dash-tab active" onclick="filterCaps('all',this)">All capsules</button>
+    <button class="dash-tab" onclick="filterCaps('sealed',this)">Sealed</button>
+    <button class="dash-tab" onclick="filterCaps('unlocked',this)">Unlocked</button>
   </div>
   <div class="capsules-grid">
     <div class="capsule-card">
@@ -118,7 +118,7 @@
           <div><div class="cd-num" id="d1h">14</div><div class="cd-unit-label">Hours</div></div>
         </div>
       </div>
-      <div class="cap-actions"><button class="cap-btn">View details</button><button class="cap-btn">Edit</button></div>
+      <div class="cap-actions"><button class="cap-btn" onclick="alert('Capsule details: Letter to myself at 30 — 1GB — Sealed until 2034')">View details</button><button class="cap-btn" onclick="alert('Edit feature: You can change the capsule name and unlock date before sealing.')">Edit</button></div>
     </div>
     <div class="capsule-card">
       <span class="cap-status status-sealed">Sealed</span>
@@ -138,7 +138,7 @@
           <div><div class="cd-num">06</div><div class="cd-unit-label">Hours</div></div>
         </div>
       </div>
-      <div class="cap-actions"><button class="cap-btn">View details</button><button class="cap-btn">Edit</button></div>
+      <div class="cap-actions"><button class="cap-btn" onclick="alert('Capsule details — Sealed and encrypted.')">View details</button><button class="cap-btn" onclick="alert('Edit feature coming soon!')">Edit</button></div>
     </div>
     <div class="capsule-card unlocked">
       <span class="cap-status status-unlocked">Unlocked</span>
@@ -150,7 +150,7 @@
         <div class="cap-meta-row"><span class="cap-meta-key">Unlocked</span><span class="cap-meta-val">Apr 01, 2026</span></div>
       </div>
       <div class="unlock-banner">Your capsule has unlocked. Relive the memory.</div>
-      <div class="cap-actions"><button class="cap-btn primary">Open capsule</button><button class="cap-btn">Download all</button><button class="cap-btn">Share</button></div>
+      <div class="cap-actions"><button class="cap-btn primary" onclick="alert('Opening capsule: University First Day — 12 files unlocked!')">Open capsule</button><button class="cap-btn" onclick="alert('Preparing download of all 12 files...')">Download all</button><button class="cap-btn" onclick="navigator.clipboard.writeText(window.location.href).then(()=>alert('Share link copied to clipboard!'))">Share</button></div>
     </div>
     <div class="new-cap-card" onclick="window.location.href='create.html'">
       <div class="new-cap-icon">+</div>
@@ -172,10 +172,11 @@
 </footer>
 <script>
 const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.transform=`translate(${mx-4}px,${my-4}px)`;});
-function animateRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.transform=`translate(${rx-16}px,${ry-16}px)`;requestAnimationFrame(animateRing);}
-animateRing();
+document.addEventListener('mousemove',e=>{
+  const x=e.clientX,y=e.clientY;
+  cursor.style.transform=`translate(${x-4}px,${y-4}px)`;
+  ring.style.transform=`translate(${x-16}px,${y-16}px)`;
+});
 document.getElementById('dashDate').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
 function updateCountdown(){
   const unlock=new Date('2030-12-31');const now=new Date();const diff=unlock-now;
@@ -191,6 +192,20 @@ function updateCountdown(){
 }
 updateCountdown();setInterval(updateCountdown,60000);
 document.querySelectorAll('.dash-tab').forEach(t=>t.addEventListener('click',function(){document.querySelectorAll('.dash-tab').forEach(x=>x.classList.remove('active'));this.classList.add('active');}));
+
+function filterCaps(type, btn) {
+  document.querySelectorAll('.dash-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  const cards = document.querySelectorAll('.capsule-card');
+  cards.forEach(card => {
+    if (type === 'all') { card.style.display = ''; return; }
+    const isUnlocked = card.classList.contains('unlocked');
+    const isEmpty = card.classList.contains('new-cap-card');
+    if (isEmpty) { card.style.display = type === 'all' ? '' : 'none'; return; }
+    if (type === 'sealed') card.style.display = isUnlocked ? 'none' : '';
+    if (type === 'unlocked') card.style.display = isUnlocked ? '' : 'none';
+  });
+}
 </script>
 </body>
 </html>

@@ -484,7 +484,7 @@
       <div class="promo-label">Promo code</div>
       <div class="promo-row">
         <input class="promo-input" type="text" placeholder="Enter code">
-        <button class="promo-btn">Apply</button>
+        <button class="promo-btn" onclick="applyPromo()">Apply</button>
       </div>
     </div>
 
@@ -653,17 +653,15 @@
   // Cursor
   const cursor = document.getElementById('cursor');
   const ring = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
   document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cursor.style.transform = `translate(${mx - 4}px, ${my - 4}px)`;
+    const x = e.clientX, y = e.clientY;
+    cursor.style.transform = `translate(${x - 4}px, ${y - 4}px)`;
+    ring.style.transform = `translate(${x - 16}px, ${y - 16}px)`;
   });
-  function animateRing() {
-    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
-    ring.style.transform = `translate(${rx - 16}px, ${ry - 16}px)`;
-    requestAnimationFrame(animateRing);
-  }
-  animateRing();
+  document.querySelectorAll('button, a').forEach(el => {
+    el.addEventListener('mouseenter', () => { ring.style.borderColor = 'rgba(139,127,240,0.9)'; ring.style.transform += ' scale(1.5)'; });
+    el.addEventListener('mouseleave', () => { ring.style.borderColor = 'rgba(139,127,240,0.5)'; });
+  });
 
   // Scroll reveal
   const observer = new IntersectionObserver(entries => {
@@ -746,6 +744,13 @@
     updateSummaryDate(d);
     countdown.textContent = 'Unlocks in 5 years';
   })();
+
+function applyPromo() {
+  const code = document.querySelector('.promo-input').value.trim().toUpperCase();
+  if (code === 'AETERNA10') { alert('Promo code applied! 10% discount added.'); }
+  else if (code === '') { alert('Please enter a promo code.'); }
+  else { alert('Invalid promo code. Try AETERNA10!'); }
+}
 </script>
 </body>
 </html>

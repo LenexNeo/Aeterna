@@ -86,11 +86,11 @@
         <p class="form-sub">Sign in to access your capsules.</p>
         <div class="field"><label>Email address</label><input type="email" placeholder="you@example.com" id="loginEmail"></div>
         <div class="field"><label>Password</label><input type="password" placeholder="••••••••" id="loginPass"></div>
-        <a href="#" class="forgot">Forgot password?</a>
+        <a href="#" class="forgot" onclick="alert('A password reset link will be sent to your email.')">Forgot password?</a>
         <button class="btn-submit" onclick="window.location.href='dashboard.html'">Sign in to Aeterna</button>
         <div class="divider-or"><span>or</span></div>
-        <button class="btn-google">Continue with Google</button>
-        <div class="form-footer">No account? <a href="#" onclick="switchTab('register')">Create one →</a></div>
+        <button class="btn-google" onclick="alert('Google login coming soon! Please use email login.')">Continue with Google</button>
+        <div class="form-footer">No account? <a href="#" onclick="switchTab('register');return false;">Create one →</a></div>
       </div>
       <div id="registerForm" class="hidden">
         <div class="form-title">Create your <em>vault.</em></div>
@@ -108,8 +108,8 @@
         </div>
         <button class="btn-submit" onclick="window.location.href='dashboard.html'">Create my account</button>
         <div class="divider-or"><span>or</span></div>
-        <button class="btn-google">Continue with Google</button>
-        <div class="form-footer">Already have an account? <a href="#" onclick="switchTab('login')">Sign in →</a></div>
+        <button class="btn-google" onclick="alert('Google login coming soon! Please use email login.')">Continue with Google</button>
+        <div class="form-footer">Already have an account? <a href="#" onclick="switchTab('login');return false;">Sign in →</a></div>
       </div>
     </div>
   </div>
@@ -123,10 +123,11 @@
 </footer>
 <script>
 const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.transform=`translate(${mx-4}px,${my-4}px)`;});
-function animateRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.transform=`translate(${rx-16}px,${ry-16}px)`;requestAnimationFrame(animateRing);}
-animateRing();
+document.addEventListener('mousemove',e=>{
+  const x=e.clientX,y=e.clientY;
+  cursor.style.transform=`translate(${x-4}px,${y-4}px)`;
+  ring.style.transform=`translate(${x-16}px,${y-16}px)`;
+});
 function showTab(name,btn){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
