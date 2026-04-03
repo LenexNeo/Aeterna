@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Aeterna</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="aeterna.css">
+<style>
+.about-hero { padding: 148px 48px 80px; border-bottom: 0.5px solid var(--border); background: var(--surface); position: relative; overflow: hidden; }
+.about-hero::after { content: 'AETERNA'; position: absolute; right: -20px; bottom: -60px; font-family: 'Cormorant Garamond', serif; font-size: 160px; font-weight: 600; color: rgba(240,237,232,0.02); letter-spacing: 0.08em; pointer-events: none; }
+.about-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 5vw, 80px); font-weight: 300; line-height: 1.05; max-width: 680px; margin-bottom: 24px; }
+.about-hero h1 em { font-style: italic; color: var(--purple); }
+.about-hero p { font-size: 15px; color: var(--muted); line-height: 1.9; max-width: 500px; }
+/* MANIFESTO */
+.manifesto { padding: 100px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; border-bottom: 0.5px solid var(--border); }
+.manifesto-text h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 3vw, 44px); font-weight: 300; margin-bottom: 24px; }
+.manifesto-text h2 em { font-style: italic; color: var(--purple); }
+.manifesto-text p { font-size: 14px; color: var(--muted); line-height: 1.9; margin-bottom: 16px; }
+.manifesto-quote { border-left: 1px solid var(--purple); padding-left: 32px; }
+.manifesto-quote blockquote { font-family: 'Cormorant Garamond', serif; font-size: clamp(22px, 2.5vw, 32px); font-weight: 300; line-height: 1.25; margin-bottom: 16px; }
+.manifesto-quote blockquote em { font-style: italic; color: var(--purple); }
+.manifesto-quote cite { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+/* VALUES */
+.values { padding: 100px 48px; background: var(--surface); border-bottom: 0.5px solid var(--border); }
+.values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 0.5px solid var(--border); margin-top: 48px; }
+.value-card { background: var(--surface); padding: 40px 32px; transition: background 0.3s; position: relative; }
+.value-card:hover { background: var(--surface2); }
+.value-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: transparent; transition: background 0.3s; }
+.value-card:hover::before { background: var(--purple); }
+.value-num { font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 300; color: rgba(240,237,232,0.04); margin-bottom: 16px; line-height: 1; }
+.value-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; margin-bottom: 10px; }
+.value-desc { font-size: 13px; color: var(--muted); line-height: 1.8; }
+/* TIMELINE */
+.timeline { padding: 100px 48px; border-bottom: 0.5px solid var(--border); }
+.tl-items { margin-top: 48px; position: relative; }
+.tl-items::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 0.5px; background: var(--border); }
+.tl-item { display: grid; grid-template-columns: 160px 1fr; gap: 40px; margin-bottom: 48px; }
+.tl-year { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; color: var(--purple); padding-left: 20px; position: relative; }
+.tl-year::before { content: ''; position: absolute; left: -4px; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; border-radius: 50%; background: var(--purple); }
+.tl-content h4 { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; margin-bottom: 8px; }
+.tl-content p { font-size: 13px; color: var(--muted); line-height: 1.8; }
+/* TEAM */
+.team { padding: 100px 48px; background: var(--surface); border-bottom: 0.5px solid var(--border); }
+.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 48px; }
+.team-card { border: 0.5px solid var(--border); border-radius: 2px; padding: 28px; transition: border-color 0.2s; }
+.team-card:hover { border-color: var(--purple-border); }
+.team-avatar { width: 52px; height: 52px; border-radius: 50%; background: var(--purple-dim); border: 0.5px solid var(--purple-border); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--purple); margin-bottom: 16px; }
+.team-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; margin-bottom: 4px; }
+.team-role { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--purple); margin-bottom: 12px; }
+.team-bio { font-size: 12px; color: var(--muted); line-height: 1.7; }
+/* CTA */
+.about-cta { padding: 100px 48px; text-align: center; }
+.about-cta h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 64px); font-weight: 300; margin-bottom: 20px; }
+.about-cta h2 em { font-style: italic; color: var(--purple); }
+.about-cta p { font-size: 14px; color: var(--muted); margin-bottom: 36px; max-width: 400px; margin-left: auto; margin-right: auto; line-height: 1.8; }
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<nav>
+  <a class="nav-brand" href="index.html">
+    <div class="nav-logo">AETERNA</div>
+    <div class="nav-tagline">Where memories live forever</div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="dashboard.html">My Capsules</a>
+    <a href="about.html" class="active">About</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <a class="nav-cta" href="create.html">Create Capsule</a>
+</nav>
+<section class="about-hero">
+  <div class="eyebrow">Our story</div>
+  <h1>We built a vault for the <em>moments that matter.</em></h1>
+  <p>Aeterna was born from a simple question: what if you could send a message to the future? Not a tweet — a sealed, encrypted vault of everything you feel right now.</p>
+</section>
+<section class="manifesto reveal">
+  <div class="manifesto-text">
+    <h2>Why we <em>exist</em></h2>
+    <p>Every generation loses its memories. Hard drives fail. Platforms shut down. Photos fade. The things that matter most are the most fragile.</p>
+    <p>We built Aeterna to fix that. A place where memories don't just get stored — they get preserved, encrypted, and delivered exactly when you need them most.</p>
+    <p>Our mission is simple: make the present moment permanent.</p>
+  </div>
+  <div class="manifesto-quote">
+    <blockquote>"The present moment always will have <em>been.</em> We just make sure you can find it again."</blockquote>
+    <cite>— Aeterna founding philosophy</cite>
+  </div>
+</section>
+<section class="values">
+  <div class="eyebrow reveal">What we stand for</div>
+  <h2 class="section-h reveal">Our <em>values</em></h2>
+  <div class="values-grid reveal">
+    <div class="value-card"><div class="value-num">01</div><div class="value-name">Privacy first</div><p class="value-desc">Your memories belong to you. We encrypt everything with AES-256. Our team cannot read your capsules.</p></div>
+    <div class="value-card"><div class="value-num">02</div><div class="value-name">No subscriptions</div><p class="value-desc">Pay once, preserved forever. Memories shouldn't require a monthly payment to survive.</p></div>
+    <div class="value-card"><div class="value-num">03</div><div class="value-name">Radical honesty</div><p class="value-desc">We are transparent about what we store and how we operate. No dark patterns. No surprise fees.</p></div>
+  </div>
+</section>
+<section class="timeline">
+  <div class="eyebrow reveal">Timeline</div>
+  <h2 class="section-h reveal">How we got <em>here</em></h2>
+  <div class="tl-items reveal">
+    <div class="tl-item"><div class="tl-year">2024</div><div class="tl-content"><h4>The idea</h4><p>Founded after a hard drive failure erased five years of family photos. We asked: why doesn't something better exist?</p></div></div>
+    <div class="tl-item"><div class="tl-year">2025</div><div class="tl-content"><h4>First capsule sealed</h4><p>Beta launched with 50 users. First capsule sealed: a letter from a mother to her newborn daughter, to open in 18 years.</p></div></div>
+    <div class="tl-item"><div class="tl-year">2026</div><div class="tl-content"><h4>Public launch</h4><p>Aeterna opens to everyone. Pay-as-you-go pricing introduced. AES-256 encryption on every capsule by default.</p></div></div>
+  </div>
+</section>
+<section class="team">
+  <div class="eyebrow reveal">The team</div>
+  <h2 class="section-h reveal">Built by people who <em>care</em></h2>
+  <div class="team-grid reveal">
+    <div class="team-card"><div class="team-avatar">AE</div><div class="team-name">Aiden Ellis</div><div class="team-role">Founder & CEO</div><p class="team-bio">Lost five years of memories to a failed hard drive. Built Aeterna so nobody else has to.</p></div>
+    <div class="team-card"><div class="team-avatar">SR</div><div class="team-name">Sofia Reyes</div><div class="team-role">Head of Engineering</div><p class="team-bio">Cryptography specialist. Designed the AES-256 encryption vault that protects every capsule.</p></div>
+    <div class="team-card"><div class="team-avatar">NK</div><div class="team-name">Nour Khalil</div><div class="team-role">Head of Design</div><p class="team-bio">Believes interfaces for important things should feel important. Designed every pixel of Aeterna.</p></div>
+  </div>
+</section>
+<section class="about-cta">
+  <h2>Ready to <em>preserve</em> something?</h2>
+  <p>Create your first digital time capsule today. Starting from just $1.</p>
+  <a class="btn-primary" href="create.html">Create your capsule</a>
+</section>
+<footer>
+  <div class="footer-inner">
+    <div><div class="footer-logo">AETERNA</div><div class="footer-tagline">Where memories live forever</div></div>
+    <span class="footer-copy">© 2026 Aeterna. All rights reserved.</span>
+    <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="contact.html">Contact</a></div>
+  </div>
+</footer>
+<script>
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.transform=`translate(${mx-4}px,${my-4}px)`;});
+function animateRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.transform=`translate(${rx-16}px,${ry-16}px)`;requestAnimationFrame(animateRing);}
+animateRing();
+const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(r=>observer.observe(r));
+</script>
+</body>
+</html>
