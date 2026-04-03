@@ -4,43 +4,172 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — Aeterna</title>
-<link rel="stylesheet" href="aeterna.css">
 <style>
-.contact-header { padding: 148px 48px 64px; border-bottom: 0.5px solid var(--border); background: var(--surface); position: relative; overflow: hidden; }
-.contact-header::after { content: '✉'; position: absolute; right: 40px; bottom: -60px; font-size: 200px; color: rgba(240,237,232,0.02); pointer-events: none; }
-.contact-header h1 { font-family: 'Arial', sans-serif; font-size: clamp(40px, 5vw, 72px); font-weight: 300; line-height: 1.05; margin-bottom: 16px; }
-.contact-header h1 em { font-style: italic; color: var(--purple); }
-.contact-header p { font-size: 14px; color: var(--muted); max-width: 480px; line-height: 1.8; }
+:root {
+  --black: #060608;
+  --surface: #0e0e12;
+  --surface2: #141418;
+  --purple: #8b7ff0;
+  --purple-dim: rgba(139,127,240,0.10);
+  --purple-border: rgba(139,127,240,0.35);
+  --teal: #2dd4a0;
+  --teal-dim: rgba(45,212,160,0.08);
+  --white: #f0ede8;
+  --muted: rgba(240,237,232,0.38);
+  --border: rgba(240,237,232,0.07);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: Arial, sans-serif;
+  font-weight: 300;
+  min-height: 100vh;
+  cursor: none;
+}
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 1000; opacity: 0.4;
+}
+/* CURSOR */
+.cursor { width: 8px; height: 8px; background: var(--purple); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; }
+.cursor-ring { width: 32px; height: 32px; border: 0.5px solid rgba(139,127,240,0.5); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9998; }
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 48px;
+  border-bottom: 0.5px solid var(--border);
+  background: rgba(6,6,8,0.88);
+  backdrop-filter: blur(20px);
+}
+.nav-brand { text-decoration: none; display: flex; flex-direction: column; gap: 1px; }
+.nav-logo { font-size: 22px; font-weight: 700; letter-spacing: 0.18em; color: var(--white); }
+.nav-tagline { font-size: 8px; letter-spacing: 0.2em; color: var(--purple); text-transform: uppercase; }
+.nav-links { display: flex; gap: 36px; }
+.nav-links a { font-size: 12px; color: var(--muted); text-decoration: none; letter-spacing: 0.06em; transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--white); }
+.nav-cta {
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--black); background: var(--purple);
+  border: none; padding: 10px 22px; border-radius: 2px;
+  cursor: none; text-decoration: none; display: inline-block;
+  transition: opacity 0.2s;
+}
+.nav-cta:hover { opacity: 0.85; }
+/* PAGE HEADER */
+.page-header {
+  padding: 148px 48px 64px;
+  border-bottom: 0.5px solid var(--border);
+  background: var(--surface);
+}
+.eyebrow {
+  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--teal); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.eyebrow::before { content: ''; width: 16px; height: 0.5px; background: var(--teal); display: block; }
+.page-header h1 { font-size: clamp(36px, 5vw, 64px); font-weight: 300; line-height: 1.1; margin-bottom: 16px; }
+.page-header h1 em { font-style: italic; color: var(--purple); }
+.page-header p { font-size: 14px; color: var(--muted); max-width: 480px; line-height: 1.8; }
 /* CONTACT BODY */
-.contact-body { display: grid; grid-template-columns: 1fr 1fr; min-height: 70vh; }
-.contact-left { padding: 64px 48px; border-right: 0.5px solid var(--border); background: var(--surface); }
+.contact-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.contact-left {
+  padding: 64px 48px;
+  border-right: 0.5px solid var(--border);
+  background: var(--surface);
+}
 .contact-right { padding: 64px 48px; }
-.contact-methods { display: flex; flex-direction: column; gap: 0; border: 0.5px solid var(--border); border-radius: 2px; overflow: hidden; margin-bottom: 32px; }
-.contact-method { display: flex; align-items: center; gap: 16px; padding: 20px 24px; border-bottom: 0.5px solid var(--border); transition: background 0.2s; }
+/* CONTACT METHODS */
+.methods-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+.methods-label::before { content: ''; width: 16px; height: 0.5px; background: var(--teal); display: block; }
+.contact-methods {
+  border: 0.5px solid var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+.contact-method {
+  display: flex; align-items: center; gap: 16px;
+  padding: 18px 24px;
+  border-bottom: 0.5px solid var(--border);
+  transition: background 0.2s;
+}
 .contact-method:last-child { border-bottom: none; }
 .contact-method:hover { background: rgba(240,237,232,0.02); }
-.method-icon { width: 36px; height: 36px; border-radius: 2px; background: var(--purple-dim); border: 0.5px solid var(--purple-border); display: flex; align-items: center; justify-content: center; font-family: 'Arial', sans-serif; font-size: 12px; color: var(--purple); flex-shrink: 0; }
-.method-label { font-family: 'Arial', sans-serif; font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+.method-icon {
+  width: 36px; height: 36px; border-radius: 2px;
+  background: var(--purple-dim); border: 0.5px solid var(--purple-border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: var(--purple); flex-shrink: 0;
+}
+.method-label { font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
 .method-val { font-size: 13px; color: var(--white); }
-.contact-note { font-family: 'Arial', sans-serif; font-size: 9px; letter-spacing: 0.1em; color: var(--muted); line-height: 1.8; }
-.form-title { font-family: 'Arial', sans-serif; font-size: 28px; font-weight: 300; margin-bottom: 32px; }
+.contact-note { font-size: 12px; color: var(--muted); line-height: 1.8; }
+/* FORM */
+.form-title { font-size: 28px; font-weight: 300; margin-bottom: 28px; }
 .form-title em { font-style: italic; color: var(--purple); }
+.field { margin-bottom: 18px; }
+.field label { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 8px; }
+.field input, .field textarea, .field select {
+  width: 100%; background: var(--surface);
+  border: 0.5px solid var(--border); border-radius: 2px;
+  padding: 13px 16px; color: var(--white);
+  font-family: Arial, sans-serif; font-size: 13px;
+  font-weight: 300; outline: none; transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
+.field input:focus, .field textarea:focus, .field select:focus { border-color: var(--purple); }
+.field input::placeholder, .field textarea::placeholder { color: rgba(240,237,232,0.2); }
+.field textarea { resize: vertical; min-height: 130px; }
+.field select { color: var(--white); cursor: none; }
+.field select option { background: var(--surface2); color: var(--white); }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.success-msg { display: none; background: var(--teal-dim); border: 0.5px solid rgba(45,212,160,0.2); border-radius: 2px; padding: 20px 24px; margin-top: 20px; }
-.success-msg h4 { font-family: 'Arial', sans-serif; font-size: 20px; font-weight: 300; color: var(--teal); margin-bottom: 6px; }
+.btn-send {
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  background: var(--purple); color: var(--black);
+  border: none; padding: 14px 32px; border-radius: 2px;
+  cursor: none; transition: opacity 0.2s; margin-top: 4px;
+}
+.btn-send:hover { opacity: 0.88; }
+.success-msg {
+  display: none;
+  background: var(--teal-dim); border: 0.5px solid rgba(45,212,160,0.2);
+  border-radius: 2px; padding: 20px 24px; margin-top: 20px;
+}
+.success-msg h4 { font-size: 20px; font-weight: 300; color: var(--teal); margin-bottom: 6px; }
 .success-msg p { font-size: 13px; color: var(--muted); }
 /* FAQ */
 .faq-strip { background: var(--surface); border-top: 0.5px solid var(--border); padding: 64px 48px; }
-.faq-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 32px; }
+.section-h { font-size: clamp(26px, 3vw, 40px); font-weight: 300; margin-bottom: 32px; margin-top: 12px; }
+.section-h em { font-style: italic; color: var(--purple); }
+.faq-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .faq-item { padding: 24px; border: 0.5px solid var(--border); border-radius: 2px; transition: border-color 0.2s; }
 .faq-item:hover { border-color: var(--purple-border); }
-.faq-q { font-family: 'Arial', sans-serif; font-size: 16px; font-weight: 400; margin-bottom: 8px; }
+.faq-q { font-size: 15px; font-weight: 500; margin-bottom: 10px; color: var(--white); }
 .faq-a { font-size: 12px; color: var(--muted); line-height: 1.7; }
+/* FOOTER */
+footer { background: var(--black); border-top: 0.5px solid var(--border); padding: 36px 48px; }
+.footer-inner { display: flex; justify-content: space-between; align-items: center; }
+.footer-logo { font-size: 18px; font-weight: 700; letter-spacing: 0.14em; }
+.footer-tagline { font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--purple); margin-top: 2px; }
+.footer-copy { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(240,237,232,0.2); }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(240,237,232,0.2); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--muted); }
 </style>
 </head>
 <body>
+
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
+
 <nav>
   <a class="nav-brand" href="index.html">
     <div class="nav-logo">AETERNA</div>
@@ -55,22 +184,52 @@
   </div>
   <a class="nav-cta" href="create.html">Create Capsule</a>
 </nav>
-<div class="contact-header">
+
+<div class="page-header">
   <div class="eyebrow">Get in touch</div>
   <h1>We'd love to <em>hear from you.</em></h1>
   <p>Have a question about your capsule? Need help with an order? Or just want to say something? We're here.</p>
 </div>
+
 <div class="contact-body">
   <div class="contact-left">
-    <div class="eyebrow" style="margin-bottom:24px;">Contact methods</div>
+    <div class="methods-label">Contact methods</div>
     <div class="contact-methods">
-      <div class="contact-method"><div class="method-icon">@</div><div><div class="method-label">Email</div><div class="method-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5a323f3636351a3b3f2e3f28343b743335">[email&#160;protected]</a></div></div></div>
-      <div class="contact-method"><div class="method-icon">↗</div><div><div class="method-label">Support</div><div class="method-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cebdbbbebea1bcba8eafabbaabbca0afe0a7a1">[email&#160;protected]</a></div></div></div>
-      <div class="contact-method"><div class="method-icon">⏱</div><div><div class="method-label">Response time</div><div class="method-val">Within 24 hours</div></div></div>
-      <div class="contact-method"><div class="method-icon">⚑</div><div><div class="method-label">Location</div><div class="method-val">Colombo, Sri Lanka</div></div></div>
+      <div class="contact-method">
+        <div class="method-icon">@</div>
+        <div>
+          <div class="method-label">Email</div>
+          <div class="method-val">hello@aeterna.io</div>
+        </div>
+      </div>
+      <div class="contact-method">
+        <div class="method-icon">↗</div>
+        <div>
+          <div class="method-label">Support</div>
+          <div class="method-val">support@aeterna.io</div>
+        </div>
+      </div>
+      <div class="contact-method">
+        <div class="method-icon">⏱</div>
+        <div>
+          <div class="method-label">Response time</div>
+          <div class="method-val">Within 24 hours</div>
+        </div>
+      </div>
+      <div class="contact-method">
+        <div class="method-icon">⚑</div>
+        <div>
+          <div class="method-label">Location</div>
+          <div class="method-val">Colombo, Sri Lanka</div>
+        </div>
+      </div>
     </div>
-    <div class="contact-note">We respond to all messages within 24 hours.<br>For urgent issues, email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e2919792928d9096a283879687908c83cc8b8d">[email&#160;protected]</a> directly.</div>
+    <div class="contact-note">
+      We respond to all messages within 24 hours.<br>
+      For urgent issues, email support@aeterna.io directly.
+    </div>
   </div>
+
   <div class="contact-right">
     <div class="form-title">Send us a <em>message</em></div>
     <div class="field-row">
@@ -78,7 +237,8 @@
       <div class="field"><label>Last name</label><input type="text" placeholder="Silva" id="lname"></div>
     </div>
     <div class="field"><label>Email address</label><input type="email" placeholder="you@example.com" id="femail"></div>
-    <div class="field"><label>Subject</label>
+    <div class="field">
+      <label>Subject</label>
       <select id="fsubject">
         <option value="">Select a topic</option>
         <option>General enquiry</option>
@@ -90,34 +250,80 @@
       </select>
     </div>
     <div class="field"><label>Message</label><textarea placeholder="Tell us how we can help..." id="fmessage"></textarea></div>
-    <button class="btn-primary" id="sendBtn" onclick="handleSubmit()">Send message →</button>
+    <button class="btn-send" id="sendBtn" onclick="handleSubmit()">Send message →</button>
     <div class="success-msg" id="successMsg">
       <h4>Message received.</h4>
       <p>Thank you for reaching out. We'll get back to you within 24 hours.</p>
     </div>
   </div>
 </div>
+
 <div class="faq-strip">
-  <div class="eyebrow reveal">Quick answers</div>
-  <h2 class="section-h reveal">Common <em>questions</em></h2>
-  <div class="faq-grid reveal">
-    <div class="faq-item"><div class="faq-q">How do I access my capsule?</div><p class="faq-a">Log in and visit "My Capsules". Sealed capsules show a countdown. Unlocked ones have an Open button.</p></div>
-    <div class="faq-item"><div class="faq-q">Can I get a refund?</div><p class="faq-a">Yes — full refund within 30 days of purchase if the capsule has not been sealed with content yet.</p></div>
-    <div class="faq-item"><div class="faq-q">What if I forget my password?</div><p class="faq-a">Use the "Forgot password" link on the login page. A reset link will be sent to your registered email.</p></div>
+  <div class="eyebrow">Quick answers</div>
+  <h2 class="section-h">Common <em>questions</em></h2>
+  <div class="faq-grid">
+    <div class="faq-item">
+      <div class="faq-q">How do I access my capsule?</div>
+      <p class="faq-a">Log in and visit "My Capsules". Sealed capsules show a countdown timer. Unlocked ones have an Open button.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can I get a refund?</div>
+      <p class="faq-a">Yes — full refund within 30 days of purchase if the capsule has not been sealed with content yet.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What if I forget my password?</div>
+      <p class="faq-a">Use the "Forgot password" link on the login page. A reset link will be sent to your registered email address.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What file types can I upload?</div>
+      <p class="faq-a">Photos (JPG, PNG, WEBP), videos (MP4, MOV), audio (MP3, WAV), and documents (PDF, TXT, DOCX).</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can I change the unlock date?</div>
+      <p class="faq-a">Yes — you can extend the unlock date any time before it arrives. You cannot move it to an earlier date once sealed.</p>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is my data secure?</div>
+      <p class="faq-a">All capsules are encrypted with AES-256 before storage. Only you can access your capsule — not even our team.</p>
+    </div>
   </div>
 </div>
+
 <footer>
   <div class="footer-inner">
-    <div><div class="footer-logo">AETERNA</div><div class="footer-tagline">Where memories live forever</div></div>
+    <div>
+      <div class="footer-logo">AETERNA</div>
+      <div class="footer-tagline">Where memories live forever</div>
+    </div>
     <span class="footer-copy">© 2026 Aeterna. All rights reserved.</span>
-    <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="contact.html">Contact</a></div>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="contact.html">Contact</a>
+    </div>
   </div>
 </footer>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
-document.addEventListener('mousemove',e=>{
-  const x=e.clientX,y=e.clientY;
-  cursor.style.transform=`translate(${x-4}px,${y-4}px)`;
-  ring.style.transform=`translate(${x-16}px,${y-16}px)`;
+
+<script>
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+document.addEventListener('mousemove', e => {
+  const x = e.clientX, y = e.clientY;
+  cursor.style.transform = `translate(${x - 4}px, ${y - 4}px)`;
+  ring.style.transform = `translate(${x - 16}px, ${y - 16}px)`;
 });
-const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visi
+
+function handleSubmit() {
+  const f = document.getElementById('fname').value.trim();
+  const e = document.getElementById('femail').value.trim();
+  const m = document.getElementById('fmessage').value.trim();
+  if (!f || !e || !m) {
+    alert('Please fill in your name, email, and message.');
+    return;
+  }
+  document.getElementById('successMsg').style.display = 'block';
+  document.getElementById('sendBtn').style.display = 'none';
+}
+</script>
+</body>
+</html>
