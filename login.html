@@ -4,36 +4,35 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login — Aeterna</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="aeterna.css">
 <style>
 .login-wrap { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; }
 /* LEFT */
 .left-panel { background: var(--surface); border-right: 0.5px solid var(--border); display: flex; flex-direction: column; justify-content: space-between; padding: 148px 56px 56px; position: relative; overflow: hidden; }
-.left-panel::after { content: 'AETERNA'; position: absolute; bottom: -40px; left: -10px; font-family: 'Cormorant Garamond', serif; font-size: 120px; font-weight: 600; color: rgba(240,237,232,0.025); letter-spacing: 0.08em; pointer-events: none; white-space: nowrap; }
-.panel-quote blockquote { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 2.5vw, 34px); font-weight: 300; line-height: 1.2; color: var(--white); margin-bottom: 16px; }
+.left-panel::after { content: 'AETERNA'; position: absolute; bottom: -40px; left: -10px; font-family: 'Arial', sans-serif; font-size: 120px; font-weight: 600; color: rgba(240,237,232,0.025); letter-spacing: 0.08em; pointer-events: none; white-space: nowrap; }
+.panel-quote blockquote { font-family: 'Arial', sans-serif; font-size: clamp(24px, 2.5vw, 34px); font-weight: 300; line-height: 1.2; color: var(--white); margin-bottom: 16px; }
 .panel-quote blockquote em { font-style: italic; color: var(--purple); }
-.panel-quote cite { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+.panel-quote cite { font-family: 'Arial', sans-serif; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
 .panel-stats { display: flex; gap: 36px; }
-.pstat-num { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; }
-.pstat-label { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
+.pstat-num { font-family: 'Arial', sans-serif; font-size: 26px; font-weight: 300; }
+.pstat-label { font-family: 'Arial', sans-serif; font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
 /* RIGHT */
 .right-panel { display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 120px 56px 56px; }
 .form-wrap { width: 100%; max-width: 400px; }
 .form-tabs { display: flex; border-bottom: 0.5px solid var(--border); margin-bottom: 40px; }
-.tab { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); padding: 0 0 14px; margin-right: 28px; cursor: none; border: none; border-bottom: 1px solid transparent; background: none; transition: color 0.2s, border-color 0.2s; }
+.tab { font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); padding: 0 0 14px; margin-right: 28px; cursor: none; border: none; border-bottom: 1px solid transparent; background: none; transition: color 0.2s, border-color 0.2s; }
 .tab.active { color: var(--white); border-bottom-color: var(--purple); }
-.form-title { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; margin-bottom: 8px; }
+.form-title { font-family: 'Arial', sans-serif; font-size: 36px; font-weight: 300; margin-bottom: 8px; }
 .form-title em { font-style: italic; color: var(--purple); }
 .form-sub { font-size: 13px; color: var(--muted); margin-bottom: 32px; line-height: 1.7; }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.forgot { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--purple); text-decoration: none; display: block; text-align: right; margin-top: -8px; margin-bottom: 24px; }
-.btn-submit { width: 100%; padding: 16px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; background: var(--purple); color: var(--black); border: none; border-radius: 2px; cursor: none; transition: opacity 0.2s; margin-bottom: 16px; }
+.forgot { font-family: 'Arial', sans-serif; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--purple); text-decoration: none; display: block; text-align: right; margin-top: -8px; margin-bottom: 24px; }
+.btn-submit { width: 100%; padding: 16px; font-family: 'Arial', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; background: var(--purple); color: var(--black); border: none; border-radius: 2px; cursor: none; transition: opacity 0.2s; margin-bottom: 16px; }
 .btn-submit:hover { opacity: 0.88; }
 .divider-or { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
-.divider-or span { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.divider-or span { font-family: 'Arial', sans-serif; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
 .divider-or::before, .divider-or::after { content: ''; flex: 1; height: 0.5px; background: var(--border); }
-.btn-google { width: 100%; padding: 14px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; background: transparent; color: var(--muted); border: 0.5px solid var(--border); border-radius: 2px; cursor: none; transition: border-color 0.2s, color 0.2s; margin-bottom: 28px; }
+.btn-google { width: 100%; padding: 14px; font-family: 'Arial', sans-serif; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; background: transparent; color: var(--muted); border: 0.5px solid var(--border); border-radius: 2px; cursor: none; transition: border-color 0.2s, color 0.2s; margin-bottom: 28px; }
 .btn-google:hover { border-color: var(--purple-border); color: var(--white); }
 .form-footer { font-size: 12px; color: var(--muted); text-align: center; }
 .form-footer a { color: var(--purple); text-decoration: none; }

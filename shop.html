@@ -4,8 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shop — Aeterna</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
   :root {
     --black: #060608;
@@ -25,7 +23,7 @@
   body {
     background: var(--black);
     color: var(--white);
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Arial', sans-serif;
     font-weight: 300;
     overflow-x: hidden;
     cursor: none;
@@ -49,12 +47,12 @@
     backdrop-filter: blur(20px);
   }
   .nav-brand { display: flex; flex-direction: column; gap: 1px; text-decoration: none; }
-  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; letter-spacing: 0.18em; color: var(--white); }
-  .nav-tagline { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 0.2em; color: var(--purple); text-transform: uppercase; }
+  .nav-logo { font-family: 'Arial', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: 0.18em; color: var(--white); }
+  .nav-tagline { font-family: 'Arial', sans-serif; font-size: 8px; letter-spacing: 0.2em; color: var(--purple); text-transform: uppercase; }
   .nav-links { display: flex; gap: 36px; }
   .nav-links a { font-size: 12px; font-weight: 400; color: var(--muted); text-decoration: none; letter-spacing: 0.06em; transition: color 0.2s; }
   .nav-links a:hover, .nav-links a.active { color: var(--white); }
-  .nav-cta { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; color: var(--black); background: var(--purple); border: none; padding: 10px 22px; border-radius: 2px; cursor: none; transition: opacity 0.2s; text-transform: uppercase; }
+  .nav-cta { font-family: 'Arial', sans-serif; font-size: 11px; letter-spacing: 0.1em; color: var(--black); background: var(--purple); border: none; padding: 10px 22px; border-radius: 2px; cursor: none; transition: opacity 0.2s; text-transform: uppercase; }
   .nav-cta:hover { opacity: 0.85; }
 
   /* PAGE HEADER */
@@ -67,15 +65,15 @@
   .page-header::after {
     content: 'SHOP';
     position: absolute; right: 40px; bottom: -20px;
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Arial', sans-serif;
     font-size: 160px; font-weight: 600;
     color: rgba(240,237,232,0.025);
     letter-spacing: 0.1em; line-height: 1;
     pointer-events: none;
   }
-  .breadcrumb { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; display: flex; gap: 10px; align-items: center; }
+  .breadcrumb { font-family: 'Arial', sans-serif; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; display: flex; gap: 10px; align-items: center; }
   .breadcrumb span { color: var(--purple); }
-  .page-header h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 5vw, 72px); font-weight: 300; line-height: 1.05; }
+  .page-header h1 { font-family: 'Arial', sans-serif; font-size: clamp(40px, 5vw, 72px); font-weight: 300; line-height: 1.05; }
   .page-header h1 em { font-style: italic; color: var(--purple); }
   .page-header p { font-size: 14px; color: var(--muted); margin-top: 16px; max-width: 480px; line-height: 1.8; }
 
@@ -93,16 +91,16 @@
 
   /* STORAGE CALCULATOR */
   .calc-section { margin-bottom: 56px; }
-  .section-eyebrow { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+  .section-eyebrow { font-family: 'Arial', sans-serif; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
   .section-eyebrow::before { content: ''; width: 16px; height: 0.5px; background: var(--teal); display: block; }
-  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; margin-bottom: 28px; }
+  .section-title { font-family: 'Arial', sans-serif; font-size: 28px; font-weight: 300; margin-bottom: 28px; }
   .section-title em { font-style: italic; color: var(--purple); }
 
   .slider-wrap { background: var(--surface); border: 0.5px solid var(--border); border-radius: 2px; padding: 32px; margin-bottom: 16px; }
   .slider-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 24px; }
   .slider-label { font-size: 13px; color: var(--muted); }
-  .slider-value { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; color: var(--white); }
-  .slider-value span { font-size: 16px; color: var(--muted); font-family: 'DM Mono', monospace; }
+  .slider-value { font-family: 'Arial', sans-serif; font-size: 40px; font-weight: 300; color: var(--white); }
+  .slider-value span { font-size: 16px; color: var(--muted); font-family: 'Arial', sans-serif; }
 
   input[type="range"] {
     -webkit-appearance: none; appearance: none;
@@ -121,12 +119,12 @@
   input[type="range"]::-webkit-slider-runnable-track { height: 1px; }
 
   .slider-ticks { display: flex; justify-content: space-between; }
-  .slider-tick { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em; color: var(--muted); }
+  .slider-tick { font-family: 'Arial', sans-serif; font-size: 9px; letter-spacing: 0.1em; color: var(--muted); }
 
   .calc-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
   .calc-stat { background: var(--surface); border: 0.5px solid var(--border); border-radius: 2px; padding: 18px 20px; }
-  .calc-stat-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
-  .calc-stat-val { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; color: var(--white); }
+  .calc-stat-label { font-family: 'Arial', sans-serif; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .calc-stat-val { font-family: 'Arial', sans-serif; font-size: 24px; font-weight: 300; color: var(--white); }
   .calc-stat-val.accent { color: var(--teal); }
 
   /* CAPSULE TYPE SELECTOR */
@@ -143,18 +141,18 @@
   .type-opt.selected::after {
     content: '✓';
     position: absolute; top: 14px; right: 16px;
-    font-family: 'DM Mono', monospace; font-size: 10px;
+    font-family: 'Arial', sans-serif; font-size: 10px;
     color: var(--purple);
   }
-  .type-opt-tag { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--purple); margin-bottom: 10px; }
-  .type-opt-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; margin-bottom: 8px; }
+  .type-opt-tag { font-family: 'Arial', sans-serif; font-size: 8px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--purple); margin-bottom: 10px; }
+  .type-opt-name { font-family: 'Arial', sans-serif; font-size: 20px; font-weight: 300; margin-bottom: 8px; }
   .type-opt-desc { font-size: 12px; color: var(--muted); line-height: 1.7; }
 
   /* UNLOCK DATE */
   .date-section { margin-bottom: 56px; }
   .date-presets { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
   .date-preset {
-    font-family: 'DM Mono', monospace; font-size: 10px;
+    font-family: 'Arial', sans-serif; font-size: 10px;
     letter-spacing: 0.1em; text-transform: uppercase;
     border: 0.5px solid var(--border); border-radius: 2px;
     padding: 8px 16px; cursor: none; color: var(--muted);
@@ -165,13 +163,13 @@
   .date-input-wrap input[type="date"] {
     background: var(--surface); border: 0.5px solid var(--border);
     border-radius: 2px; padding: 12px 16px;
-    color: var(--white); font-family: 'DM Mono', monospace;
+    color: var(--white); font-family: 'Arial', sans-serif;
     font-size: 12px; outline: none; flex: 1;
     color-scheme: dark;
     transition: border-color 0.2s;
   }
   .date-input-wrap input[type="date"]:focus { border-color: var(--purple); }
-  .date-countdown { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; color: var(--teal); padding: 12px 16px; background: var(--teal-dim); border: 0.5px solid rgba(45,212,160,0.2); border-radius: 2px; white-space: nowrap; }
+  .date-countdown { font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 0.1em; color: var(--teal); padding: 12px 16px; background: var(--teal-dim); border: 0.5px solid rgba(45,212,160,0.2); border-radius: 2px; white-space: nowrap; }
 
   /* WHAT'S INCLUDED */
   .includes-section { margin-bottom: 0; }
@@ -189,23 +187,23 @@
     border-left: 0.5px solid var(--border);
     min-height: calc(100vh - 80px);
   }
-  .sidebar-title { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+  .sidebar-title { font-family: 'Arial', sans-serif; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
 
   .order-card { background: var(--black); border: 0.5px solid var(--border); border-radius: 2px; padding: 24px; margin-bottom: 16px; }
   .order-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 0.5px solid var(--border); }
   .order-row:last-child { border-bottom: none; }
   .order-key { font-size: 12px; color: var(--muted); }
-  .order-val { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--white); }
+  .order-val { font-family: 'Arial', sans-serif; font-size: 12px; color: var(--white); }
   .order-val.highlight { color: var(--teal); }
 
   .order-total { background: var(--purple-dim); border: 0.5px solid var(--purple-border); border-radius: 2px; padding: 20px 24px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
-  .order-total-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
-  .order-total-amount { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; color: var(--white); }
-  .order-total-amount small { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
+  .order-total-label { font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .order-total-amount { font-family: 'Arial', sans-serif; font-size: 36px; font-weight: 300; color: var(--white); }
+  .order-total-amount small { font-family: 'Arial', sans-serif; font-size: 11px; color: var(--muted); }
 
   .btn-checkout {
     width: 100%; padding: 16px;
-    font-family: 'DM Mono', monospace;
+    font-family: 'Arial', sans-serif;
     font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
     background: var(--purple); color: var(--black);
     border: none; border-radius: 2px; cursor: none;
@@ -214,7 +212,7 @@
   .btn-checkout:hover { opacity: 0.88; }
   .btn-paypal {
     width: 100%; padding: 14px;
-    font-family: 'DM Mono', monospace;
+    font-family: 'Arial', sans-serif;
     font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
     background: #F6BE00; color: #003087;
     border: none; border-radius: 2px; cursor: none;
@@ -229,17 +227,17 @@
   .sidebar-divider { border: none; border-top: 0.5px solid var(--border); margin: 24px 0; }
 
   .promo-wrap { margin-bottom: 24px; }
-  .promo-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .promo-label { font-family: 'Arial', sans-serif; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
   .promo-row { display: flex; gap: 8px; }
   .promo-input {
     flex: 1; background: var(--black); border: 0.5px solid var(--border);
     border-radius: 2px; padding: 10px 14px;
-    color: var(--white); font-family: 'DM Mono', monospace; font-size: 11px;
+    color: var(--white); font-family: 'Arial', sans-serif; font-size: 11px;
     outline: none; transition: border-color 0.2s;
   }
   .promo-input:focus { border-color: var(--purple); }
   .promo-btn {
-    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em;
+    font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 0.1em;
     text-transform: uppercase; color: var(--purple);
     background: transparent; border: 0.5px solid var(--purple-border);
     padding: 10px 16px; border-radius: 2px; cursor: none;
@@ -251,7 +249,7 @@
   .compare-section { padding: 80px 48px; background: var(--surface); border-top: 0.5px solid var(--border); }
   .compare-table { width: 100%; border-collapse: collapse; margin-top: 40px; }
   .compare-table th {
-    font-family: 'DM Mono', monospace; font-size: 9px;
+    font-family: 'Arial', sans-serif; font-size: 9px;
     letter-spacing: 0.16em; text-transform: uppercase;
     color: var(--muted); padding: 16px 20px;
     text-align: left; border-bottom: 0.5px solid var(--border);
@@ -269,7 +267,7 @@
   .compare-table tr:hover td.featured-col { background: rgba(139,127,240,0.14); }
   .check { color: var(--teal); }
   .cross { color: rgba(240,237,232,0.2); }
-  .compare-price { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; }
+  .compare-price { font-family: 'Arial', sans-serif; font-size: 22px; font-weight: 300; }
 
   /* FAQ */
   .faq-section { padding: 80px 48px; border-top: 0.5px solid var(--border); }
@@ -277,16 +275,16 @@
   .faq-item { padding: 28px 32px; border-bottom: 0.5px solid var(--border); border-right: 0.5px solid var(--border); }
   .faq-item:nth-child(even) { border-right: none; }
   .faq-item:nth-last-child(-n+2) { border-bottom: none; }
-  .faq-q { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; margin-bottom: 10px; }
+  .faq-q { font-family: 'Arial', sans-serif; font-size: 18px; font-weight: 400; margin-bottom: 10px; }
   .faq-a { font-size: 13px; color: var(--muted); line-height: 1.8; }
 
   /* FOOTER */
   footer { background: var(--black); border-top: 0.5px solid var(--border); padding: 40px 48px; }
   .footer-bottom { display: flex; justify-content: space-between; align-items: center; }
-  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 300; letter-spacing: 0.14em; }
-  .footer-copy { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(240,237,232,0.2); }
+  .footer-logo { font-family: 'Arial', sans-serif; font-size: 18px; font-weight: 300; letter-spacing: 0.14em; }
+  .footer-copy { font-family: 'Arial', sans-serif; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(240,237,232,0.2); }
   .footer-links { display: flex; gap: 24px; }
-  .footer-links a { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(240,237,232,0.25); text-decoration: none; transition: color 0.2s; }
+  .footer-links a { font-family: 'Arial', sans-serif; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(240,237,232,0.25); text-decoration: none; transition: color 0.2s; }
   .footer-links a:hover { color: var(--muted); }
 
   .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
@@ -306,11 +304,11 @@
   <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="shop.html" class="active">Shop</a>
-    <a href="#">My Capsules</a>
-    <a href="#">About</a>
-    <a href="#">Contact</a>
+    <a href="dashboard.html">My Capsules</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
   </div>
-  <button class="nav-cta">Create Capsule</button>
+  <a class="nav-cta" href="create.html">Create Capsule</a>
 </nav>
 
 <!-- PAGE HEADER -->
@@ -498,8 +496,8 @@
       <div class="order-total-amount" id="summaryPrice">$3.00 <small>USD</small></div>
     </div>
 
-    <button class="btn-checkout" onclick="window.location.href='checkout.html'">Proceed to checkout →</button>
-    <button class="btn-paypal">Pay with PayPal</button>
+    <button class="btn-checkout" onclick="window.location.href='create.html'">Proceed to checkout →</button>
+    <button class="btn-paypal" onclick="window.location.href='create.html'">Pay with PayPal</button>
 
     <div class="security-badges">
       <div class="security-badge">256-bit SSL encrypted checkout</div>
@@ -513,7 +511,7 @@
     <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Need help?</div>
     <div style="font-size:12px;color:var(--muted);line-height:1.8;">
       Questions about your order?<br>
-      <a href="#" style="color:var(--purple);text-decoration:none;">Contact our support team →</a>
+      <a href="contact.html" style="color:var(--purple);text-decoration:none;">Contact our support team →</a>
     </div>
   </div>
 </div>
@@ -644,9 +642,9 @@
     <div class="footer-logo">AETERNA</div>
     <span class="footer-copy">© 2026 Aeterna. All rights reserved.</span>
     <div class="footer-links">
-      <a href="#">Privacy</a>
-      <a href="#">Terms</a>
-      <a href="#">Refund Policy</a>
+      <a href="contact.html">Privacy</a>
+      <a href="contact.html">Terms</a>
+      <a href="contact.html">Refund Policy</a>
     </div>
   </div>
 </footer>

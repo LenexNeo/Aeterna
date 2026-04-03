@@ -4,12 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — Aeterna</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="aeterna.css">
 <style>
 .contact-header { padding: 148px 48px 64px; border-bottom: 0.5px solid var(--border); background: var(--surface); position: relative; overflow: hidden; }
 .contact-header::after { content: '✉'; position: absolute; right: 40px; bottom: -60px; font-size: 200px; color: rgba(240,237,232,0.02); pointer-events: none; }
-.contact-header h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 5vw, 72px); font-weight: 300; line-height: 1.05; margin-bottom: 16px; }
+.contact-header h1 { font-family: 'Arial', sans-serif; font-size: clamp(40px, 5vw, 72px); font-weight: 300; line-height: 1.05; margin-bottom: 16px; }
 .contact-header h1 em { font-style: italic; color: var(--purple); }
 .contact-header p { font-size: 14px; color: var(--muted); max-width: 480px; line-height: 1.8; }
 /* CONTACT BODY */
@@ -20,22 +19,22 @@
 .contact-method { display: flex; align-items: center; gap: 16px; padding: 20px 24px; border-bottom: 0.5px solid var(--border); transition: background 0.2s; }
 .contact-method:last-child { border-bottom: none; }
 .contact-method:hover { background: rgba(240,237,232,0.02); }
-.method-icon { width: 36px; height: 36px; border-radius: 2px; background: var(--purple-dim); border: 0.5px solid var(--purple-border); display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 12px; color: var(--purple); flex-shrink: 0; }
-.method-label { font-family: 'DM Mono', monospace; font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+.method-icon { width: 36px; height: 36px; border-radius: 2px; background: var(--purple-dim); border: 0.5px solid var(--purple-border); display: flex; align-items: center; justify-content: center; font-family: 'Arial', sans-serif; font-size: 12px; color: var(--purple); flex-shrink: 0; }
+.method-label { font-family: 'Arial', sans-serif; font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
 .method-val { font-size: 13px; color: var(--white); }
-.contact-note { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em; color: var(--muted); line-height: 1.8; }
-.form-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; margin-bottom: 32px; }
+.contact-note { font-family: 'Arial', sans-serif; font-size: 9px; letter-spacing: 0.1em; color: var(--muted); line-height: 1.8; }
+.form-title { font-family: 'Arial', sans-serif; font-size: 28px; font-weight: 300; margin-bottom: 32px; }
 .form-title em { font-style: italic; color: var(--purple); }
 .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .success-msg { display: none; background: var(--teal-dim); border: 0.5px solid rgba(45,212,160,0.2); border-radius: 2px; padding: 20px 24px; margin-top: 20px; }
-.success-msg h4 { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; color: var(--teal); margin-bottom: 6px; }
+.success-msg h4 { font-family: 'Arial', sans-serif; font-size: 20px; font-weight: 300; color: var(--teal); margin-bottom: 6px; }
 .success-msg p { font-size: 13px; color: var(--muted); }
 /* FAQ */
 .faq-strip { background: var(--surface); border-top: 0.5px solid var(--border); padding: 64px 48px; }
 .faq-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 32px; }
 .faq-item { padding: 24px; border: 0.5px solid var(--border); border-radius: 2px; transition: border-color 0.2s; }
 .faq-item:hover { border-color: var(--purple-border); }
-.faq-q { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 400; margin-bottom: 8px; }
+.faq-q { font-family: 'Arial', sans-serif; font-size: 16px; font-weight: 400; margin-bottom: 8px; }
 .faq-a { font-size: 12px; color: var(--muted); line-height: 1.7; }
 </style>
 </head>
@@ -65,12 +64,12 @@
   <div class="contact-left reveal">
     <div class="eyebrow" style="margin-bottom:24px;">Contact methods</div>
     <div class="contact-methods">
-      <div class="contact-method"><div class="method-icon">@</div><div><div class="method-label">Email</div><div class="method-val">hello@aeterna.io</div></div></div>
-      <div class="contact-method"><div class="method-icon">↗</div><div><div class="method-label">Support</div><div class="method-val">support@aeterna.io</div></div></div>
+      <div class="contact-method"><div class="method-icon">@</div><div><div class="method-label">Email</div><div class="method-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5a323f3636351a3b3f2e3f28343b743335">[email&#160;protected]</a></div></div></div>
+      <div class="contact-method"><div class="method-icon">↗</div><div><div class="method-label">Support</div><div class="method-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cebdbbbebea1bcba8eafabbaabbca0afe0a7a1">[email&#160;protected]</a></div></div></div>
       <div class="contact-method"><div class="method-icon">⏱</div><div><div class="method-label">Response time</div><div class="method-val">Within 24 hours</div></div></div>
       <div class="contact-method"><div class="method-icon">⚑</div><div><div class="method-label">Location</div><div class="method-val">Colombo, Sri Lanka</div></div></div>
     </div>
-    <div class="contact-note">We respond to all messages within 24 hours.<br>For urgent issues, email support@aeterna.io directly.</div>
+    <div class="contact-note">We respond to all messages within 24 hours.<br>For urgent issues, email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e2919792928d9096a283879687908c83cc8b8d">[email&#160;protected]</a> directly.</div>
   </div>
   <div class="contact-right reveal">
     <div class="form-title">Send us a <em>message</em></div>
@@ -114,19 +113,10 @@
     <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="contact.html">Contact</a></div>
   </div>
 </footer>
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.transform=`translate(${mx-4}px,${my-4}px)`;});
 function animateRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.transform=`translate(${rx-16}px,${ry-16}px)`;requestAnimationFrame(animateRing);}
 animateRing();
-const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.08});
-document.querySelectorAll('.reveal').forEach(r=>observer.observe(r));
-function handleSubmit(){
-  if(!document.getElementById('fname').value||!document.getElementById('femail').value||!document.getElementById('fmessage').value){alert('Please fill in your name, email, and message.');return;}
-  document.getElementById('successMsg').style.display='block';
-  document.getElementById('sendBtn').style.display='none';
-}
-</script>
-</body>
-</html>
+const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visi
