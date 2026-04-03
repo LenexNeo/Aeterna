@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/png" href="favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — Aeterna</title>
 <style>
@@ -172,8 +173,7 @@ footer { background: var(--black); border-top: 0.5px solid var(--border); paddin
 
 <nav>
   <a class="nav-brand" href="index.html">
-    <div class="nav-logo">AETERNA</div>
-    <div class="nav-tagline">Where memories live forever</div>
+    <img src="logo-white.png" alt="Aeterna" style="height:36px;width:auto;display:block;">
   </a>
   <div class="nav-links">
     <a href="index.html">Home</a>
@@ -199,14 +199,14 @@ footer { background: var(--black); border-top: 0.5px solid var(--border); paddin
         <div class="method-icon">@</div>
         <div>
           <div class="method-label">Email</div>
-          <div class="method-val">hello@aeterna.io</div>
+          <div class="method-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b2dad7dededdf2d3d7c6d7c0dcd39cdbdd">[email&#160;protected]</a></div>
         </div>
       </div>
       <div class="contact-method">
         <div class="method-icon">↗</div>
         <div>
           <div class="method-label">Support</div>
-          <div class="method-val">support@aeterna.io</div>
+          <div class="method-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2a595f5a5a45585e6a4b4f5e4f58444b044345">[email&#160;protected]</a></div>
         </div>
       </div>
       <div class="contact-method">
@@ -226,7 +226,7 @@ footer { background: var(--black); border-top: 0.5px solid var(--border); paddin
     </div>
     <div class="contact-note">
       We respond to all messages within 24 hours.<br>
-      For urgent issues, email support@aeterna.io directly.
+      For urgent issues, email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c3b0b6b3b3acb1b783a2a6b7a6b1ada2edaaac">[email&#160;protected]</a> directly.
     </div>
   </div>
 
@@ -304,26 +304,10 @@ footer { background: var(--black); border-top: 0.5px solid var(--border); paddin
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const cursor = document.getElementById('cursor');
 const ring = document.getElementById('cursorRing');
 document.addEventListener('mousemove', e => {
   const x = e.clientX, y = e.clientY;
   cursor.style.transform = `translate(${x - 4}px, ${y - 4}px)`;
-  ring.style.transform = `translate(${x - 16}px, ${y - 16}px)`;
-});
-
-function handleSubmit() {
-  const f = document.getElementById('fname').value.trim();
-  const e = document.getElementById('femail').value.trim();
-  const m = document.getElementById('fmessage').value.trim();
-  if (!f || !e || !m) {
-    alert('Please fill in your name, email, and message.');
-    return;
-  }
-  document.getElementById('successMsg').style.display = 'block';
-  document.getElementById('sendBtn').style.display = 'none';
-}
-</script>
-</body>
-</html>
+  ring.style.transform = `translate(${x - 16}px, ${y - 16}px)
