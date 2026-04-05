@@ -2,86 +2,73 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/png" href="favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="favicon.png">
 <title>Create Capsule — Aeterna</title>
 <link rel="stylesheet" href="aeterna.css">
 <style>
-/* PROGRESS STRIP */
-.progress-strip { position: fixed; top: 65px; left: 0; right: 0; z-index: 99; background: var(--surface); border-bottom: 0.5px solid var(--border); padding: 0 48px; }
-.steps-row { display: flex; align-items: center; gap: 0; }
-.step-item { display: flex; align-items: center; gap: 10px; padding: 14px 20px 14px 0; position: relative; }
-.step-item:not(:last-child)::after { content: ''; position: absolute; right: 0; top: 50%; width: 20px; height: 0.5px; background: var(--border); }
-.step-num { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Arial', sans-serif; font-size: 9px; border: 0.5px solid var(--border); color: var(--muted); transition: all 0.3s; flex-shrink: 0; }
-.step-item.active .step-num { border-color: var(--purple); background: var(--purple); color: var(--black); }
-.step-item.done .step-num { border-color: var(--teal); background: var(--teal); color: var(--black); }
-.step-label { font-family: 'Arial', sans-serif; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); transition: color 0.3s; white-space: nowrap; }
-.step-item.active .step-label { color: var(--white); }
-.step-item.done .step-label { color: var(--teal); }
-/* MAIN */
-.create-main { padding: 160px 48px 80px; max-width: 800px; margin: 0 auto; }
-.step-panel { display: none; }
-.step-panel.active { display: block; animation: fadein 0.4s ease; }
-@keyframes fadein { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-.step-eyebrow { font-family: 'Arial', sans-serif; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
-.step-eyebrow::before { content: ''; width: 16px; height: 0.5px; background: var(--teal); display: block; }
-.step-h { font-family: 'Arial', sans-serif; font-size: clamp(32px, 4vw, 52px); font-weight: 300; margin-bottom: 36px; }
-.step-h em { font-style: italic; color: var(--purple); }
-/* TYPE CARDS */
-.type-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 36px; }
-.type-card { border: 0.5px solid var(--border); border-radius: 2px; padding: 28px; cursor: none; transition: all 0.2s; position: relative; }
-.type-card:hover { border-color: var(--purple-border); background: var(--purple-dim); }
-.type-card.selected { border-color: var(--purple); background: var(--purple-dim); }
-.type-card.selected::after { content: '✓'; position: absolute; top: 14px; right: 16px; font-family: 'Arial', sans-serif; font-size: 11px; color: var(--purple); }
-.type-tag { font-family: 'Arial', sans-serif; font-size: 8px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--purple); margin-bottom: 10px; }
-.type-name { font-family: 'Arial', sans-serif; font-size: 22px; font-weight: 300; margin-bottom: 8px; }
-.type-desc { font-size: 12px; color: var(--muted); line-height: 1.7; }
-/* UPLOAD */
-.upload-zone { border: 0.5px dashed var(--purple-border); border-radius: 2px; padding: 56px 32px; text-align: center; cursor: none; transition: all 0.2s; margin-bottom: 20px; position: relative; }
-.upload-zone:hover { background: var(--purple-dim); }
-.upload-zone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: none; width: 100%; height: 100%; }
-.upload-title { font-family: 'Arial', sans-serif; font-size: 24px; font-weight: 300; margin-bottom: 8px; }
-.upload-sub { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
-.upload-tag { display: inline-block; font-family: 'Arial', sans-serif; font-size: 8px; letter-spacing: 0.12em; text-transform: uppercase; border: 0.5px solid var(--border); padding: 4px 10px; border-radius: 2px; color: var(--muted); margin: 3px; }
-.file-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
-.file-item { display: flex; justify-content: space-between; align-items: center; background: var(--surface); border: 0.5px solid var(--border); border-radius: 2px; padding: 10px 14px; }
-.file-name { font-size: 12px; color: var(--white); }
-.file-size { font-family: 'Arial', sans-serif; font-size: 9px; color: var(--muted); }
-/* DATE */
-.date-presets { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
-.date-preset { font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; border: 0.5px solid var(--border); border-radius: 2px; padding: 8px 16px; cursor: none; color: var(--muted); background: transparent; transition: all 0.2s; }
-.date-preset.active, .date-preset:hover { border-color: var(--purple); color: var(--purple); background: var(--purple-dim); }
-.date-info { font-family: 'Arial', sans-serif; font-size: 10px; color: var(--teal); padding: 12px 16px; background: var(--teal-dim); border: 0.5px solid rgba(45,212,160,0.2); border-radius: 2px; margin-top: -10px; margin-bottom: 20px; }
-/* REVIEW */
-.review-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: 2px; padding: 28px; margin-bottom: 16px; }
-.review-label { font-family: 'Arial', sans-serif; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
-.review-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 0.5px solid var(--border); }
-.review-row:last-child { border-bottom: none; }
-.review-key { font-size: 13px; color: var(--muted); }
-.review-val { font-size: 13px; color: var(--white); font-weight: 500; }
-.review-total { background: var(--purple-dim); border: 0.5px solid var(--purple-border); border-radius: 2px; padding: 20px 28px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
-.review-total-label { font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
-.review-total-price { font-family: 'Arial', sans-serif; font-size: 40px; font-weight: 300; }
-/* NAV BTNS */
-.nav-btns { display: flex; gap: 12px; margin-top: 36px; }
-.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.progress-strip{position:fixed;top:65px;left:0;right:0;z-index:99;background:var(--surface);border-bottom:0.5px solid var(--border);padding:0 48px;}
+.steps-row{display:flex;align-items:center;}
+.step-item{display:flex;align-items:center;gap:10px;padding:14px 20px 14px 0;position:relative;}
+.step-item:not(:last-child)::after{content:'';position:absolute;right:0;top:50%;width:20px;height:0.5px;background:var(--border);}
+.step-num{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;border:0.5px solid var(--border);color:var(--muted);transition:all 0.3s;flex-shrink:0;}
+.step-item.active .step-num{border-color:var(--orange);background:var(--orange);color:var(--black);}
+.step-item.done .step-num{border-color:var(--amber);background:var(--amber);color:var(--black);}
+.step-label{font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);transition:color 0.3s;white-space:nowrap;}
+.step-item.active .step-label{color:var(--white);}
+.step-item.done .step-label{color:var(--amber);}
+.create-main{padding:160px 48px 80px;max-width:800px;margin:0 auto;}
+.step-panel{display:none;}
+.step-panel.active{display:block;animation:fadein 0.4s ease;}
+@keyframes fadein{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+.step-eyebrow{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+.step-eyebrow::before{content:'';width:16px;height:0.5px;background:var(--amber);display:block;}
+.step-h{font-size:clamp(28px,4vw,48px);font-weight:300;margin-bottom:32px;}
+.step-h em{font-style:italic;color:var(--orange);}
+.type-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:32px;}
+.type-card{border:0.5px solid var(--border);border-radius:2px;padding:26px;cursor:none;transition:all 0.2s;position:relative;}
+.type-card:hover{border-color:var(--orange-border);background:var(--orange-dim);}
+.type-card.selected{border-color:var(--orange);background:var(--orange-dim);}
+.type-card.selected::after{content:'✓';position:absolute;top:12px;right:14px;font-size:11px;color:var(--orange);}
+.type-tag{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--orange);margin-bottom:10px;}
+.type-name{font-size:20px;font-weight:400;margin-bottom:8px;}
+.type-desc{font-size:12px;color:var(--muted);line-height:1.7;}
+.upload-zone{border:0.5px dashed var(--orange-border);border-radius:2px;padding:52px 32px;text-align:center;cursor:none;transition:all 0.2s;margin-bottom:18px;position:relative;}
+.upload-zone:hover{background:var(--orange-dim);}
+.upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:none;width:100%;height:100%;}
+.upload-title{font-size:22px;font-weight:300;margin-bottom:8px;}
+.upload-sub{font-size:12px;color:var(--muted);margin-bottom:16px;}
+.upload-tag{display:inline-block;font-size:8px;letter-spacing:0.12em;text-transform:uppercase;border:0.5px solid var(--border);padding:4px 10px;border-radius:2px;color:var(--muted);margin:3px;}
+.file-list{display:flex;flex-direction:column;gap:8px;margin-bottom:18px;}
+.file-item{display:flex;justify-content:space-between;align-items:center;background:var(--surface);border:0.5px solid var(--border);border-radius:2px;padding:10px 14px;}
+.file-name{font-size:12px;color:var(--white);}
+.file-size{font-size:9px;color:var(--muted);}
+.date-presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+.date-preset{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;border:0.5px solid var(--border);border-radius:2px;padding:8px 14px;cursor:none;color:var(--muted);background:transparent;transition:all 0.2s;}
+.date-preset.active,.date-preset:hover{border-color:var(--orange);color:var(--orange);background:var(--orange-dim);}
+.date-info{font-size:10px;color:var(--amber);padding:12px 16px;background:var(--amber-dim);border:0.5px solid rgba(255,170,77,0.2);border-radius:2px;margin-top:-8px;margin-bottom:18px;}
+.review-card{background:var(--surface);border:0.5px solid var(--border);border-radius:2px;padding:26px;margin-bottom:14px;}
+.review-label{font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;}
+.review-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:0.5px solid var(--border);}
+.review-row:last-child{border-bottom:none;}
+.review-key{font-size:13px;color:var(--muted);}
+.review-val{font-size:13px;color:var(--white);font-weight:500;}
+.review-total{background:var(--orange-dim);border:0.5px solid var(--orange-border);border-radius:2px;padding:20px 26px;display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;}
+.review-total-label{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);}
+.review-total-price{font-size:38px;font-weight:300;}
+.nav-btns{display:flex;gap:12px;margin-top:32px;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 </style>
 </head>
 <body>
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 <nav>
-  <a class="nav-brand" href="index.html">
-    <img src="logo-white.png" alt="Aeterna" style="height:36px;width:auto;display:block;">
-  </a>
+  <a class="nav-brand" href="index.html"><img src="logo-white.png" alt="Aeterna"></a>
   <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="shop.html">Shop</a>
-    <a href="dashboard.html">My Capsules</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
+    <a href="index.html">Home</a><a href="shop.html">Shop</a><a href="dashboard.html">My Capsules</a><a href="about.html">About</a><a href="contact.html">Contact</a>
   </div>
-  <a class="nav-cta nav-cta-active" href="create.html">Create Capsule</a>
+  <a class="nav-cta" href="create.html">Create Capsule</a>
 </nav>
 <div class="progress-strip">
   <div class="steps-row">
@@ -93,7 +80,6 @@
   </div>
 </div>
 <div class="create-main">
-  <!-- STEP 1 -->
   <div class="step-panel active" id="step1">
     <div class="step-eyebrow">Step 01 of 05</div>
     <h2 class="step-h">Choose capsule <em>type</em></h2>
@@ -105,45 +91,25 @@
     </div>
     <div class="nav-btns"><button class="btn-primary" onclick="goStep(2)">Continue →</button></div>
   </div>
-  <!-- STEP 2 -->
   <div class="step-panel" id="step2">
     <div class="step-eyebrow">Step 02 of 05</div>
     <h2 class="step-h">Name your <em>capsule</em></h2>
     <div class="field"><label>Capsule name</label><input type="text" id="capsuleName" placeholder="e.g. Summer of 2026" maxlength="60" oninput="updateCount(this,'nc')"></div>
-    <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);text-align:right;margin-top:-14px;margin-bottom:18px;" id="nc">0 / 60</div>
+    <div style="font-size:9px;color:var(--muted);text-align:right;margin-top:-14px;margin-bottom:16px;" id="nc">0 / 60</div>
     <div class="field"><label>Description (optional)</label><textarea id="capsuleDesc" placeholder="What is this capsule about?" maxlength="300" oninput="updateCount(this,'dc')"></textarea></div>
-    <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);text-align:right;margin-top:-14px;margin-bottom:18px;" id="dc">0 / 300</div>
-    <div class="field"><label>Recipient</label>
-      <select id="recipient" onchange="toggleRecipient()">
-        <option value="self">Myself</option>
-        <option value="someone">Someone else</option>
-      </select>
-    </div>
+    <div style="font-size:9px;color:var(--muted);text-align:right;margin-top:-14px;margin-bottom:16px;" id="dc">0 / 300</div>
+    <div class="field"><label>Recipient</label><select id="recipient" onchange="toggleRecipient()"><option value="self">Myself</option><option value="someone">Someone else</option></select></div>
     <div class="field" id="recipientEmail" style="display:none"><label>Recipient email</label><input type="email" placeholder="their@email.com"></div>
-    <div class="field"><label>Storage size</label>
-      <select id="storageSize" onchange="updatePrice()">
-        <option value="1">1 GB — $1.00</option>
-        <option value="5" selected>5 GB — $3.00</option>
-        <option value="10">10 GB — $5.00</option>
-        <option value="25">25 GB — $10.00</option>
-      </select>
-    </div>
+    <div class="field"><label>Storage size</label><select id="storageSize" onchange="updatePrice()"><option value="1">1 GB — $1.00</option><option value="5" selected>5 GB — $3.00</option><option value="10">10 GB — $5.00</option><option value="25">25 GB — $10.00</option></select></div>
     <div class="nav-btns"><button class="btn-ghost" onclick="goStep(1)">← Back</button><button class="btn-primary" onclick="goStep(3)">Continue →</button></div>
   </div>
-  <!-- STEP 3 -->
   <div class="step-panel" id="step3">
     <div class="step-eyebrow">Step 03 of 05</div>
     <h2 class="step-h">Upload your <em>memories</em></h2>
-    <div class="upload-zone" id="dropZone">
-      <input type="file" multiple accept="image/*,video/*,audio/*,.pdf,.txt,.docx" onchange="handleFiles(this.files)">
-      <div class="upload-title">Drop files here</div>
-      <p class="upload-sub">or click to browse your device</p>
-      <div><span class="upload-tag">JPG PNG WEBP</span><span class="upload-tag">MP4 MOV</span><span class="upload-tag">MP3 WAV</span><span class="upload-tag">PDF TXT DOCX</span></div>
-    </div>
+    <div class="upload-zone"><input type="file" multiple accept="image/*,video/*,audio/*,.pdf,.txt,.docx" onchange="handleFiles(this.files)"><div class="upload-title">Drop files here</div><p class="upload-sub">or click to browse your device</p><div><span class="upload-tag">JPG PNG WEBP</span><span class="upload-tag">MP4 MOV</span><span class="upload-tag">MP3 WAV</span><span class="upload-tag">PDF TXT DOCX</span></div></div>
     <div class="file-list" id="fileList"></div>
     <div class="nav-btns"><button class="btn-ghost" onclick="goStep(2)">← Back</button><button class="btn-primary" onclick="goStep(4)">Continue →</button></div>
   </div>
-  <!-- STEP 4 -->
   <div class="step-panel" id="step4">
     <div class="step-eyebrow">Step 04 of 05</div>
     <h2 class="step-h">Set your <em>unlock date</em></h2>
@@ -158,7 +124,6 @@
     <div class="field"><label>Notification email</label><input type="email" placeholder="Where should we send the unlock notification?"></div>
     <div class="nav-btns"><button class="btn-ghost" onclick="goStep(3)">← Back</button><button class="btn-primary" onclick="goStep(5)">Review order →</button></div>
   </div>
-  <!-- STEP 5 -->
   <div class="step-panel" id="step5">
     <div class="step-eyebrow">Step 05 of 05</div>
     <h2 class="step-h">Review & <em>seal</em></h2>
@@ -169,10 +134,10 @@
       <div class="review-row"><span class="review-key">Storage</span><span class="review-val" id="rv-storage">5 GB</span></div>
       <div class="review-row"><span class="review-key">Files uploaded</span><span class="review-val" id="rv-files">0 files</span></div>
       <div class="review-row"><span class="review-key">Unlock date</span><span class="review-val" id="rv-date">—</span></div>
-      <div class="review-row"><span class="review-key">Encryption</span><span class="review-val" style="color:var(--teal)">AES-256</span></div>
+      <div class="review-row"><span class="review-key">Encryption</span><span class="review-val" style="color:var(--amber)">AES-256</span></div>
     </div>
     <div class="review-total">
-      <div><div class="review-total-label">Total due today</div><div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);margin-top:2px;">One-time payment</div></div>
+      <div><div class="review-total-label">Total due today</div><div style="font-size:9px;color:var(--muted);margin-top:2px;">One-time payment</div></div>
       <div class="review-total-price" id="rv-price">$3.00</div>
     </div>
     <div class="nav-btns">
@@ -190,61 +155,18 @@
 </footer>
 <script>
 const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
-document.addEventListener('mousemove',e=>{
-  const x=e.clientX,y=e.clientY;
-  cursor.style.transform=`translate(${x-4}px,${y-4}px)`;
-  ring.style.transform=`translate(${x-16}px,${y-16}px)`;
-});
+document.addEventListener('mousemove',e=>{const x=e.clientX,y=e.clientY;cursor.style.transform=`translate(${x-4}px,${y-4}px)`;ring.style.transform=`translate(${x-16}px,${y-16}px)`;});
 let state={type:'Memory Capsule',storage:'5',files:0};
 const prices={'1':'$1.00','5':'$3.00','10':'$5.00','25':'$10.00'};
-function goStep(n){
-  document.querySelectorAll('.step-panel').forEach(p=>p.classList.remove('active'));
-  document.getElementById('step'+n).classList.add('active');
-  for(let i=1;i<=5;i++){
-    const si=document.getElementById('si'+i);
-    si.classList.remove('active','done');
-    if(i<n)si.classList.add('done');
-    else if(i===n)si.classList.add('active');
-  }
-  if(n===5)populateReview();
-  window.scrollTo({top:0,behavior:'smooth'});
-}
+function goStep(n){document.querySelectorAll('.step-panel').forEach(p=>p.classList.remove('active'));document.getElementById('step'+n).classList.add('active');for(let i=1;i<=5;i++){const si=document.getElementById('si'+i);si.classList.remove('active','done');if(i<n)si.classList.add('done');else if(i===n)si.classList.add('active');}if(n===5)populateReview();window.scrollTo({top:0,behavior:'smooth'});}
 function selectType(el,name){document.querySelectorAll('.type-card').forEach(c=>c.classList.remove('selected'));el.classList.add('selected');state.type=name;}
 function updateCount(el,id){document.getElementById(id).textContent=`${el.value.length} / ${el.maxLength}`;}
 function updatePrice(){state.storage=document.getElementById('storageSize').value;}
 function toggleRecipient(){document.getElementById('recipientEmail').style.display=document.getElementById('recipient').value==='someone'?'block':'none';}
-function setPreset(btn,years){
-  document.querySelectorAll('.date-preset').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
-  const d=new Date();d.setFullYear(d.getFullYear()+years);
-  document.getElementById('unlockDate').value=d.toISOString().split('T')[0];
-  document.getElementById('dateInfo').textContent=`Your capsule will unlock in ${years} year${years>1?'s':''} — ${d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}`;
-}
-function handleFiles(files){
-  state.files=files.length;
-  const list=document.getElementById('fileList');list.innerHTML='';
-  Array.from(files).forEach(f=>{
-    const size=f.size>1048576?`${(f.size/1048576).toFixed(1)} MB`:`${Math.round(f.size/1024)} KB`;
-    list.innerHTML+=`<div class="file-item"><span class="file-name">${f.name}</span><span class="file-size">${size}</span></div>`;
-  });
-}
-function populateReview(){
-  const name=document.getElementById('capsuleName').value||'Unnamed Capsule';
-  const dateVal=document.getElementById('unlockDate').value;
-  const dateStr=dateVal?new Date(dateVal).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}):'Not set';
-  const p=prices[state.storage];
-  document.getElementById('rv-type').textContent=state.type;
-  document.getElementById('rv-name').textContent=name;
-  document.getElementById('rv-storage').textContent=state.storage+' GB';
-  document.getElementById('rv-files').textContent=state.files+' file'+(state.files!==1?'s':'');
-  document.getElementById('rv-date').textContent=dateStr;
-  document.getElementById('rv-price').textContent=p;
-  document.getElementById('pay-price').textContent=p;
-}
-(function(){
-  const d=new Date();d.setFullYear(d.getFullYear()+5);
-  document.getElementById('unlockDate').value=d.toISOString().split('T')[0];
-  document.getElementById('dateInfo').textContent=`Your capsule will unlock in 5 years — ${d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}`;
-})();
+function setPreset(btn,years){document.querySelectorAll('.date-preset').forEach(b=>b.classList.remove('active'));btn.classList.add('active');const d=new Date();d.setFullYear(d.getFullYear()+years);document.getElementById('unlockDate').value=d.toISOString().split('T')[0];document.getElementById('dateInfo').textContent=`Your capsule will unlock in ${years} year${years>1?'s':''} — ${d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}`;}
+function handleFiles(files){state.files=files.length;const list=document.getElementById('fileList');list.innerHTML='';Array.from(files).forEach(f=>{const size=f.size>1048576?`${(f.size/1048576).toFixed(1)} MB`:`${Math.round(f.size/1024)} KB`;list.innerHTML+=`<div class="file-item"><span class="file-name">${f.name}</span><span class="file-size">${size}</span></div>`;});}
+function populateReview(){const name=document.getElementById('capsuleName').value||'Unnamed Capsule';const dateVal=document.getElementById('unlockDate').value;const dateStr=dateVal?new Date(dateVal).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'}):'Not set';const p=prices[state.storage];document.getElementById('rv-type').textContent=state.type;document.getElementById('rv-name').textContent=name;document.getElementById('rv-storage').textContent=state.storage+' GB';document.getElementById('rv-files').textContent=state.files+' file'+(state.files!==1?'s':'');document.getElementById('rv-date').textContent=dateStr;document.getElementById('rv-price').textContent=p;document.getElementById('pay-price').textContent=p;}
+(function(){const d=new Date();d.setFullYear(d.getFullYear()+5);document.getElementById('unlockDate').value=d.toISOString().split('T')[0];document.getElementById('dateInfo').textContent=`Your capsule will unlock in 5 years — ${d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}`;})();
 </script>
 </body>
 </html>

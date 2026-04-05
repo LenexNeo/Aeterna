@@ -2,305 +2,100 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/png" href="favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="favicon.png">
 <title>Shop — Aeterna</title>
+<link rel="stylesheet" href="aeterna.css">
 <style>
-  :root {
-    --black: #060608;
-    --surface: #0e0e12;
-    --surface2: #141418;
-    --purple: #8b7ff0;
-    --purple-dim: rgba(139,127,240,0.10);
-    --purple-border: rgba(139,127,240,0.35);
-    --teal: #2dd4a0;
-    --teal-dim: rgba(45,212,160,0.08);
-    --white: #f0ede8;
-    --muted: rgba(240,237,232,0.38);
-    --border: rgba(240,237,232,0.07);
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--black);
-    color: var(--white);
-    font-family: 'Arial', sans-serif;
-    font-weight: 300;
-    overflow-x: hidden;
-    cursor: none;
-  }
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none; z-index: 1000; opacity: 0.4;
-  }
-  .cursor { width: 8px; height: 8px; background: var(--purple); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; transition: transform 0.15s ease; }
-  .cursor-ring { width: 32px; height: 32px; border: 0.5px solid rgba(139,127,240,0.5); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9998; }
-
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 20px 48px;
-    border-bottom: 0.5px solid var(--border);
-    background: rgba(6,6,8,0.88);
-    backdrop-filter: blur(20px);
-  }
-  .nav-brand { display: flex; align-items: center; text-decoration: none; }
-  .nav-logo { font-family: 'Arial', sans-serif; font-size: 22px; font-weight: 600; letter-spacing: 0.18em; color: var(--white); }
-  .nav-tagline { font-family: 'Arial', sans-serif; font-size: 8px; letter-spacing: 0.2em; color: var(--purple); text-transform: uppercase; }
-  .nav-links { display: flex; gap: 36px; }
-  .nav-links a { font-size: 12px; font-weight: 400; color: var(--muted); text-decoration: none; letter-spacing: 0.06em; transition: color 0.2s; }
-  .nav-links a:hover, .nav-links a.active { color: var(--white); }
-  .nav-cta { font-family: 'Arial', sans-serif; font-size: 11px; letter-spacing: 0.1em; color: var(--black); background: var(--purple); border: none; padding: 10px 22px; border-radius: 2px; cursor: none; transition: opacity 0.2s; text-transform: uppercase; }
-  .nav-cta:hover { opacity: 0.85; }
-
-  /* PAGE HEADER */
-  .page-header {
-    padding: 148px 48px 64px;
-    border-bottom: 0.5px solid var(--border);
-    background: var(--surface);
-    position: relative; overflow: hidden;
-  }
-  .page-header::after {
-    content: 'SHOP';
-    position: absolute; right: 40px; bottom: -20px;
-    font-family: 'Arial', sans-serif;
-    font-size: 160px; font-weight: 600;
-    color: rgba(240,237,232,0.025);
-    letter-spacing: 0.1em; line-height: 1;
-    pointer-events: none;
-  }
-  .breadcrumb { font-family: 'Arial', sans-serif; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; display: flex; gap: 10px; align-items: center; }
-  .breadcrumb span { color: var(--purple); }
-  .page-header h1 { font-family: 'Arial', sans-serif; font-size: clamp(40px, 5vw, 72px); font-weight: 300; line-height: 1.05; }
-  .page-header h1 em { font-style: italic; color: var(--purple); }
-  .page-header p { font-size: 14px; color: var(--muted); margin-top: 16px; max-width: 480px; line-height: 1.8; }
-
-  /* MAIN LAYOUT */
-  .shop-layout {
-    display: grid;
-    grid-template-columns: 1fr 340px;
-    gap: 0;
-    min-height: 100vh;
-    align-items: start;
-  }
-
-  /* LEFT: PRODUCTS */
-  .shop-main { padding: 56px 48px; border-right: 0.5px solid var(--border); }
-
-  /* STORAGE CALCULATOR */
-  .calc-section { margin-bottom: 56px; }
-  .section-eyebrow { font-family: 'Arial', sans-serif; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
-  .section-eyebrow::before { content: ''; width: 16px; height: 0.5px; background: var(--teal); display: block; }
-  .section-title { font-family: 'Arial', sans-serif; font-size: 28px; font-weight: 300; margin-bottom: 28px; }
-  .section-title em { font-style: italic; color: var(--purple); }
-
-  .slider-wrap { background: var(--surface); border: 0.5px solid var(--border); border-radius: 2px; padding: 32px; margin-bottom: 16px; }
-  .slider-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 24px; }
-  .slider-label { font-size: 13px; color: var(--muted); }
-  .slider-value { font-family: 'Arial', sans-serif; font-size: 40px; font-weight: 300; color: var(--white); }
-  .slider-value span { font-size: 16px; color: var(--muted); font-family: 'Arial', sans-serif; }
-
-  input[type="range"] {
-    -webkit-appearance: none; appearance: none;
-    width: 100%; height: 1px;
-    background: var(--border); outline: none;
-    margin-bottom: 10px;
-  }
-  input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none; appearance: none;
-    width: 18px; height: 18px;
-    border-radius: 50%;
-    background: var(--purple);
-    cursor: none; border: 3px solid var(--black);
-    box-shadow: 0 0 0 1px var(--purple);
-  }
-  input[type="range"]::-webkit-slider-runnable-track { height: 1px; }
-
-  .slider-ticks { display: flex; justify-content: space-between; }
-  .slider-tick { font-family: 'Arial', sans-serif; font-size: 9px; letter-spacing: 0.1em; color: var(--muted); }
-
-  .calc-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-  .calc-stat { background: var(--surface); border: 0.5px solid var(--border); border-radius: 2px; padding: 18px 20px; }
-  .calc-stat-label { font-family: 'Arial', sans-serif; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
-  .calc-stat-val { font-family: 'Arial', sans-serif; font-size: 24px; font-weight: 300; color: var(--white); }
-  .calc-stat-val.accent { color: var(--teal); }
-
-  /* CAPSULE TYPE SELECTOR */
-  .type-section { margin-bottom: 56px; }
-  .type-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .type-opt {
-    border: 0.5px solid var(--border); border-radius: 2px;
-    padding: 24px; cursor: none;
-    transition: border-color 0.2s, background 0.2s;
-    position: relative;
-  }
-  .type-opt:hover { border-color: var(--purple-border); background: var(--purple-dim); }
-  .type-opt.selected { border-color: var(--purple); background: var(--purple-dim); }
-  .type-opt.selected::after {
-    content: '✓';
-    position: absolute; top: 14px; right: 16px;
-    font-family: 'Arial', sans-serif; font-size: 10px;
-    color: var(--purple);
-  }
-  .type-opt-tag { font-family: 'Arial', sans-serif; font-size: 8px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--purple); margin-bottom: 10px; }
-  .type-opt-name { font-family: 'Arial', sans-serif; font-size: 20px; font-weight: 300; margin-bottom: 8px; }
-  .type-opt-desc { font-size: 12px; color: var(--muted); line-height: 1.7; }
-
-  /* UNLOCK DATE */
-  .date-section { margin-bottom: 56px; }
-  .date-presets { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
-  .date-preset {
-    font-family: 'Arial', sans-serif; font-size: 10px;
-    letter-spacing: 0.1em; text-transform: uppercase;
-    border: 0.5px solid var(--border); border-radius: 2px;
-    padding: 8px 16px; cursor: none; color: var(--muted);
-    background: transparent; transition: all 0.2s;
-  }
-  .date-preset:hover, .date-preset.active { border-color: var(--purple); color: var(--purple); background: var(--purple-dim); }
-  .date-input-wrap { display: flex; gap: 10px; align-items: center; }
-  .date-input-wrap input[type="date"] {
-    background: var(--surface); border: 0.5px solid var(--border);
-    border-radius: 2px; padding: 12px 16px;
-    color: var(--white); font-family: 'Arial', sans-serif;
-    font-size: 12px; outline: none; flex: 1;
-    color-scheme: dark;
-    transition: border-color 0.2s;
-  }
-  .date-input-wrap input[type="date"]:focus { border-color: var(--purple); }
-  .date-countdown { font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 0.1em; color: var(--teal); padding: 12px 16px; background: var(--teal-dim); border: 0.5px solid rgba(45,212,160,0.2); border-radius: 2px; white-space: nowrap; }
-
-  /* WHAT'S INCLUDED */
-  .includes-section { margin-bottom: 0; }
-  .includes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .include-item { display: flex; gap: 14px; align-items: flex-start; padding: 18px; background: var(--surface); border: 0.5px solid var(--border); border-radius: 2px; }
-  .include-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); margin-top: 5px; flex-shrink: 0; }
-  .include-text h4 { font-size: 13px; font-weight: 500; margin-bottom: 3px; }
-  .include-text p { font-size: 12px; color: var(--muted); line-height: 1.6; }
-
-  /* RIGHT: ORDER SUMMARY */
-  .shop-sidebar {
-    padding: 56px 36px;
-    position: sticky; top: 80px;
-    background: var(--surface);
-    border-left: 0.5px solid var(--border);
-    min-height: calc(100vh - 80px);
-  }
-  .sidebar-title { font-family: 'Arial', sans-serif; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
-
-  .order-card { background: var(--black); border: 0.5px solid var(--border); border-radius: 2px; padding: 24px; margin-bottom: 16px; }
-  .order-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 0.5px solid var(--border); }
-  .order-row:last-child { border-bottom: none; }
-  .order-key { font-size: 12px; color: var(--muted); }
-  .order-val { font-family: 'Arial', sans-serif; font-size: 12px; color: var(--white); }
-  .order-val.highlight { color: var(--teal); }
-
-  .order-total { background: var(--purple-dim); border: 0.5px solid var(--purple-border); border-radius: 2px; padding: 20px 24px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
-  .order-total-label { font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
-  .order-total-amount { font-family: 'Arial', sans-serif; font-size: 36px; font-weight: 300; color: var(--white); }
-  .order-total-amount small { font-family: 'Arial', sans-serif; font-size: 11px; color: var(--muted); }
-
-  .btn-checkout {
-    width: 100%; padding: 16px;
-    font-family: 'Arial', sans-serif;
-    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
-    background: var(--purple); color: var(--black);
-    border: none; border-radius: 2px; cursor: none;
-    transition: opacity 0.2s; margin-bottom: 10px;
-  }
-  .btn-checkout:hover { opacity: 0.88; }
-  .btn-paypal {
-    width: 100%; padding: 14px;
-    font-family: 'Arial', sans-serif;
-    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
-    background: #F6BE00; color: #003087;
-    border: none; border-radius: 2px; cursor: none;
-    transition: opacity 0.2s; margin-bottom: 16px;
-  }
-  .btn-paypal:hover { opacity: 0.88; }
-
-  .security-badges { display: flex; flex-direction: column; gap: 8px; }
-  .security-badge { display: flex; gap: 10px; align-items: center; font-size: 11px; color: var(--muted); }
-  .security-badge::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
-
-  .sidebar-divider { border: none; border-top: 0.5px solid var(--border); margin: 24px 0; }
-
-  .promo-wrap { margin-bottom: 24px; }
-  .promo-label { font-family: 'Arial', sans-serif; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
-  .promo-row { display: flex; gap: 8px; }
-  .promo-input {
-    flex: 1; background: var(--black); border: 0.5px solid var(--border);
-    border-radius: 2px; padding: 10px 14px;
-    color: var(--white); font-family: 'Arial', sans-serif; font-size: 11px;
-    outline: none; transition: border-color 0.2s;
-  }
-  .promo-input:focus { border-color: var(--purple); }
-  .promo-btn {
-    font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--purple);
-    background: transparent; border: 0.5px solid var(--purple-border);
-    padding: 10px 16px; border-radius: 2px; cursor: none;
-    transition: background 0.2s;
-  }
-  .promo-btn:hover { background: var(--purple-dim); }
-
-  /* COMPARE TABLE */
-  .compare-section { padding: 80px 48px; background: var(--surface); border-top: 0.5px solid var(--border); }
-  .compare-table { width: 100%; border-collapse: collapse; margin-top: 40px; }
-  .compare-table th {
-    font-family: 'Arial', sans-serif; font-size: 9px;
-    letter-spacing: 0.16em; text-transform: uppercase;
-    color: var(--muted); padding: 16px 20px;
-    text-align: left; border-bottom: 0.5px solid var(--border);
-    font-weight: 400;
-  }
-  .compare-table th.featured-col { color: var(--purple); }
-  .compare-table td {
-    padding: 16px 20px; font-size: 13px; color: var(--white);
-    border-bottom: 0.5px solid var(--border);
-  }
-  .compare-table td.feat-name { color: var(--muted); font-size: 12px; }
-  .compare-table td.featured-col { background: var(--purple-dim); }
-  .compare-table tr:last-child td { border-bottom: none; }
-  .compare-table tr:hover td { background: rgba(240,237,232,0.02); }
-  .compare-table tr:hover td.featured-col { background: rgba(139,127,240,0.14); }
-  .check { color: var(--teal); }
-  .cross { color: rgba(240,237,232,0.2); }
-  .compare-price { font-family: 'Arial', sans-serif; font-size: 22px; font-weight: 300; }
-
-  /* FAQ */
-  .faq-section { padding: 80px 48px; border-top: 0.5px solid var(--border); }
-  .faq-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; margin-top: 40px; border: 0.5px solid var(--border); }
-  .faq-item { padding: 28px 32px; border-bottom: 0.5px solid var(--border); border-right: 0.5px solid var(--border); }
-  .faq-item:nth-child(even) { border-right: none; }
-  .faq-item:nth-last-child(-n+2) { border-bottom: none; }
-  .faq-q { font-family: 'Arial', sans-serif; font-size: 18px; font-weight: 400; margin-bottom: 10px; }
-  .faq-a { font-size: 13px; color: var(--muted); line-height: 1.8; }
-
-  /* FOOTER */
-  footer { background: var(--black); border-top: 0.5px solid var(--border); padding: 40px 48px; }
-  .footer-bottom { display: flex; justify-content: space-between; align-items: center; }
-  .footer-logo { font-family: 'Arial', sans-serif; font-size: 18px; font-weight: 300; letter-spacing: 0.14em; }
-  .footer-copy { font-family: 'Arial', sans-serif; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(240,237,232,0.2); }
-  .footer-links { display: flex; gap: 24px; }
-  .footer-links a { font-family: 'Arial', sans-serif; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(240,237,232,0.25); text-decoration: none; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--muted); }
-
-  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
-  .reveal.visible { opacity: 1; transform: none; }
+.page-header::after{content:'SHOP';position:absolute;right:40px;bottom:-20px;font-size:150px;font-weight:700;color:rgba(245,237,224,0.025);letter-spacing:0.1em;line-height:1;pointer-events:none;}
+.shop-layout{display:grid;grid-template-columns:1fr 340px;gap:0;align-items:start;}
+.shop-main{padding:56px 48px;border-right:0.5px solid var(--border);}
+.calc-section{margin-bottom:52px;}
+.section-eyebrow{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.section-eyebrow::before{content:'';width:16px;height:0.5px;background:var(--amber);display:block;}
+.section-title{font-size:26px;font-weight:300;margin-bottom:24px;}
+.section-title em{font-style:italic;color:var(--orange);}
+.slider-wrap{background:var(--surface);border:0.5px solid var(--border);border-radius:2px;padding:28px;margin-bottom:14px;}
+.slider-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px;}
+.slider-label{font-size:13px;color:var(--muted);}
+.slider-value{font-size:38px;font-weight:300;color:var(--white);}
+.slider-value span{font-size:14px;color:var(--muted);}
+input[type="range"]{-webkit-appearance:none;width:100%;height:1px;background:var(--border);outline:none;margin-bottom:10px;}
+input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--orange);cursor:none;border:3px solid var(--black);box-shadow:0 0 0 1px var(--orange);}
+.slider-ticks{display:flex;justify-content:space-between;}
+.slider-tick{font-size:9px;letter-spacing:0.1em;color:var(--muted);}
+.calc-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.calc-stat{background:var(--surface);border:0.5px solid var(--border);border-radius:2px;padding:16px 18px;}
+.calc-stat-label{font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.calc-stat-val{font-size:22px;font-weight:300;color:var(--white);}
+.calc-stat-val.accent{color:var(--amber);}
+.type-section{margin-bottom:52px;}
+.type-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+.type-opt{border:0.5px solid var(--border);border-radius:2px;padding:22px;cursor:none;transition:all 0.2s;position:relative;}
+.type-opt:hover{border-color:var(--orange-border);background:var(--orange-dim);}
+.type-opt.selected{border-color:var(--orange);background:var(--orange-dim);}
+.type-opt.selected::after{content:'✓';position:absolute;top:12px;right:14px;font-size:11px;color:var(--orange);}
+.type-opt-tag{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--orange);margin-bottom:8px;}
+.type-opt-name{font-size:18px;font-weight:400;margin-bottom:6px;}
+.type-opt-desc{font-size:12px;color:var(--muted);line-height:1.7;}
+.date-section{margin-bottom:52px;}
+.date-presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+.date-preset{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;border:0.5px solid var(--border);border-radius:2px;padding:8px 14px;cursor:none;color:var(--muted);background:transparent;transition:all 0.2s;}
+.date-preset:hover,.date-preset.active{border-color:var(--orange);color:var(--orange);background:var(--orange-dim);}
+.date-input-wrap{display:flex;gap:10px;align-items:center;}
+.date-input-wrap input[type="date"]{background:var(--surface);border:0.5px solid var(--border);border-radius:2px;padding:12px 14px;color:var(--white);font-family:Arial,sans-serif;font-size:12px;outline:none;flex:1;color-scheme:dark;transition:border-color 0.2s;}
+.date-input-wrap input[type="date"]:focus{border-color:var(--orange);}
+.date-countdown{font-size:10px;letter-spacing:0.1em;color:var(--amber);padding:12px 14px;background:var(--amber-dim);border:0.5px solid rgba(255,170,77,0.2);border-radius:2px;white-space:nowrap;}
+.includes-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+.include-item{display:flex;gap:12px;align-items:flex-start;padding:16px;background:var(--surface);border:0.5px solid var(--border);border-radius:2px;}
+.include-dot{width:6px;height:6px;border-radius:50%;background:var(--amber);margin-top:5px;flex-shrink:0;}
+.include-text h4{font-size:13px;font-weight:500;margin-bottom:3px;}
+.include-text p{font-size:12px;color:var(--muted);line-height:1.6;}
+.shop-sidebar{padding:48px 32px;position:sticky;top:80px;background:var(--surface);border-left:0.5px solid var(--border);}
+.sidebar-title{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:22px;}
+.order-card{background:var(--black);border:0.5px solid var(--border);border-radius:2px;padding:22px;margin-bottom:14px;}
+.order-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:0.5px solid var(--border);}
+.order-row:last-child{border-bottom:none;}
+.order-key{font-size:12px;color:var(--muted);}
+.order-val{font-size:12px;color:var(--white);font-weight:500;}
+.order-val.highlight{color:var(--amber);}
+.order-total{background:var(--orange-dim);border:0.5px solid var(--orange-border);border-radius:2px;padding:18px 22px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;}
+.order-total-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);}
+.order-total-amount{font-size:34px;font-weight:300;color:var(--white);}
+.order-total-amount small{font-size:11px;color:var(--muted);}
+.btn-checkout{width:100%;padding:14px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;background:var(--orange);color:var(--black);border:none;border-radius:2px;cursor:none;transition:opacity 0.2s;margin-bottom:10px;font-weight:700;}
+.btn-checkout:hover{opacity:0.88;}
+.btn-paypal{width:100%;padding:13px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;background:#F6BE00;color:#003087;border:none;border-radius:2px;cursor:none;transition:opacity 0.2s;margin-bottom:16px;font-weight:700;}
+.btn-paypal:hover{opacity:0.88;}
+.security-badges{display:flex;flex-direction:column;gap:8px;}
+.security-badge{display:flex;gap:10px;align-items:center;font-size:11px;color:var(--muted);}
+.security-badge::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--amber);flex-shrink:0;}
+.sidebar-divider{border:none;border-top:0.5px solid var(--border);margin:20px 0;}
+.promo-wrap{margin-bottom:20px;}
+.promo-label{font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.promo-row{display:flex;gap:8px;}
+.promo-input{flex:1;background:var(--black);border:0.5px solid var(--border);border-radius:2px;padding:10px 12px;color:var(--white);font-family:Arial,sans-serif;font-size:11px;outline:none;transition:border-color 0.2s;}
+.promo-input:focus{border-color:var(--orange);}
+.promo-btn{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--orange);background:transparent;border:0.5px solid var(--orange-border);padding:10px 14px;border-radius:2px;cursor:none;transition:background 0.2s;}
+.promo-btn:hover{background:var(--orange-dim);}
+.compare-section{padding:80px 48px;background:var(--surface);border-top:0.5px solid var(--border);}
+.compare-table{width:100%;border-collapse:collapse;margin-top:36px;}
+.compare-table th{font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);padding:14px 18px;text-align:left;border-bottom:0.5px solid var(--border);font-weight:400;}
+.compare-table th.featured-col{color:var(--orange);}
+.compare-table td{padding:14px 18px;font-size:13px;color:var(--white);border-bottom:0.5px solid var(--border);}
+.compare-table td.feat-name{color:var(--muted);font-size:12px;}
+.compare-table td.featured-col{background:var(--orange-dim);}
+.compare-table tr:last-child td{border-bottom:none;}
+.compare-price{font-size:22px;font-weight:300;}
+.check{color:var(--amber);}
+.cross{color:rgba(245,237,224,0.2);}
 </style>
 </head>
 <body>
-
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
-
 <nav>
-  <a class="nav-brand" href="index.html">
-    <img src="logo-white.png" alt="Aeterna" style="height:36px;width:auto;display:block;">
-  </a>
+  <a class="nav-brand" href="index.html"><img src="logo-white.png" alt="Aeterna"></a>
   <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="shop.html" class="active">Shop</a>
@@ -310,447 +105,133 @@
   </div>
   <a class="nav-cta" href="create.html">Create Capsule</a>
 </nav>
-
-<!-- PAGE HEADER -->
 <div class="page-header">
   <div class="breadcrumb">Aeterna <span>/ Shop</span></div>
   <h1>Build your <em>capsule.</em></h1>
   <p>Choose your storage, pick your capsule type, set your unlock date. One payment — preserved forever.</p>
 </div>
-
-<!-- SHOP BODY -->
 <div class="shop-layout">
-
-  <!-- LEFT: CONFIGURATOR -->
   <div class="shop-main">
-
-    <!-- STORAGE SLIDER -->
     <div class="calc-section reveal">
       <div class="section-eyebrow">Step 01</div>
       <div class="section-title">Choose your <em>storage</em></div>
       <div class="slider-wrap">
-        <div class="slider-header">
-          <span class="slider-label">Storage size</span>
-          <div class="slider-value"><span id="sliderDisplay">5</span> <span>GB</span></div>
-        </div>
+        <div class="slider-header"><span class="slider-label">Storage size</span><div class="slider-value"><span id="sliderDisplay">5</span> <span>GB</span></div></div>
         <input type="range" id="storageSlider" min="0" max="3" value="1" step="1">
-        <div class="slider-ticks">
-          <span class="slider-tick">1 GB</span>
-          <span class="slider-tick">5 GB</span>
-          <span class="slider-tick">10 GB</span>
-          <span class="slider-tick">25 GB</span>
-        </div>
+        <div class="slider-ticks"><span class="slider-tick">1 GB</span><span class="slider-tick">5 GB</span><span class="slider-tick">10 GB</span><span class="slider-tick">25 GB</span></div>
       </div>
       <div class="calc-summary">
-        <div class="calc-stat">
-          <div class="calc-stat-label">Price</div>
-          <div class="calc-stat-val accent" id="calcPrice">$3.00</div>
-        </div>
-        <div class="calc-stat">
-          <div class="calc-stat-label">Est. photos</div>
-          <div class="calc-stat-val" id="calcPhotos">~2,500</div>
-        </div>
-        <div class="calc-stat">
-          <div class="calc-stat-label">Est. videos</div>
-          <div class="calc-stat-val" id="calcVideos">~40</div>
-        </div>
+        <div class="calc-stat"><div class="calc-stat-label">Price</div><div class="calc-stat-val accent" id="calcPrice">$3.00</div></div>
+        <div class="calc-stat"><div class="calc-stat-label">Est. photos</div><div class="calc-stat-val" id="calcPhotos">~2,500</div></div>
+        <div class="calc-stat"><div class="calc-stat-label">Est. videos</div><div class="calc-stat-val" id="calcVideos">~40</div></div>
       </div>
     </div>
-
-    <!-- CAPSULE TYPE -->
     <div class="type-section reveal">
       <div class="section-eyebrow">Step 02</div>
       <div class="section-title">Choose capsule <em>type</em></div>
       <div class="type-grid">
-        <div class="type-opt" onclick="selectType(this)">
-          <div class="type-opt-tag">Memory Vault</div>
-          <div class="type-opt-name">Memory Capsule</div>
-          <p class="type-opt-desc">Photos, videos and moments from a specific time. Open years later and relive exactly how it felt.</p>
-        </div>
-        <div class="type-opt selected" onclick="selectType(this)">
-          <div class="type-opt-tag">Future Letter</div>
-          <div class="type-opt-name">Letter Capsule</div>
-          <p class="type-opt-desc">Write a message to your future self or a loved one. Sealed today, delivered when the time is right.</p>
-        </div>
-        <div class="type-opt" onclick="selectType(this)">
-          <div class="type-opt-tag">Anniversary</div>
-          <div class="type-opt-name">Anniversary Capsule</div>
-          <p class="type-opt-desc">A gift that grows in meaning over time. Perfect for weddings, milestones, and celebrations.</p>
-        </div>
-        <div class="type-opt" onclick="selectType(this)">
-          <div class="type-opt-tag">Legacy</div>
-          <div class="type-opt-name">Legacy Capsule</div>
-          <p class="type-opt-desc">Leave something behind for the people you love. Messages, stories, and wisdom across generations.</p>
-        </div>
+        <div class="type-opt" onclick="selectType(this)"><div class="type-opt-tag">Memory Vault</div><div class="type-opt-name">Memory Capsule</div><p class="type-opt-desc">Photos, videos and moments from a specific time. Open years later and relive exactly how it felt.</p></div>
+        <div class="type-opt selected" onclick="selectType(this)"><div class="type-opt-tag">Future Letter</div><div class="type-opt-name">Letter Capsule</div><p class="type-opt-desc">Write a message to your future self or a loved one. Sealed today, delivered when the time is right.</p></div>
+        <div class="type-opt" onclick="selectType(this)"><div class="type-opt-tag">Anniversary</div><div class="type-opt-name">Anniversary Capsule</div><p class="type-opt-desc">A gift that grows in meaning over time. Perfect for weddings, milestones, and celebrations.</p></div>
+        <div class="type-opt" onclick="selectType(this)"><div class="type-opt-tag">Legacy</div><div class="type-opt-name">Legacy Capsule</div><p class="type-opt-desc">Leave something behind for the people you love. Messages, stories, and wisdom across generations.</p></div>
       </div>
     </div>
-
-    <!-- UNLOCK DATE -->
     <div class="date-section reveal">
       <div class="section-eyebrow">Step 03</div>
       <div class="section-title">Set your <em>unlock date</em></div>
       <div class="date-presets">
-        <button class="date-preset" onclick="setPreset(this, 1)">1 year</button>
-        <button class="date-preset active" onclick="setPreset(this, 5)">5 years</button>
-        <button class="date-preset" onclick="setPreset(this, 10)">10 years</button>
-        <button class="date-preset" onclick="setPreset(this, 25)">25 years</button>
-        <button class="date-preset" onclick="setPreset(this, 0)">Custom</button>
+        <button class="date-preset" onclick="setPreset(this,1)">1 year</button>
+        <button class="date-preset active" onclick="setPreset(this,5)">5 years</button>
+        <button class="date-preset" onclick="setPreset(this,10)">10 years</button>
+        <button class="date-preset" onclick="setPreset(this,25)">25 years</button>
+        <button class="date-preset" onclick="setPreset(this,0)">Custom</button>
       </div>
       <div class="date-input-wrap">
         <input type="date" id="unlockDate">
         <div class="date-countdown" id="dateCountdown">Unlocks in 5 years</div>
       </div>
     </div>
-
-    <!-- WHAT'S INCLUDED -->
-    <div class="includes-section reveal">
+    <div class="reveal">
       <div class="section-eyebrow">Every capsule includes</div>
       <div class="section-title">What's <em>inside</em></div>
       <div class="includes-grid">
-        <div class="include-item">
-          <div class="include-dot"></div>
-          <div class="include-text">
-            <h4>AES-256 encryption</h4>
-            <p>Your memories are encrypted at rest and in transit. Nobody can access them — not even us.</p>
-          </div>
-        </div>
-        <div class="include-item">
-          <div class="include-dot"></div>
-          <div class="include-text">
-            <h4>Countdown unlock timer</h4>
-            <p>Watch the days count down on your dashboard. The anticipation is part of the experience.</p>
-          </div>
-        </div>
-        <div class="include-item">
-          <div class="include-dot"></div>
-          <div class="include-text">
-            <h4>Email notification</h4>
-            <p>We'll email you the moment your capsule unlocks so you never miss the opening.</p>
-          </div>
-        </div>
-        <div class="include-item">
-          <div class="include-dot"></div>
-          <div class="include-text">
-            <h4>Shareable capsule link</h4>
-            <p>Share the unlocked capsule with loved ones using a private link — valid forever.</p>
-          </div>
-        </div>
-        <div class="include-item">
-          <div class="include-dot"></div>
-          <div class="include-text">
-            <h4>Download all content</h4>
-            <p>Once unlocked, download everything in one click. Your memories, on your device.</p>
-          </div>
-        </div>
-        <div class="include-item">
-          <div class="include-dot"></div>
-          <div class="include-text">
-            <h4>One-time payment</h4>
-            <p>Pay once, preserved forever. No monthly fees, no renewals, no surprises.</p>
-          </div>
-        </div>
+        <div class="include-item"><div class="include-dot"></div><div class="include-text"><h4>AES-256 encryption</h4><p>Your memories are encrypted at rest and in transit. Nobody can access them — not even us.</p></div></div>
+        <div class="include-item"><div class="include-dot"></div><div class="include-text"><h4>Countdown unlock timer</h4><p>Watch the days count down on your dashboard. The anticipation is part of the experience.</p></div></div>
+        <div class="include-item"><div class="include-dot"></div><div class="include-text"><h4>Email notification</h4><p>We'll email you the moment your capsule unlocks so you never miss the opening.</p></div></div>
+        <div class="include-item"><div class="include-dot"></div><div class="include-text"><h4>Shareable capsule link</h4><p>Share the unlocked capsule with loved ones using a private link — valid forever.</p></div></div>
+        <div class="include-item"><div class="include-dot"></div><div class="include-text"><h4>Download all content</h4><p>Once unlocked, download everything in one click. Your memories, on your device.</p></div></div>
+        <div class="include-item"><div class="include-dot"></div><div class="include-text"><h4>One-time payment</h4><p>Pay once, preserved forever. No monthly fees, no renewals, no surprises.</p></div></div>
       </div>
     </div>
   </div>
-
-  <!-- RIGHT: ORDER SUMMARY -->
   <div class="shop-sidebar">
     <div class="sidebar-title">Order summary</div>
-
     <div class="order-card">
-      <div class="order-row">
-        <span class="order-key">Storage</span>
-        <span class="order-val" id="summaryStorage">5 GB</span>
-      </div>
-      <div class="order-row">
-        <span class="order-key">Capsule type</span>
-        <span class="order-val" id="summaryType">Letter Capsule</span>
-      </div>
-      <div class="order-row">
-        <span class="order-key">Unlock date</span>
-        <span class="order-val" id="summaryDate">—</span>
-      </div>
-      <div class="order-row">
-        <span class="order-key">Encryption</span>
-        <span class="order-val highlight">AES-256</span>
-      </div>
-      <div class="order-row">
-        <span class="order-key">Subscription</span>
-        <span class="order-val highlight">None</span>
-      </div>
+      <div class="order-row"><span class="order-key">Storage</span><span class="order-val" id="summaryStorage">5 GB</span></div>
+      <div class="order-row"><span class="order-key">Capsule type</span><span class="order-val" id="summaryType">Letter Capsule</span></div>
+      <div class="order-row"><span class="order-key">Unlock date</span><span class="order-val" id="summaryDate">—</span></div>
+      <div class="order-row"><span class="order-key">Encryption</span><span class="order-val highlight">AES-256</span></div>
+      <div class="order-row"><span class="order-key">Subscription</span><span class="order-val highlight">None</span></div>
     </div>
-
     <div class="promo-wrap">
       <div class="promo-label">Promo code</div>
-      <div class="promo-row">
-        <input class="promo-input" type="text" placeholder="Enter code">
-        <button class="promo-btn" onclick="applyPromo()">Apply</button>
-      </div>
+      <div class="promo-row"><input class="promo-input" type="text" placeholder="Enter code"><button class="promo-btn" onclick="applyPromo()">Apply</button></div>
     </div>
-
     <div class="order-total">
-      <div>
-        <div class="order-total-label">Total</div>
-        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:2px;">One-time payment</div>
-      </div>
+      <div><div class="order-total-label">Total</div><div style="font-size:10px;color:var(--muted);margin-top:2px;">One-time payment</div></div>
       <div class="order-total-amount" id="summaryPrice">$3.00 <small>USD</small></div>
     </div>
-
     <button class="btn-checkout" onclick="window.location.href='create.html'">Proceed to checkout →</button>
     <button class="btn-paypal" onclick="window.location.href='create.html'">Pay with PayPal</button>
-
     <div class="security-badges">
       <div class="security-badge">256-bit SSL encrypted checkout</div>
       <div class="security-badge">No recurring charges</div>
       <div class="security-badge">Instant capsule creation after payment</div>
       <div class="security-badge">30-day refund policy</div>
     </div>
-
     <hr class="sidebar-divider">
-
-    <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">Need help?</div>
-    <div style="font-size:12px;color:var(--muted);line-height:1.8;">
-      Questions about your order?<br>
-      <a href="contact.html" style="color:var(--purple);text-decoration:none;">Contact our support team →</a>
-    </div>
+    <div style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">Need help?</div>
+    <div style="font-size:12px;color:var(--muted);line-height:1.8;">Questions about your order?<br><a href="contact.html" style="color:var(--orange);text-decoration:none;">Contact our support team →</a></div>
   </div>
 </div>
-
-<!-- COMPARE TABLE -->
 <section class="compare-section">
-  <div class="section-eyebrow reveal">Compare plans</div>
-  <h2 class="section-title reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3vw,44px);font-weight:300;">Everything <em>included,</em> always.</h2>
+  <div class="eyebrow reveal">Compare plans</div>
+  <h2 class="section-h reveal">Everything <em>included,</em> always.</h2>
   <table class="compare-table reveal">
-    <thead>
-      <tr>
-        <th style="width:36%;">Feature</th>
-        <th>1 GB</th>
-        <th class="featured-col">5 GB ★</th>
-        <th>10 GB</th>
-        <th>25 GB</th>
-      </tr>
-    </thead>
+    <thead><tr><th style="width:36%">Feature</th><th>1 GB</th><th class="featured-col">5 GB ★</th><th>10 GB</th><th>25 GB</th></tr></thead>
     <tbody>
-      <tr>
-        <td class="feat-name">Price</td>
-        <td><span class="compare-price">$1</span></td>
-        <td class="featured-col"><span class="compare-price">$3</span></td>
-        <td><span class="compare-price">$5</span></td>
-        <td><span class="compare-price">$10</span></td>
-      </tr>
-      <tr>
-        <td class="feat-name">Est. photos</td>
-        <td>~500</td>
-        <td class="featured-col">~2,500</td>
-        <td>~5,000</td>
-        <td>~12,500</td>
-      </tr>
-      <tr>
-        <td class="feat-name">Est. videos</td>
-        <td>~10</td>
-        <td class="featured-col">~40</td>
-        <td>~80</td>
-        <td>~200</td>
-      </tr>
-      <tr>
-        <td class="feat-name">AES-256 encryption</td>
-        <td><span class="check">✓</span></td>
-        <td class="featured-col"><span class="check">✓</span></td>
-        <td><span class="check">✓</span></td>
-        <td><span class="check">✓</span></td>
-      </tr>
-      <tr>
-        <td class="feat-name">Countdown timer</td>
-        <td><span class="check">✓</span></td>
-        <td class="featured-col"><span class="check">✓</span></td>
-        <td><span class="check">✓</span></td>
-        <td><span class="check">✓</span></td>
-      </tr>
-      <tr>
-        <td class="feat-name">Email notification</td>
-        <td><span class="check">✓</span></td>
-        <td class="featured-col"><span class="check">✓</span></td>
-        <td><span class="check">✓</span></td>
-        <td><span class="check">✓</span></td>
-      </tr>
-      <tr>
-        <td class="feat-name">Shareable link</td>
-        <td><span class="check">✓</span></td>
-        <td class="featured-col"><span class="check">✓</span></td>
-        <td><span class="check">✓</span></td>
-        <td><span class="check">✓</span></td>
-      </tr>
-      <tr>
-        <td class="feat-name">HD video support</td>
-        <td><span class="cross">—</span></td>
-        <td class="featured-col"><span class="check">✓</span></td>
-        <td><span class="check">✓</span></td>
-        <td><span class="check">✓</span></td>
-      </tr>
-      <tr>
-        <td class="feat-name">4K video support</td>
-        <td><span class="cross">—</span></td>
-        <td class="featured-col"><span class="cross">—</span></td>
-        <td><span class="cross">—</span></td>
-        <td><span class="check">✓</span></td>
-      </tr>
-      <tr>
-        <td class="feat-name">Subscription</td>
-        <td>None</td>
-        <td class="featured-col">None</td>
-        <td>None</td>
-        <td>None</td>
-      </tr>
+      <tr><td class="feat-name">Price</td><td><span class="compare-price">$1</span></td><td class="featured-col"><span class="compare-price">$3</span></td><td><span class="compare-price">$5</span></td><td><span class="compare-price">$10</span></td></tr>
+      <tr><td class="feat-name">Est. photos</td><td>~500</td><td class="featured-col">~2,500</td><td>~5,000</td><td>~12,500</td></tr>
+      <tr><td class="feat-name">Est. videos</td><td>~10</td><td class="featured-col">~40</td><td>~80</td><td>~200</td></tr>
+      <tr><td class="feat-name">AES-256 encryption</td><td><span class="check">✓</span></td><td class="featured-col"><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+      <tr><td class="feat-name">Countdown timer</td><td><span class="check">✓</span></td><td class="featured-col"><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+      <tr><td class="feat-name">HD video support</td><td><span class="cross">—</span></td><td class="featured-col"><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+      <tr><td class="feat-name">4K video support</td><td><span class="cross">—</span></td><td class="featured-col"><span class="cross">—</span></td><td><span class="cross">—</span></td><td><span class="check">✓</span></td></tr>
+      <tr><td class="feat-name">Subscription</td><td>None</td><td class="featured-col">None</td><td>None</td><td>None</td></tr>
     </tbody>
   </table>
 </section>
-
-<!-- FAQ -->
-<section class="faq-section">
-  <div class="section-eyebrow reveal">FAQ</div>
-  <h2 class="section-title reveal" style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3vw,44px);font-weight:300;">Common <em>questions</em></h2>
-  <div class="faq-grid reveal">
-    <div class="faq-item">
-      <div class="faq-q">What happens if I need more storage later?</div>
-      <p class="faq-a">You can purchase an additional capsule with more storage. Each capsule is independent — buy as many as you need.</p>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Can I change the unlock date after purchasing?</div>
-      <p class="faq-a">Yes — you can extend the unlock date any time before it arrives. You cannot move it to an earlier date once sealed.</p>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">What file types can I upload?</div>
-      <p class="faq-a">Photos (JPG, PNG, WEBP), videos (MP4, MOV), audio (MP3, WAV), and text documents (PDF, TXT, DOCX).</p>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Is my data safe and private?</div>
-      <p class="faq-a">Yes. All capsules are encrypted with AES-256 before storage. Only you can access your capsule — not even our team.</p>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">What is your refund policy?</div>
-      <p class="faq-a">We offer a full refund within 30 days of purchase, provided the capsule has not yet been sealed with content.</p>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Do I need to create an account?</div>
-      <p class="faq-a">Yes — an account is required to store, manage, and access your capsules. Registration is free and takes under a minute.</p>
-    </div>
-  </div>
-</section>
-
 <footer>
-  <div class="footer-bottom">
-    <div class="footer-logo">AETERNA</div>
+  <div class="footer-inner">
+    <div><div class="footer-logo">AETERNA</div><div class="footer-tagline">Where memories live forever</div></div>
     <span class="footer-copy">© 2026 Aeterna. All rights reserved.</span>
-    <div class="footer-links">
-      <a href="contact.html">Privacy</a>
-      <a href="contact.html">Terms</a>
-      <a href="contact.html">Refund Policy</a>
-    </div>
+    <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="contact.html">Contact</a></div>
   </div>
 </footer>
-
 <script>
-  // Cursor
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  document.addEventListener('mousemove', e => {
-    const x = e.clientX, y = e.clientY;
-    cursor.style.transform = `translate(${x - 4}px, ${y - 4}px)`;
-    ring.style.transform = `translate(${x - 16}px, ${y - 16}px)`;
-  });
-  document.querySelectorAll('button, a').forEach(el => {
-    el.addEventListener('mouseenter', () => { ring.style.borderColor = 'rgba(139,127,240,0.9)'; ring.style.transform += ' scale(1.5)'; });
-    el.addEventListener('mouseleave', () => { ring.style.borderColor = 'rgba(139,127,240,0.5)'; });
-  });
-
-  // Scroll reveal
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0, rootMargin: '0px 0px -10px 0px' });
-  document.querySelectorAll('.reveal').forEach(r => observer.observe(r));
-
-  // Storage data
-  const sizes = [
-    { gb: 1, price: 1, photos: '~500', videos: '~10' },
-    { gb: 5, price: 3, photos: '~2,500', videos: '~40' },
-    { gb: 10, price: 5, photos: '~5,000', videos: '~80' },
-    { gb: 25, price: 10, photos: '~12,500', videos: '~200' }
-  ];
-
-  const slider = document.getElementById('storageSlider');
-  function updateStorage() {
-    const d = sizes[slider.value];
-    document.getElementById('sliderDisplay').textContent = d.gb;
-    document.getElementById('calcPrice').textContent = `$${d.price}.00`;
-    document.getElementById('calcPhotos').textContent = d.photos;
-    document.getElementById('calcVideos').textContent = d.videos;
-    document.getElementById('summaryStorage').textContent = `${d.gb} GB`;
-    document.getElementById('summaryPrice').innerHTML = `$${d.price}.00 <small>USD</small>`;
-  }
-  slider.addEventListener('input', updateStorage);
-  updateStorage();
-
-  // Capsule type select
-  let selectedType = 'Letter Capsule';
-  function selectType(el) {
-    document.querySelectorAll('.type-opt').forEach(o => o.classList.remove('selected'));
-    el.classList.add('selected');
-    selectedType = el.querySelector('.type-opt-name').textContent;
-    document.getElementById('summaryType').textContent = selectedType;
-  }
-
-  // Date presets
-  const dateInput = document.getElementById('unlockDate');
-  const countdown = document.getElementById('dateCountdown');
-
-  function setPreset(btn, years) {
-    document.querySelectorAll('.date-preset').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    if (years === 0) { dateInput.value = ''; countdown.textContent = 'Choose a date'; return; }
-    const d = new Date();
-    d.setFullYear(d.getFullYear() + years);
-    const iso = d.toISOString().split('T')[0];
-    dateInput.value = iso;
-    updateCountdown(d, years);
-    updateSummaryDate(d);
-  }
-
-  function updateCountdown(d, years) {
-    if (years === 1) countdown.textContent = `Unlocks in 1 year`;
-    else countdown.textContent = `Unlocks in ${years} years`;
-  }
-
-  function updateSummaryDate(d) {
-    const opts = { year: 'numeric', month: 'long', day: 'numeric' };
-    document.getElementById('summaryDate').textContent = d.toLocaleDateString('en-US', opts);
-  }
-
-  dateInput.addEventListener('change', () => {
-    const d = new Date(dateInput.value);
-    if (!isNaN(d)) {
-      const now = new Date();
-      const diffDays = Math.round((d - now) / (1000 * 60 * 60 * 24));
-      const diffYears = (diffDays / 365).toFixed(1);
-      countdown.textContent = `Unlocks in ~${diffYears} years`;
-      updateSummaryDate(d);
-    }
-  });
-
-  // Set default 5 years
-  (function() {
-    const d = new Date();
-    d.setFullYear(d.getFullYear() + 5);
-    dateInput.value = d.toISOString().split('T')[0];
-    updateSummaryDate(d);
-    countdown.textContent = 'Unlocks in 5 years';
-  })();
-
-function applyPromo() {
-  const code = document.querySelector('.promo-input').value.trim().toUpperCase();
-  if (code === 'AETERNA10') { alert('Promo code applied! 10% discount added.'); }
-  else if (code === '') { alert('Please enter a promo code.'); }
-  else { alert('Invalid promo code. Try AETERNA10!'); }
-}
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+document.addEventListener('mousemove',e=>{const x=e.clientX,y=e.clientY;cursor.style.transform=`translate(${x-4}px,${y-4}px)`;ring.style.transform=`translate(${x-16}px,${y-16}px)`;});
+const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0});
+document.querySelectorAll('.reveal').forEach(r=>{const rect=r.getBoundingClientRect();if(rect.top<window.innerHeight)r.classList.add('visible');else observer.observe(r);});
+const sizes=[{gb:1,price:1,photos:'~500',videos:'~10'},{gb:5,price:3,photos:'~2,500',videos:'~40'},{gb:10,price:5,photos:'~5,000',videos:'~80'},{gb:25,price:10,photos:'~12,500',videos:'~200'}];
+const slider=document.getElementById('storageSlider');
+function updateStorage(){const d=sizes[slider.value];document.getElementById('sliderDisplay').textContent=d.gb;document.getElementById('calcPrice').textContent=`$${d.price}.00`;document.getElementById('calcPhotos').textContent=d.photos;document.getElementById('calcVideos').textContent=d.videos;document.getElementById('summaryStorage').textContent=`${d.gb} GB`;document.getElementById('summaryPrice').innerHTML=`$${d.price}.00 <small>USD</small>`;}
+slider.addEventListener('input',updateStorage);updateStorage();
+function selectType(el){document.querySelectorAll('.type-opt').forEach(o=>o.classList.remove('selected'));el.classList.add('selected');document.getElementById('summaryType').textContent=el.querySelector('.type-opt-name').textContent;}
+function setPreset(btn,years){document.querySelectorAll('.date-preset').forEach(b=>b.classList.remove('active'));btn.classList.add('active');if(years===0){document.getElementById('unlockDate').value='';document.getElementById('dateCountdown').textContent='Choose a date';return;}const d=new Date();d.setFullYear(d.getFullYear()+years);document.getElementById('unlockDate').value=d.toISOString().split('T')[0];document.getElementById('dateCountdown').textContent=`Unlocks in ${years} year${years>1?'s':''}`;const opts={year:'numeric',month:'long',day:'numeric'};document.getElementById('summaryDate').textContent=d.toLocaleDateString('en-US',opts);}
+document.getElementById('unlockDate').addEventListener('change',function(){const d=new Date(this.value);if(!isNaN(d)){const diff=Math.round((d-new Date())/(1000*60*60*24*365)*10)/10;document.getElementById('dateCountdown').textContent=`Unlocks in ~${diff} years`;document.getElementById('summaryDate').textContent=d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});}});
+function applyPromo(){const code=document.querySelector('.promo-input').value.trim().toUpperCase();if(code==='AETERNA10')alert('Promo code applied! 10% discount added.');else if(code==='')alert('Please enter a promo code.');else alert('Invalid promo code. Try AETERNA10!');}
+(function(){const d=new Date();d.setFullYear(d.getFullYear()+5);document.getElementById('unlockDate').value=d.toISOString().split('T')[0];document.getElementById('summaryDate').textContent=d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});document.getElementById('dateCountdown').textContent='Unlocks in 5 years';})();
 </script>
 </body>
 </html>

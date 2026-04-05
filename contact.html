@@ -2,234 +2,104 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/png" href="favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="favicon.png">
 <title>Contact — Aeterna</title>
 <style>
-:root {
-  --black: #060608;
-  --surface: #0e0e12;
-  --surface2: #141418;
-  --purple: #8b7ff0;
-  --purple-dim: rgba(139,127,240,0.10);
-  --purple-border: rgba(139,127,240,0.35);
-  --teal: #2dd4a0;
-  --teal-dim: rgba(45,212,160,0.08);
-  --white: #f0ede8;
-  --muted: rgba(240,237,232,0.38);
-  --border: rgba(240,237,232,0.07);
-}
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--black);
-  color: var(--white);
-  font-family: Arial, sans-serif;
-  font-weight: 300;
-  min-height: 100vh;
-  cursor: none;
-}
-body::before {
-  content: '';
-  position: fixed; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events: none; z-index: 1000; opacity: 0.4;
-}
-/* CURSOR */
-.cursor { width: 8px; height: 8px; background: var(--purple); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; }
-.cursor-ring { width: 32px; height: 32px; border: 0.5px solid rgba(139,127,240,0.5); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9998; }
-/* NAV */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 20px 48px;
-  border-bottom: 0.5px solid var(--border);
-  background: rgba(6,6,8,0.88);
-  backdrop-filter: blur(20px);
-}
-.nav-brand { text-decoration: none; display: flex; flex-direction: column; gap: 1px; }
-.nav-logo { font-size: 22px; font-weight: 700; letter-spacing: 0.18em; color: var(--white); }
-.nav-tagline { font-size: 8px; letter-spacing: 0.2em; color: var(--purple); text-transform: uppercase; }
-.nav-links { display: flex; gap: 36px; }
-.nav-links a { font-size: 12px; color: var(--muted); text-decoration: none; letter-spacing: 0.06em; transition: color 0.2s; }
-.nav-links a:hover, .nav-links a.active { color: var(--white); }
-.nav-cta {
-  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--black); background: var(--purple);
-  border: none; padding: 10px 22px; border-radius: 2px;
-  cursor: none; text-decoration: none; display: inline-block;
-  transition: opacity 0.2s;
-}
-.nav-cta:hover { opacity: 0.85; }
-/* PAGE HEADER */
-.page-header {
-  padding: 148px 48px 64px;
-  border-bottom: 0.5px solid var(--border);
-  background: var(--surface);
-}
-.eyebrow {
-  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--teal); margin-bottom: 16px;
-  display: flex; align-items: center; gap: 10px;
-}
-.eyebrow::before { content: ''; width: 16px; height: 0.5px; background: var(--teal); display: block; }
-.page-header h1 { font-size: clamp(36px, 5vw, 64px); font-weight: 300; line-height: 1.1; margin-bottom: 16px; }
-.page-header h1 em { font-style: italic; color: var(--purple); }
-.page-header p { font-size: 14px; color: var(--muted); max-width: 480px; line-height: 1.8; }
-/* CONTACT BODY */
-.contact-body {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-.contact-left {
-  padding: 64px 48px;
-  border-right: 0.5px solid var(--border);
-  background: var(--surface);
-}
-.contact-right { padding: 64px 48px; }
-/* CONTACT METHODS */
-.methods-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-.methods-label::before { content: ''; width: 16px; height: 0.5px; background: var(--teal); display: block; }
-.contact-methods {
-  border: 0.5px solid var(--border);
-  border-radius: 2px;
-  overflow: hidden;
-  margin-bottom: 28px;
-}
-.contact-method {
-  display: flex; align-items: center; gap: 16px;
-  padding: 18px 24px;
-  border-bottom: 0.5px solid var(--border);
-  transition: background 0.2s;
-}
-.contact-method:last-child { border-bottom: none; }
-.contact-method:hover { background: rgba(240,237,232,0.02); }
-.method-icon {
-  width: 36px; height: 36px; border-radius: 2px;
-  background: var(--purple-dim); border: 0.5px solid var(--purple-border);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 14px; color: var(--purple); flex-shrink: 0;
-}
-.method-label { font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
-.method-val { font-size: 13px; color: var(--white); }
-.contact-note { font-size: 12px; color: var(--muted); line-height: 1.8; }
-/* FORM */
-.form-title { font-size: 28px; font-weight: 300; margin-bottom: 28px; }
-.form-title em { font-style: italic; color: var(--purple); }
-.field { margin-bottom: 18px; }
-.field label { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 8px; }
-.field input, .field textarea, .field select {
-  width: 100%; background: var(--surface);
-  border: 0.5px solid var(--border); border-radius: 2px;
-  padding: 13px 16px; color: var(--white);
-  font-family: Arial, sans-serif; font-size: 13px;
-  font-weight: 300; outline: none; transition: border-color 0.2s;
-  -webkit-appearance: none;
-}
-.field input:focus, .field textarea:focus, .field select:focus { border-color: var(--purple); }
-.field input::placeholder, .field textarea::placeholder { color: rgba(240,237,232,0.2); }
-.field textarea { resize: vertical; min-height: 130px; }
-.field select { color: var(--white); cursor: none; }
-.field select option { background: var(--surface2); color: var(--white); }
-.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.btn-send {
-  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
-  background: var(--purple); color: var(--black);
-  border: none; padding: 14px 32px; border-radius: 2px;
-  cursor: none; transition: opacity 0.2s; margin-top: 4px;
-}
-.btn-send:hover { opacity: 0.88; }
-.success-msg {
-  display: none;
-  background: var(--teal-dim); border: 0.5px solid rgba(45,212,160,0.2);
-  border-radius: 2px; padding: 20px 24px; margin-top: 20px;
-}
-.success-msg h4 { font-size: 20px; font-weight: 300; color: var(--teal); margin-bottom: 6px; }
-.success-msg p { font-size: 13px; color: var(--muted); }
-/* FAQ */
-.faq-strip { background: var(--surface); border-top: 0.5px solid var(--border); padding: 64px 48px; }
-.section-h { font-size: clamp(26px, 3vw, 40px); font-weight: 300; margin-bottom: 32px; margin-top: 12px; }
-.section-h em { font-style: italic; color: var(--purple); }
-.faq-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-.faq-item { padding: 24px; border: 0.5px solid var(--border); border-radius: 2px; transition: border-color 0.2s; }
-.faq-item:hover { border-color: var(--purple-border); }
-.faq-q { font-size: 15px; font-weight: 500; margin-bottom: 10px; color: var(--white); }
-.faq-a { font-size: 12px; color: var(--muted); line-height: 1.7; }
-/* FOOTER */
-footer { background: var(--black); border-top: 0.5px solid var(--border); padding: 36px 48px; }
-.footer-inner { display: flex; justify-content: space-between; align-items: center; }
-.footer-logo { font-size: 18px; font-weight: 700; letter-spacing: 0.14em; }
-.footer-tagline { font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--purple); margin-top: 2px; }
-.footer-copy { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(240,237,232,0.2); }
-.footer-links { display: flex; gap: 24px; }
-.footer-links a { font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(240,237,232,0.2); text-decoration: none; transition: color 0.2s; }
-.footer-links a:hover { color: var(--muted); }
+:root{--black:#080600;--surface:#0f0900;--surface2:#180e00;--orange:#ff6b1a;--orange-dim:rgba(255,107,26,0.10);--orange-border:rgba(255,107,26,0.35);--amber:#ffaa4d;--amber-dim:rgba(255,170,77,0.08);--white:#f5ede0;--muted:rgba(245,237,224,0.40);--border:rgba(245,237,224,0.07);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:Arial,sans-serif;font-weight:300;min-height:100vh;cursor:none;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:0.4;}
+.cursor{width:8px;height:8px;background:var(--orange);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;}
+.cursor-ring{width:32px;height:32px;border:0.5px solid rgba(255,107,26,0.6);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;border-bottom:0.5px solid var(--border);background:rgba(8,6,0,0.90);backdrop-filter:blur(20px);}
+.nav-brand{display:flex;align-items:center;text-decoration:none;}
+.nav-brand img{height:36px;width:auto;display:block;}
+.nav-links{display:flex;gap:36px;}
+.nav-links a{font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--white);}
+.nav-cta{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--black);background:var(--orange);border:none;padding:10px 22px;border-radius:2px;cursor:none;text-decoration:none;display:inline-block;font-weight:700;transition:opacity 0.2s;}
+.nav-cta:hover{opacity:0.85;}
+.page-header{padding:120px 48px 56px;border-bottom:0.5px solid var(--border);background:var(--surface);}
+.eyebrow{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.eyebrow::before{content:'';width:16px;height:0.5px;background:var(--amber);display:block;}
+.page-header h1{font-size:clamp(34px,5vw,60px);font-weight:300;line-height:1.1;margin-bottom:14px;}
+.page-header h1 em{font-style:italic;color:var(--orange);}
+.page-header p{font-size:14px;color:var(--muted);max-width:480px;line-height:1.8;}
+.contact-body{display:grid;grid-template-columns:1fr 1fr;}
+.contact-left{padding:56px 48px;border-right:0.5px solid var(--border);background:var(--surface);}
+.contact-right{padding:56px 48px;}
+.methods-label{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:18px;display:flex;align-items:center;gap:10px;}
+.methods-label::before{content:'';width:16px;height:0.5px;background:var(--amber);display:block;}
+.contact-methods{border:0.5px solid var(--border);border-radius:2px;overflow:hidden;margin-bottom:26px;}
+.contact-method{display:flex;align-items:center;gap:16px;padding:18px 22px;border-bottom:0.5px solid var(--border);transition:background 0.2s;}
+.contact-method:last-child{border-bottom:none;}
+.contact-method:hover{background:rgba(245,237,224,0.02);}
+.method-icon{width:34px;height:34px;border-radius:2px;background:var(--orange-dim);border:0.5px solid var(--orange-border);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--orange);flex-shrink:0;}
+.method-label{font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
+.method-val{font-size:13px;color:var(--white);}
+.contact-note{font-size:12px;color:var(--muted);line-height:1.8;}
+.form-title{font-size:26px;font-weight:300;margin-bottom:26px;}
+.form-title em{font-style:italic;color:var(--orange);}
+.field{margin-bottom:18px;}
+.field label{font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px;}
+.field input,.field textarea,.field select{width:100%;background:var(--surface);border:0.5px solid var(--border);border-radius:2px;padding:13px 16px;color:var(--white);font-family:Arial,sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;-webkit-appearance:none;}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--orange);}
+.field input::placeholder,.field textarea::placeholder{color:rgba(245,237,224,0.2);}
+.field textarea{resize:vertical;min-height:130px;}
+.field select{color:var(--white);cursor:none;}
+.field select option{background:var(--surface2);color:var(--white);}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.btn-send{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;background:var(--orange);color:var(--black);border:none;padding:14px 32px;border-radius:2px;cursor:none;transition:opacity 0.2s;font-weight:700;}
+.btn-send:hover{opacity:0.88;}
+.success-msg{display:none;background:var(--amber-dim);border:0.5px solid rgba(255,170,77,0.25);border-radius:2px;padding:20px 22px;margin-top:18px;}
+.success-msg h4{font-size:20px;font-weight:300;color:var(--amber);margin-bottom:6px;}
+.success-msg p{font-size:13px;color:var(--muted);}
+.faq-strip{background:var(--surface);border-top:0.5px solid var(--border);padding:60px 48px;}
+.section-h{font-size:clamp(24px,3vw,38px);font-weight:300;margin-bottom:28px;margin-top:10px;}
+.section-h em{font-style:italic;color:var(--orange);}
+.faq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.faq-item{padding:22px;border:0.5px solid var(--border);border-radius:2px;transition:border-color 0.2s;}
+.faq-item:hover{border-color:var(--orange-border);}
+.faq-q{font-size:15px;font-weight:500;margin-bottom:10px;color:var(--white);}
+.faq-a{font-size:12px;color:var(--muted);line-height:1.7;}
+footer{background:var(--black);border-top:0.5px solid var(--border);padding:36px 48px;}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;}
+.footer-logo{font-size:18px;font-weight:700;letter-spacing:0.14em;color:var(--white);}
+.footer-tagline{font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:var(--orange);margin-top:2px;}
+.footer-copy{font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,237,224,0.2);}
+.footer-links{display:flex;gap:24px;}
+.footer-links a{font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,237,224,0.2);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--muted);}
 </style>
 </head>
 <body>
-
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
-
 <nav>
-  <a class="nav-brand" href="index.html">
-    <img src="logo-white.png" alt="Aeterna" style="height:36px;width:auto;display:block;">
-  </a>
+  <a class="nav-brand" href="index.html"><img src="logo-white.png" alt="Aeterna"></a>
   <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="shop.html">Shop</a>
-    <a href="dashboard.html">My Capsules</a>
-    <a href="about.html">About</a>
-    <a href="contact.html" class="active">Contact</a>
+    <a href="index.html">Home</a><a href="shop.html">Shop</a><a href="dashboard.html">My Capsules</a><a href="about.html">About</a><a href="contact.html" class="active">Contact</a>
   </div>
   <a class="nav-cta" href="create.html">Create Capsule</a>
 </nav>
-
 <div class="page-header">
   <div class="eyebrow">Get in touch</div>
   <h1>We'd love to <em>hear from you.</em></h1>
-  <p>Have a question about your capsule? Need help with an order? Or just want to say something? We're here.</p>
+  <p>Have a question about your capsule? Need help with an order? We're here.</p>
 </div>
-
 <div class="contact-body">
   <div class="contact-left">
     <div class="methods-label">Contact methods</div>
     <div class="contact-methods">
-      <div class="contact-method">
-        <div class="method-icon">@</div>
-        <div>
-          <div class="method-label">Email</div>
-          <div class="method-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b2dad7dededdf2d3d7c6d7c0dcd39cdbdd">[email&#160;protected]</a></div>
-        </div>
-      </div>
-      <div class="contact-method">
-        <div class="method-icon">↗</div>
-        <div>
-          <div class="method-label">Support</div>
-          <div class="method-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2a595f5a5a45585e6a4b4f5e4f58444b044345">[email&#160;protected]</a></div>
-        </div>
-      </div>
-      <div class="contact-method">
-        <div class="method-icon">⏱</div>
-        <div>
-          <div class="method-label">Response time</div>
-          <div class="method-val">Within 24 hours</div>
-        </div>
-      </div>
-      <div class="contact-method">
-        <div class="method-icon">⚑</div>
-        <div>
-          <div class="method-label">Location</div>
-          <div class="method-val">Colombo, Sri Lanka</div>
-        </div>
-      </div>
+      <div class="contact-method"><div class="method-icon">@</div><div><div class="method-label">Email</div><div class="method-val">hello@aeterna.io</div></div></div>
+      <div class="contact-method"><div class="method-icon">↗</div><div><div class="method-label">Support</div><div class="method-val">support@aeterna.io</div></div></div>
+      <div class="contact-method"><div class="method-icon">⏱</div><div><div class="method-label">Response time</div><div class="method-val">Within 24 hours</div></div></div>
+      <div class="contact-method"><div class="method-icon">⚑</div><div><div class="method-label">Location</div><div class="method-val">Colombo, Sri Lanka</div></div></div>
     </div>
-    <div class="contact-note">
-      We respond to all messages within 24 hours.<br>
-      For urgent issues, email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c3b0b6b3b3acb1b783a2a6b7a6b1ada2edaaac">[email&#160;protected]</a> directly.
-    </div>
+    <div class="contact-note">We respond to all messages within 24 hours.<br>For urgent issues, email support@aeterna.io directly.</div>
   </div>
-
   <div class="contact-right">
     <div class="form-title">Send us a <em>message</em></div>
     <div class="field-row">
@@ -237,77 +107,35 @@ footer { background: var(--black); border-top: 0.5px solid var(--border); paddin
       <div class="field"><label>Last name</label><input type="text" placeholder="Silva" id="lname"></div>
     </div>
     <div class="field"><label>Email address</label><input type="email" placeholder="you@example.com" id="femail"></div>
-    <div class="field">
-      <label>Subject</label>
-      <select id="fsubject">
-        <option value="">Select a topic</option>
-        <option>General enquiry</option>
-        <option>Order support</option>
-        <option>Technical issue</option>
-        <option>Refund request</option>
-        <option>Partnership</option>
-        <option>Other</option>
-      </select>
-    </div>
+    <div class="field"><label>Subject</label><select id="fsubject"><option value="">Select a topic</option><option>General enquiry</option><option>Order support</option><option>Technical issue</option><option>Refund request</option><option>Partnership</option><option>Other</option></select></div>
     <div class="field"><label>Message</label><textarea placeholder="Tell us how we can help..." id="fmessage"></textarea></div>
     <button class="btn-send" id="sendBtn" onclick="handleSubmit()">Send message →</button>
-    <div class="success-msg" id="successMsg">
-      <h4>Message received.</h4>
-      <p>Thank you for reaching out. We'll get back to you within 24 hours.</p>
-    </div>
+    <div class="success-msg" id="successMsg"><h4>Message received.</h4><p>Thank you for reaching out. We'll get back to you within 24 hours.</p></div>
   </div>
 </div>
-
 <div class="faq-strip">
   <div class="eyebrow">Quick answers</div>
   <h2 class="section-h">Common <em>questions</em></h2>
   <div class="faq-grid">
-    <div class="faq-item">
-      <div class="faq-q">How do I access my capsule?</div>
-      <p class="faq-a">Log in and visit "My Capsules". Sealed capsules show a countdown timer. Unlocked ones have an Open button.</p>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Can I get a refund?</div>
-      <p class="faq-a">Yes — full refund within 30 days of purchase if the capsule has not been sealed with content yet.</p>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">What if I forget my password?</div>
-      <p class="faq-a">Use the "Forgot password" link on the login page. A reset link will be sent to your registered email address.</p>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">What file types can I upload?</div>
-      <p class="faq-a">Photos (JPG, PNG, WEBP), videos (MP4, MOV), audio (MP3, WAV), and documents (PDF, TXT, DOCX).</p>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Can I change the unlock date?</div>
-      <p class="faq-a">Yes — you can extend the unlock date any time before it arrives. You cannot move it to an earlier date once sealed.</p>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Is my data secure?</div>
-      <p class="faq-a">All capsules are encrypted with AES-256 before storage. Only you can access your capsule — not even our team.</p>
-    </div>
+    <div class="faq-item"><div class="faq-q">How do I access my capsule?</div><p class="faq-a">Log in and visit "My Capsules". Sealed capsules show a countdown timer. Unlocked ones have an Open button.</p></div>
+    <div class="faq-item"><div class="faq-q">Can I get a refund?</div><p class="faq-a">Yes — full refund within 30 days of purchase if the capsule has not been sealed with content yet.</p></div>
+    <div class="faq-item"><div class="faq-q">What if I forget my password?</div><p class="faq-a">Use the "Forgot password" link on the login page. A reset link will be sent to your registered email address.</p></div>
+    <div class="faq-item"><div class="faq-q">What file types can I upload?</div><p class="faq-a">Photos (JPG, PNG, WEBP), videos (MP4, MOV), audio (MP3, WAV), and documents (PDF, TXT, DOCX).</p></div>
+    <div class="faq-item"><div class="faq-q">Can I change the unlock date?</div><p class="faq-a">Yes — you can extend the unlock date any time before it arrives. You cannot move it to an earlier date once sealed.</p></div>
+    <div class="faq-item"><div class="faq-q">Is my data secure?</div><p class="faq-a">All capsules are encrypted with AES-256. Only you can access your capsule — not even our team can read your data.</p></div>
   </div>
 </div>
-
 <footer>
   <div class="footer-inner">
-    <div>
-      <div class="footer-logo">AETERNA</div>
-      <div class="footer-tagline">Where memories live forever</div>
-    </div>
+    <div><div class="footer-logo">AETERNA</div><div class="footer-tagline">Where memories live forever</div></div>
     <span class="footer-copy">© 2026 Aeterna. All rights reserved.</span>
-    <div class="footer-links">
-      <a href="#">Privacy</a>
-      <a href="#">Terms</a>
-      <a href="contact.html">Contact</a>
-    </div>
+    <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="contact.html">Contact</a></div>
   </div>
 </footer>
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursorRing');
-document.addEventListener('mousemove', e => {
-  const x = e.clientX, y = e.clientY;
-  cursor.style.transform = `translate(${x - 4}px, ${y - 4}px)`;
-  ring.style.transform = `translate(${x - 16}px, ${y - 16}px)
+<script>
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+document.addEventListener('mousemove',e=>{const x=e.clientX,y=e.clientY;cursor.style.transform=`translate(${x-4}px,${y-4}px)`;ring.style.transform=`translate(${x-16}px,${y-16}px)`;});
+function handleSubmit(){if(!document.getElementById('fname').value.trim()||!document.getElementById('femail').value.trim()||!document.getElementById('fmessage').value.trim()){alert('Please fill in your name, email, and message.');return;}document.getElementById('successMsg').style.display='block';document.getElementById('sendBtn').style.display='none';}
+</script>
+</body>
+</html>

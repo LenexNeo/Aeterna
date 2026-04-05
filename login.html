@@ -2,69 +2,59 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<link rel="icon" type="image/png" href="favicon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="favicon.png">
 <title>Login — Aeterna</title>
 <link rel="stylesheet" href="aeterna.css">
 <style>
-.login-wrap { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; }
-/* LEFT */
-.left-panel { background: var(--surface); border-right: 0.5px solid var(--border); display: flex; flex-direction: column; justify-content: space-between; padding: 148px 56px 56px; position: relative; overflow: hidden; }
-.left-panel::after { content: 'AETERNA'; position: absolute; bottom: -40px; left: -10px; font-family: 'Arial', sans-serif; font-size: 120px; font-weight: 600; color: rgba(240,237,232,0.025); letter-spacing: 0.08em; pointer-events: none; white-space: nowrap; }
-.panel-quote blockquote { font-family: 'Arial', sans-serif; font-size: clamp(24px, 2.5vw, 34px); font-weight: 300; line-height: 1.2; color: var(--white); margin-bottom: 16px; }
-.panel-quote blockquote em { font-style: italic; color: var(--purple); }
-.panel-quote cite { font-family: 'Arial', sans-serif; font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
-.panel-stats { display: flex; gap: 36px; }
-.pstat-num { font-family: 'Arial', sans-serif; font-size: 26px; font-weight: 300; }
-.pstat-label { font-family: 'Arial', sans-serif; font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
-/* RIGHT */
-.right-panel { display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 120px 56px 56px; }
-.form-wrap { width: 100%; max-width: 400px; }
-.form-tabs { display: flex; border-bottom: 0.5px solid var(--border); margin-bottom: 40px; }
-.tab { font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); padding: 0 0 14px; margin-right: 28px; cursor: none; border: none; border-bottom: 1px solid transparent; background: none; transition: color 0.2s, border-color 0.2s; }
-.tab.active { color: var(--white); border-bottom-color: var(--purple); }
-.form-title { font-family: 'Arial', sans-serif; font-size: 36px; font-weight: 300; margin-bottom: 8px; }
-.form-title em { font-style: italic; color: var(--purple); }
-.form-sub { font-size: 13px; color: var(--muted); margin-bottom: 32px; line-height: 1.7; }
-.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.forgot { font-family: 'Arial', sans-serif; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--purple); text-decoration: none; display: block; text-align: right; margin-top: -8px; margin-bottom: 24px; }
-.btn-submit { width: 100%; padding: 16px; font-family: 'Arial', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; background: var(--purple); color: var(--black); border: none; border-radius: 2px; cursor: none; transition: opacity 0.2s; margin-bottom: 16px; }
-.btn-submit:hover { opacity: 0.88; }
-.divider-or { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
-.divider-or span { font-family: 'Arial', sans-serif; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
-.divider-or::before, .divider-or::after { content: ''; flex: 1; height: 0.5px; background: var(--border); }
-.btn-google { width: 100%; padding: 14px; font-family: 'Arial', sans-serif; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; background: transparent; color: var(--muted); border: 0.5px solid var(--border); border-radius: 2px; cursor: none; transition: border-color 0.2s, color 0.2s; margin-bottom: 28px; }
-.btn-google:hover { border-color: var(--purple-border); color: var(--white); }
-.form-footer { font-size: 12px; color: var(--muted); text-align: center; }
-.form-footer a { color: var(--purple); text-decoration: none; }
-.terms-check { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 20px; }
-.terms-check input[type=checkbox] { width: 14px; height: 14px; accent-color: var(--purple); margin-top: 2px; cursor: none; }
-.terms-check label { font-size: 12px; color: var(--muted); line-height: 1.5; }
-.terms-check a { color: var(--purple); text-decoration: none; }
-.hidden { display: none; }
+.login-wrap{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;}
+.left-panel{background:var(--surface);border-right:0.5px solid var(--border);display:flex;flex-direction:column;justify-content:space-between;padding:120px 56px 56px;position:relative;overflow:hidden;}
+.left-panel::after{content:'AETERNA';position:absolute;bottom:-40px;left:-10px;font-size:110px;font-weight:700;color:rgba(245,237,224,0.025);letter-spacing:0.08em;pointer-events:none;white-space:nowrap;}
+.panel-quote blockquote{font-size:clamp(22px,2.5vw,32px);font-weight:300;line-height:1.25;margin-bottom:16px;}
+.panel-quote blockquote em{font-style:italic;color:var(--orange);}
+.panel-quote cite{font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);}
+.panel-stats{display:flex;gap:32px;}
+.pstat-num{font-size:26px;font-weight:300;}
+.pstat-label{font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-top:2px;}
+.right-panel{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:120px 56px 56px;}
+.form-wrap{width:100%;max-width:400px;}
+.form-tabs{display:flex;border-bottom:0.5px solid var(--border);margin-bottom:36px;}
+.tab{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);padding:0 0 14px;margin-right:28px;cursor:none;border:none;border-bottom:1px solid transparent;background:none;transition:color 0.2s,border-color 0.2s;}
+.tab.active{color:var(--white);border-bottom-color:var(--orange);}
+.form-title{font-size:32px;font-weight:300;margin-bottom:8px;}
+.form-title em{font-style:italic;color:var(--orange);}
+.form-sub{font-size:13px;color:var(--muted);margin-bottom:28px;line-height:1.7;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.forgot{font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--orange);text-decoration:none;display:block;text-align:right;margin-top:-8px;margin-bottom:22px;}
+.btn-submit{width:100%;padding:15px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;background:var(--orange);color:var(--black);border:none;border-radius:2px;cursor:none;transition:opacity 0.2s;margin-bottom:14px;font-weight:700;}
+.btn-submit:hover{opacity:0.88;}
+.divider-or{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+.divider-or span{font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);}
+.divider-or::before,.divider-or::after{content:'';flex:1;height:0.5px;background:var(--border);}
+.btn-google{width:100%;padding:13px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;background:transparent;color:var(--muted);border:0.5px solid var(--border);border-radius:2px;cursor:none;transition:all 0.2s;margin-bottom:24px;}
+.btn-google:hover{border-color:var(--orange-border);color:var(--white);}
+.form-footer{font-size:12px;color:var(--muted);text-align:center;}
+.form-footer a{color:var(--orange);text-decoration:none;}
+.terms-check{display:flex;gap:10px;align-items:flex-start;margin-bottom:18px;}
+.terms-check input[type=checkbox]{width:14px;height:14px;accent-color:var(--orange);margin-top:2px;cursor:none;}
+.terms-check label{font-size:12px;color:var(--muted);line-height:1.5;}
+.terms-check a{color:var(--orange);text-decoration:none;}
+.hidden{display:none;}
 </style>
 </head>
 <body>
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 <nav>
-  <a class="nav-brand" href="index.html">
-    <img src="logo-white.png" alt="Aeterna" style="height:36px;width:auto;display:block;">
-  </a>
+  <a class="nav-brand" href="index.html"><img src="logo-white.png" alt="Aeterna"></a>
   <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="shop.html">Shop</a>
-    <a href="dashboard.html">My Capsules</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
+    <a href="index.html">Home</a><a href="shop.html">Shop</a><a href="dashboard.html">My Capsules</a><a href="about.html">About</a><a href="contact.html">Contact</a>
   </div>
   <a class="nav-cta" href="create.html">Create Capsule</a>
 </nav>
 <div class="login-wrap">
   <div class="left-panel">
-    <div>
-      <div class="eyebrow">Welcome back</div>
-    </div>
+    <div><div class="eyebrow">Welcome back</div></div>
     <div class="panel-quote">
       <blockquote>"The present moment always will have <em>been.</em>"</blockquote>
       <cite>— Aeterna Philosophy</cite>
@@ -84,12 +74,12 @@
       <div id="loginForm">
         <div class="form-title">Welcome <em>back.</em></div>
         <p class="form-sub">Sign in to access your capsules.</p>
-        <div class="field"><label>Email address</label><input type="email" placeholder="you@example.com" id="loginEmail"></div>
-        <div class="field"><label>Password</label><input type="password" placeholder="••••••••" id="loginPass"></div>
+        <div class="field"><label>Email address</label><input type="email" placeholder="you@example.com"></div>
+        <div class="field"><label>Password</label><input type="password" placeholder="••••••••"></div>
         <a href="#" class="forgot" onclick="alert('A password reset link will be sent to your email.')">Forgot password?</a>
         <button class="btn-submit" onclick="window.location.href='dashboard.html'">Sign in to Aeterna</button>
         <div class="divider-or"><span>or</span></div>
-        <button class="btn-google" onclick="alert('Google login coming soon! Please use email login.')">Continue with Google</button>
+        <button class="btn-google" onclick="alert('Google login coming soon!')">Continue with Google</button>
         <div class="form-footer">No account? <a href="#" onclick="switchTab('register');return false;">Create one →</a></div>
       </div>
       <div id="registerForm" class="hidden">
@@ -102,13 +92,10 @@
         <div class="field"><label>Email address</label><input type="email" placeholder="you@example.com"></div>
         <div class="field"><label>Password</label><input type="password" placeholder="Min. 8 characters"></div>
         <div class="field"><label>Confirm password</label><input type="password" placeholder="Repeat password"></div>
-        <div class="terms-check">
-          <input type="checkbox" id="terms">
-          <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
-        </div>
+        <div class="terms-check"><input type="checkbox" id="terms"><label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label></div>
         <button class="btn-submit" onclick="window.location.href='dashboard.html'">Create my account</button>
         <div class="divider-or"><span>or</span></div>
-        <button class="btn-google" onclick="alert('Google login coming soon! Please use email login.')">Continue with Google</button>
+        <button class="btn-google" onclick="alert('Google login coming soon!')">Continue with Google</button>
         <div class="form-footer">Already have an account? <a href="#" onclick="switchTab('login');return false;">Sign in →</a></div>
       </div>
     </div>
@@ -123,24 +110,9 @@
 </footer>
 <script>
 const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
-document.addEventListener('mousemove',e=>{
-  const x=e.clientX,y=e.clientY;
-  cursor.style.transform=`translate(${x-4}px,${y-4}px)`;
-  ring.style.transform=`translate(${x-16}px,${y-16}px)`;
-});
-function showTab(name,btn){
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('loginForm').classList.toggle('hidden',name!=='login');
-  document.getElementById('registerForm').classList.toggle('hidden',name!=='register');
-}
-function switchTab(name){
-  const tabs=document.querySelectorAll('.tab');
-  tabs.forEach(t=>t.classList.remove('active'));
-  name==='login'?tabs[0].classList.add('active'):tabs[1].classList.add('active');
-  document.getElementById('loginForm').classList.toggle('hidden',name!=='login');
-  document.getElementById('registerForm').classList.toggle('hidden',name!=='register');
-}
+document.addEventListener('mousemove',e=>{const x=e.clientX,y=e.clientY;cursor.style.transform=`translate(${x-4}px,${y-4}px)`;ring.style.transform=`translate(${x-16}px,${y-16}px)`;});
+function showTab(name,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');document.getElementById('loginForm').classList.toggle('hidden',name!=='login');document.getElementById('registerForm').classList.toggle('hidden',name!=='register');}
+function switchTab(name){const tabs=document.querySelectorAll('.tab');tabs.forEach(t=>t.classList.remove('active'));name==='login'?tabs[0].classList.add('active'):tabs[1].classList.add('active');document.getElementById('loginForm').classList.toggle('hidden',name!=='login');document.getElementById('registerForm').classList.toggle('hidden',name!=='register');}
 </script>
 </body>
 </html>
