@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="favicon.png">
+<title>Cart & Checkout — Aeterna</title>
+<link rel="stylesheet" href="aeterna.css">
+<style>
+@media(max-width:768px){nav{padding:14px 20px;}.nav-links{display:none;}.page-header{padding:100px 20px 40px;}.checkout-layout{grid-template-columns:1fr;padding:24px 20px;}.order-summary{position:static;}}
+.page-header{padding:140px 48px 56px;border-bottom:0.5px solid var(--border);background:var(--surface);}
+.checkout-layout{display:grid;grid-template-columns:1fr 380px;gap:40px;padding:48px;}
+.cart-section h2{font-size:24px;font-weight:300;margin-bottom:24px;}
+.cart-section h2 em{font-style:italic;color:var(--orange);}
+.cart-table{width:100%;border-collapse:collapse;}
+.cart-table th{font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);padding:10px 0;border-bottom:0.5px solid var(--border);text-align:left;font-weight:400;}
+.cart-table td{padding:18px 0;border-bottom:0.5px solid var(--border);vertical-align:middle;}
+.item-name{font-size:14px;font-weight:500;color:var(--white);margin-bottom:4px;}
+.item-meta{font-size:11px;color:var(--muted);}
+.item-price{font-size:15px;color:var(--amber);font-weight:500;}
+.qty-controls{display:flex;align-items:center;gap:8px;}
+.qty-btn{width:26px;height:26px;border-radius:50%;border:0.5px solid var(--border);background:transparent;color:var(--white);font-size:16px;cursor:none;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+.qty-btn:hover{border-color:var(--orange);color:var(--orange);}
+.qty-num{font-size:13px;min-width:20px;text-align:center;}
+.remove-btn{font-size:11px;color:var(--muted);background:none;border:none;cursor:none;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.2s;padding:0;}
+.remove-btn:hover{color:var(--orange);}
+.cart-empty-state{text-align:center;padding:80px 20px;}
+.cart-empty-state h3{font-size:24px;font-weight:300;margin-bottom:10px;}
+.cart-empty-state p{font-size:13px;color:var(--muted);margin-bottom:28px;}
+
+/* ORDER SUMMARY */
+.order-summary{background:var(--surface);border:0.5px solid var(--border);border-radius:2px;padding:28px;position:sticky;top:80px;height:fit-content;}
+.summary-title{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;}
+.summary-rows{display:flex;flex-direction:column;gap:0;margin-bottom:16px;}
+.summary-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:0.5px solid var(--border);font-size:13px;}
+.summary-row:last-child{border-bottom:none;}
+.summary-key{color:var(--muted);}
+.summary-val{color:var(--white);font-weight:500;}
+.summary-discount{color:var(--amber);}
+.summary-total{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-top:0.5px solid var(--border);margin-bottom:20px;}
+.total-label{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);}
+.total-amount{font-size:32px;font-weight:300;color:var(--white);}
+.promo-section{margin-bottom:18px;}
+.promo-label{font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.promo-row{display:flex;gap:8px;}
+.promo-input{flex:1;background:var(--black);border:0.5px solid var(--border);border-radius:2px;padding:10px 12px;color:var(--white);font-family:Arial,sans-serif;font-size:12px;outline:none;transition:border-color 0.2s;}
+.promo-input:focus{border-color:var(--orange);}
+.promo-btn{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--orange);background:transparent;border:0.5px solid var(--orange-border);padding:10px 14px;border-radius:2px;cursor:none;transition:background 0.2s;}
+.promo-btn:hover{background:var(--orange-dim);}
+.btn-pay{width:100%;padding:16px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;background:var(--orange);color:var(--black);border:none;border-radius:2px;cursor:none;font-weight:700;transition:opacity 0.2s;margin-bottom:10px;}
+.btn-pay:hover{opacity:0.88;}
+.btn-paypal{width:100%;padding:14px;font-size:11px;font-weight:700;background:#F6BE00;color:#003087;border:none;border-radius:2px;cursor:none;transition:opacity 0.2s;margin-bottom:16px;}
+.btn-paypal:hover{opacity:0.88;}
+.security-list{display:flex;flex-direction:column;gap:6px;}
+.security-item{display:flex;gap:8px;align-items:center;font-size:11px;color:var(--muted);}
+.security-item::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--amber);flex-shrink:0;}
+
+/* CHECKOUT FORM */
+.checkout-form{margin-top:36px;}
+.checkout-form h3{font-size:18px;font-weight:300;margin-bottom:20px;padding-bottom:14px;border-bottom:0.5px solid var(--border);}
+.checkout-form h3 em{font-style:italic;color:var(--orange);}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.field{margin-bottom:14px;}
+.field label{font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:6px;}
+.field input,.field select{width:100%;background:var(--surface);border:0.5px solid var(--border);border-radius:2px;padding:12px 14px;color:var(--white);font-family:Arial,sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;}
+.field input:focus,.field select:focus{border-color:var(--orange);}
+.field input::placeholder{color:rgba(245,237,224,0.2);}
+.field select{color:var(--white);-webkit-appearance:none;}
+.field select option{background:var(--surface2);color:var(--white);}
+.card-row{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px;}
+.success-overlay{display:none;position:fixed;inset:0;background:rgba(8,6,0,0.95);z-index:999;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:40px;}
+.success-overlay.show{display:flex;}
+.success-icon{font-size:56px;margin-bottom:20px;}
+.success-title{font-size:36px;font-weight:300;margin-bottom:12px;}
+.success-title em{font-style:italic;color:var(--orange);}
+.success-sub{font-size:14px;color:var(--muted);max-width:420px;line-height:1.8;margin-bottom:32px;}
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<nav>
+  <a class="nav-brand" href="index.html"><img src="logo-white.png" alt="Aeterna"></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a><a href="shop.html">Shop</a><a href="dashboard.html">My Capsules</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+  </div>
+  <div style="display:flex;gap:12px;align-items:center;">
+    <a href="cart.html" style="position:relative;text-decoration:none;">
+      <span style="font-size:20px;color:var(--orange);">🛒</span>
+      <span id="cart-badge" style="display:none;position:absolute;top:-6px;right:-8px;background:var(--orange);color:var(--black);border-radius:50%;width:18px;height:18px;font-size:10px;font-weight:700;align-items:center;justify-content:center;">0</span>
+    </a>
+    <a class="nav-cta" href="create.html">Create Capsule</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;display:flex;gap:8px;">Aeterna <span style="color:var(--orange);">/ Cart & Checkout</span></div>
+  <h1 style="font-size:clamp(32px,5vw,56px);font-weight:300;margin-bottom:12px;">Your <em style="font-style:italic;color:var(--orange);">cart</em></h1>
+  <p style="font-size:14px;color:var(--muted);line-height:1.8;">Review your items, enter your details, and complete your order.</p>
+</div>
+
+<div class="checkout-layout">
+  <!-- LEFT: CART ITEMS + BILLING -->
+  <div>
+    <div class="cart-section">
+      <h2>Items in your <em>cart</em></h2>
+      <div id="cartContent">
+        <!-- filled by JS -->
+      </div>
+    </div>
+
+    <!-- BILLING DETAILS FORM -->
+    <div class="checkout-form" id="checkoutForm" style="display:none;">
+      <h3>Billing <em>details</em></h3>
+      <div class="form-grid">
+        <div class="field"><label>First name</label><input type="text" id="fname" placeholder="Lehan"></div>
+        <div class="field"><label>Last name</label><input type="text" id="lname" placeholder="Silva"></div>
+      </div>
+      <div class="field"><label>Email address</label><input type="email" id="femail" placeholder="you@example.com"></div>
+      <div class="field"><label>Phone (optional)</label><input type="tel" placeholder="+94 77 000 0000"></div>
+      <h3 style="margin-top:24px;">Payment <em>details</em></h3>
+      <div class="field"><label>Cardholder name</label><input type="text" placeholder="Name on card"></div>
+      <div class="field"><label>Card number</label><input type="text" placeholder="4242 4242 4242 4242" maxlength="19" oninput="formatCard(this)"></div>
+      <div class="card-row">
+        <div class="field"><label>Expiry</label><input type="text" placeholder="MM / YY" maxlength="7"></div>
+        <div class="field"><label>CVV</label><input type="text" placeholder="123" maxlength="3"></div>
+        <div class="field"><label>ZIP</label><input type="text" placeholder="00000"></div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:flex-start;margin-top:8px;margin-bottom:20px;">
+        <input type="checkbox" id="agreeTerms" style="margin-top:3px;accent-color:var(--orange);cursor:none;">
+        <label for="agreeTerms" style="font-size:12px;color:var(--muted);line-height:1.6;">I agree to the <a href="terms.html" style="color:var(--orange);">Terms & Conditions</a> and <a href="privacy.html" style="color:var(--orange);">Privacy Policy</a>. I understand this is a one-time payment with no recurring charges.</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: ORDER SUMMARY -->
+  <div class="order-summary">
+    <div class="summary-title">Order summary</div>
+    <div class="summary-rows" id="summaryRows"></div>
+    <div class="promo-section">
+      <div class="promo-label">Promo code</div>
+      <div class="promo-row">
+        <input class="promo-input" type="text" id="promoCode" placeholder="e.g. AETERNA10">
+        <button class="promo-btn" onclick="applyPromo()">Apply</button>
+      </div>
+      <div id="promoMsg" style="font-size:11px;margin-top:6px;display:none;"></div>
+    </div>
+    <div class="summary-total">
+      <div>
+        <div class="total-label">Total</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px;">One-time payment</div>
+      </div>
+      <div class="total-amount" id="totalAmount">$0.00</div>
+    </div>
+    <button class="btn-pay" id="payBtn" onclick="handlePay()">Pay now — secure checkout</button>
+    <button class="btn-paypal" onclick="handlePayPal()">Pay with PayPal</button>
+    <div class="security-list">
+      <div class="security-item">256-bit SSL encrypted checkout</div>
+      <div class="security-item">No recurring charges</div>
+      <div class="security-item">30-day refund policy</div>
+      <div class="security-item">AES-256 encrypted capsule storage</div>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS OVERLAY -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-icon">✓</div>
+  <div class="success-title">Payment <em>successful!</em></div>
+  <p class="success-sub">Your capsule has been created and sealed. You'll receive a confirmation email shortly. Your memories are now safely encrypted and stored.</p>
+  <a class="btn-primary" href="dashboard.html" style="text-decoration:none;">Go to My Capsules →</a>
+</div>
+
+<footer>
+  <div class="footer-inner" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+    <div><div class="footer-logo">AETERNA</div><div class="footer-tagline">Where memories live forever</div></div>
+    <span class="footer-copy">© 2026 Aeterna. All rights reserved.</span>
+    <div class="footer-links"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a></div>
+  </div>
+</footer>
+
+<script src="cart.js"></script>
+<script>
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+document.addEventListener('mousemove',e=>{const x=e.clientX,y=e.clientY;cursor.style.transform=`translate(${x-4}px,${y-4}px)`;ring.style.transform=`translate(${x-16}px,${y-16}px)`;});
+Cart.updateBadge();
+let discount = 0;
+
+function renderCart() {
+  const items = Cart.items;
+  const content = document.getElementById('cartContent');
+  const summaryRows = document.getElementById('summaryRows');
+  const totalEl = document.getElementById('totalAmount');
+  const form = document.getElementById('checkoutForm');
+
+  if (items.length === 0) {
+    content.innerHTML = `<div class="cart-empty-state"><div style="font-size:48px;margin-bottom:16px;opacity:0.3;">🛒</div><h3>Your cart is empty</h3><p>Add some capsules from our shop to get started.</p><a class="btn-primary" href="shop.html">Browse capsules →</a></div>`;
+    summaryRows.innerHTML = '<div style="font-size:13px;color:var(--muted);padding:10px 0;">No items in cart.</div>';
+    totalEl.textContent = '$0.00';
+    form.style.display = 'none';
+    document.getElementById('payBtn').disabled = true;
+    return;
+  }
+
+  form.style.display = 'block';
+  document.getElementById('payBtn').disabled = false;
+
+  // Cart table
+  content.innerHTML = `
+    <table class="cart-table">
+      <thead><tr><th>Capsule</th><th>Type</th><th>Qty</th><th>Price</th><th></th></tr></thead>
+      <tbody>
+        ${items.map(item => `
+          <tr>
+            <td><div class="item-name">${item.name}</div><div class="item-meta">${item.storage} storage</div></td>
+            <td><div style="font-size:12px;color:var(--muted);">${item.type}</div></td>
+            <td>
+              <div class="qty-controls">
+                <button class="qty-btn" onclick="changeQty('${item.id}',-1)">−</button>
+                <span class="qty-num">${item.qty}</span>
+                <button class="qty-btn" onclick="changeQty('${item.id}',1)">+</button>
+              </div>
+            </td>
+            <td><span class="item-price">$${(item.price * item.qty).toFixed(2)}</span></td>
+            <td><button class="remove-btn" onclick="removeItem('${item.id}')">Remove</button></td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+    <div style="margin-top:16px;"><a href="shop.html" style="font-size:12px;color:var(--orange);text-decoration:none;">← Continue shopping</a></div>
+  `;
+
+  // Summary
+  const subtotal = Cart.total();
+  const discountAmt = (subtotal * discount).toFixed(2);
+  const total = (subtotal - subtotal * discount).toFixed(2);
+
+  summaryRows.innerHTML = items.map(i => `
+    <div class="summary-row"><span class="summary-key">${i.name} × ${i.qty}</span><span class="summary-val">$${(i.price*i.qty).toFixed(2)}</span></div>
+  `).join('') + (discount > 0 ? `<div class="summary-row"><span class="summary-key">Discount (10%)</span><span class="summary-val summary-discount">−$${discountAmt}</span></div>` : '');
+
+  totalEl.textContent = '$' + total;
+}
+
+function removeItem(id) { Cart.remove(id); renderCart(); }
+function changeQty(id, delta) {
+  const item = Cart.items.find(i => i.id === id);
+  if (item) { Cart.updateQty(id, item.qty + delta); renderCart(); }
+}
+
+function applyPromo() {
+  const code = document.getElementById('promoCode').value.trim().toUpperCase();
+  const msg = document.getElementById('promoMsg');
+  msg.style.display = 'block';
+  if (code === 'AETERNA10') {
+    discount = 0.1;
+    msg.style.color = 'var(--amber)'; msg.textContent = '✓ 10% discount applied!';
+  } else if (!code) {
+    msg.style.color = 'var(--muted)'; msg.textContent = 'Please enter a promo code.';
+  } else {
+    msg.style.color = '#f87171'; msg.textContent = 'Invalid code. Try AETERNA10';
+  }
+  renderCart();
+}
+
+function formatCard(input) {
+  let val = input.value.replace(/\D/g,'').substring(0,16);
+  input.value = val.replace(/(.{4})/g,'$1 ').trim();
+}
+
+function handlePay() {
+  if (Cart.items.length === 0) { alert('Your cart is empty.'); return; }
+  const fname = document.getElementById('fname').value.trim();
+  const femail = document.getElementById('femail').value.trim();
+  const agreed = document.getElementById('agreeTerms').checked;
+  if (!fname || !femail) { alert('Please fill in your name and email address.'); return; }
+  if (!agreed) { alert('Please agree to the Terms & Conditions to continue.'); return; }
+  Cart.clear();
+  document.getElementById('successOverlay').classList.add('show');
+}
+
+function handlePayPal() {
+  if (Cart.items.length === 0) { alert('Your cart is empty.'); return; }
+  alert('Redirecting to PayPal sandbox... (Test mode)');
+  Cart.clear();
+  document.getElementById('successOverlay').classList.add('show');
+}
+
+renderCart();
+</script>
+</body>
+</html>

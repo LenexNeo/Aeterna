@@ -7,88 +7,125 @@
 <title>Shop — Aeterna</title>
 <link rel="stylesheet" href="aeterna.css">
 <style>
-.page-header::after{content:'SHOP';position:absolute;right:40px;bottom:-20px;font-size:150px;font-weight:700;color:rgba(245,237,224,0.025);letter-spacing:0.1em;line-height:1;pointer-events:none;}
-.shop-layout{display:grid;grid-template-columns:1fr 340px;gap:0;align-items:start;}
-.shop-main{padding:56px 48px;border-right:0.5px solid var(--border);}
-.calc-section{margin-bottom:52px;}
-.section-eyebrow{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+/* RESPONSIVE BASE */
+@media(max-width:768px){nav{padding:14px 20px;}.nav-links{display:none;}.page-header{padding:100px 20px 40px;}.shop-layout{grid-template-columns:1fr;}.shop-sidebar{position:static;border-left:none;border-top:0.5px solid var(--border);}.shop-main{padding:32px 20px;}.includes-grid{grid-template-columns:1fr;}.type-grid{grid-template-columns:1fr;}.compare-section{padding:40px 20px;}.compare-table{font-size:11px;}.compare-table th,.compare-table td{padding:10px 8px;}}
+
+.page-header{padding:140px 48px 60px;border-bottom:0.5px solid var(--border);background:var(--surface);position:relative;overflow:hidden;}
+.page-header::after{content:'SHOP';position:absolute;right:40px;bottom:-20px;font-size:140px;font-weight:700;color:rgba(245,237,224,0.025);letter-spacing:0.1em;line-height:1;pointer-events:none;}
+
+/* SEARCH + FILTER BAR */
+.filter-bar{display:flex;gap:12px;align-items:center;padding:20px 48px;background:var(--surface);border-bottom:0.5px solid var(--border);flex-wrap:wrap;}
+.search-wrap{display:flex;align-items:center;gap:0;flex:1;min-width:200px;}
+.search-input{flex:1;background:var(--black);border:0.5px solid var(--border);border-right:none;border-radius:2px 0 0 2px;padding:10px 16px;color:var(--white);font-family:Arial,sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;}
+.search-input:focus{border-color:var(--orange);}
+.search-input::placeholder{color:rgba(245,237,224,0.25);}
+.search-btn{background:var(--orange);border:0.5px solid var(--orange);border-radius:0 2px 2px 0;padding:10px 18px;color:var(--black);font-size:12px;font-weight:700;cursor:none;letter-spacing:0.08em;white-space:nowrap;transition:opacity 0.2s;}
+.search-btn:hover{opacity:0.88;}
+.filter-tabs{display:flex;gap:6px;}
+.filter-tab{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;border:0.5px solid var(--border);border-radius:2px;padding:8px 14px;cursor:none;color:var(--muted);background:transparent;transition:all 0.2s;white-space:nowrap;}
+.filter-tab.active,.filter-tab:hover{border-color:var(--orange);color:var(--orange);background:var(--orange-dim);}
+.results-count{font-size:11px;color:var(--muted);white-space:nowrap;}
+
+/* SHOP LAYOUT */
+.shop-layout{display:grid;grid-template-columns:1fr 360px;gap:0;align-items:start;}
+.shop-main{padding:40px 48px;border-right:0.5px solid var(--border);}
+
+/* PRODUCT CARDS GRID */
+.products-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:40px;}
+.product-card{border:0.5px solid var(--border);border-radius:2px;padding:24px;transition:all 0.2s;position:relative;}
+.product-card:hover{border-color:var(--orange-border);background:var(--orange-dim);}
+.product-card.featured{border-color:var(--orange);}
+.product-tag{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--orange);border:0.5px solid var(--orange-border);padding:3px 10px;display:inline-block;border-radius:2px;margin-bottom:12px;}
+.product-badge{position:absolute;top:-1px;right:16px;font-size:8px;letter-spacing:0.12em;text-transform:uppercase;background:var(--orange);color:var(--black);padding:4px 10px;font-weight:700;}
+.product-name{font-size:22px;font-weight:300;margin-bottom:6px;}
+.product-price{font-size:28px;font-weight:300;color:var(--amber);margin-bottom:4px;}
+.product-price small{font-size:12px;color:var(--muted);}
+.product-storage{font-size:11px;color:var(--muted);margin-bottom:14px;}
+.product-features{display:flex;flex-direction:column;gap:6px;margin-bottom:18px;}
+.product-feature{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px;}
+.product-feature::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--amber);flex-shrink:0;}
+.btn-add-cart{width:100%;padding:11px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--black);background:var(--orange);border:none;border-radius:2px;cursor:none;font-weight:700;transition:opacity 0.2s;}
+.btn-add-cart:hover{opacity:0.88;}
+.no-results{text-align:center;padding:60px 20px;color:var(--muted);font-size:14px;grid-column:span 2;display:none;}
+
+/* SECTION TITLES */
+.section-eyebrow{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:12px;display:flex;align-items:center;gap:10px;}
 .section-eyebrow::before{content:'';width:16px;height:0.5px;background:var(--amber);display:block;}
-.section-title{font-size:26px;font-weight:300;margin-bottom:24px;}
+.section-title{font-size:22px;font-weight:300;margin-bottom:20px;}
 .section-title em{font-style:italic;color:var(--orange);}
-.slider-wrap{background:var(--surface);border:0.5px solid var(--border);border-radius:2px;padding:28px;margin-bottom:14px;}
-.slider-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px;}
-.slider-label{font-size:13px;color:var(--muted);}
-.slider-value{font-size:38px;font-weight:300;color:var(--white);}
-.slider-value span{font-size:14px;color:var(--muted);}
-input[type="range"]{-webkit-appearance:none;width:100%;height:1px;background:var(--border);outline:none;margin-bottom:10px;}
-input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--orange);cursor:none;border:3px solid var(--black);box-shadow:0 0 0 1px var(--orange);}
-.slider-ticks{display:flex;justify-content:space-between;}
-.slider-tick{font-size:9px;letter-spacing:0.1em;color:var(--muted);}
-.calc-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
-.calc-stat{background:var(--surface);border:0.5px solid var(--border);border-radius:2px;padding:16px 18px;}
-.calc-stat-label{font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
-.calc-stat-val{font-size:22px;font-weight:300;color:var(--white);}
-.calc-stat-val.accent{color:var(--amber);}
-.type-section{margin-bottom:52px;}
-.type-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
-.type-opt{border:0.5px solid var(--border);border-radius:2px;padding:22px;cursor:none;transition:all 0.2s;position:relative;}
+
+/* CAPSULE TYPE SELECTOR */
+.type-section{margin-bottom:40px;}
+.type-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+.type-opt{border:0.5px solid var(--border);border-radius:2px;padding:18px;cursor:none;transition:all 0.2s;position:relative;}
 .type-opt:hover{border-color:var(--orange-border);background:var(--orange-dim);}
 .type-opt.selected{border-color:var(--orange);background:var(--orange-dim);}
-.type-opt.selected::after{content:'✓';position:absolute;top:12px;right:14px;font-size:11px;color:var(--orange);}
-.type-opt-tag{font-size:8px;letter-spacing:0.16em;text-transform:uppercase;color:var(--orange);margin-bottom:8px;}
-.type-opt-name{font-size:18px;font-weight:400;margin-bottom:6px;}
-.type-opt-desc{font-size:12px;color:var(--muted);line-height:1.7;}
-.date-section{margin-bottom:52px;}
-.date-presets{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
-.date-preset{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;border:0.5px solid var(--border);border-radius:2px;padding:8px 14px;cursor:none;color:var(--muted);background:transparent;transition:all 0.2s;}
-.date-preset:hover,.date-preset.active{border-color:var(--orange);color:var(--orange);background:var(--orange-dim);}
-.date-input-wrap{display:flex;gap:10px;align-items:center;}
-.date-input-wrap input[type="date"]{background:var(--surface);border:0.5px solid var(--border);border-radius:2px;padding:12px 14px;color:var(--white);font-family:Arial,sans-serif;font-size:12px;outline:none;flex:1;color-scheme:dark;transition:border-color 0.2s;}
-.date-input-wrap input[type="date"]:focus{border-color:var(--orange);}
-.date-countdown{font-size:10px;letter-spacing:0.1em;color:var(--amber);padding:12px 14px;background:var(--amber-dim);border:0.5px solid rgba(255,170,77,0.2);border-radius:2px;white-space:nowrap;}
-.includes-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
-.include-item{display:flex;gap:12px;align-items:flex-start;padding:16px;background:var(--surface);border:0.5px solid var(--border);border-radius:2px;}
-.include-dot{width:6px;height:6px;border-radius:50%;background:var(--amber);margin-top:5px;flex-shrink:0;}
-.include-text h4{font-size:13px;font-weight:500;margin-bottom:3px;}
-.include-text p{font-size:12px;color:var(--muted);line-height:1.6;}
-.shop-sidebar{padding:48px 32px;position:sticky;top:80px;background:var(--surface);border-left:0.5px solid var(--border);}
-.sidebar-title{font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:22px;}
-.order-card{background:var(--black);border:0.5px solid var(--border);border-radius:2px;padding:22px;margin-bottom:14px;}
-.order-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:0.5px solid var(--border);}
-.order-row:last-child{border-bottom:none;}
-.order-key{font-size:12px;color:var(--muted);}
-.order-val{font-size:12px;color:var(--white);font-weight:500;}
-.order-val.highlight{color:var(--amber);}
-.order-total{background:var(--orange-dim);border:0.5px solid var(--orange-border);border-radius:2px;padding:18px 22px;margin-bottom:16px;display:flex;justify-content:space-between;align-items:center;}
-.order-total-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);}
-.order-total-amount{font-size:34px;font-weight:300;color:var(--white);}
-.order-total-amount small{font-size:11px;color:var(--muted);}
-.btn-checkout{width:100%;padding:14px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;background:var(--orange);color:var(--black);border:none;border-radius:2px;cursor:none;transition:opacity 0.2s;margin-bottom:10px;font-weight:700;}
+.type-opt.selected::after{content:'✓';position:absolute;top:10px;right:12px;font-size:11px;color:var(--orange);}
+.type-opt-tag{font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:var(--orange);margin-bottom:6px;}
+.type-opt-name{font-size:15px;font-weight:500;margin-bottom:4px;}
+.type-opt-desc{font-size:11px;color:var(--muted);line-height:1.6;}
+
+/* DATE */
+.date-section{margin-bottom:40px;}
+.date-presets{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;}
+.date-preset{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;border:0.5px solid var(--border);border-radius:2px;padding:7px 12px;cursor:none;color:var(--muted);background:transparent;transition:all 0.2s;}
+.date-preset.active,.date-preset:hover{border-color:var(--orange);color:var(--orange);background:var(--orange-dim);}
+.date-info{font-size:10px;color:var(--amber);padding:10px 14px;background:var(--amber-dim);border:0.5px solid rgba(255,170,77,0.2);border-radius:2px;margin-top:-6px;margin-bottom:14px;}
+
+/* INCLUDES */
+.includes-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+.include-item{display:flex;gap:10px;align-items:flex-start;padding:14px;background:var(--surface);border:0.5px solid var(--border);border-radius:2px;}
+.include-dot{width:5px;height:5px;border-radius:50%;background:var(--amber);margin-top:5px;flex-shrink:0;}
+.include-text h4{font-size:12px;font-weight:500;margin-bottom:2px;}
+.include-text p{font-size:11px;color:var(--muted);line-height:1.5;}
+
+/* SIDEBAR */
+.shop-sidebar{padding:32px 28px;position:sticky;top:65px;background:var(--surface);border-left:0.5px solid var(--border);max-height:calc(100vh - 65px);overflow-y:auto;}
+.sidebar-title{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;}
+.cart-empty{text-align:center;padding:40px 20px;color:var(--muted);font-size:13px;}
+.cart-empty-icon{font-size:32px;margin-bottom:10px;opacity:0.3;}
+.cart-items{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.cart-item{background:var(--black);border:0.5px solid var(--border);border-radius:2px;padding:14px;}
+.cart-item-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;}
+.cart-item-name{font-size:13px;font-weight:500;color:var(--white);}
+.cart-item-remove{font-size:16px;color:var(--muted);cursor:none;background:none;border:none;padding:0;line-height:1;transition:color 0.2s;}
+.cart-item-remove:hover{color:var(--orange);}
+.cart-item-type{font-size:10px;color:var(--muted);margin-bottom:8px;}
+.cart-item-footer{display:flex;justify-content:space-between;align-items:center;}
+.cart-item-price{font-size:15px;color:var(--amber);font-weight:500;}
+.qty-controls{display:flex;align-items:center;gap:6px;}
+.qty-btn{width:22px;height:22px;border-radius:50%;border:0.5px solid var(--border);background:transparent;color:var(--white);font-size:14px;cursor:none;display:flex;align-items:center;justify-content:center;line-height:1;transition:all 0.2s;}
+.qty-btn:hover{border-color:var(--orange);color:var(--orange);}
+.qty-num{font-size:12px;color:var(--white);min-width:16px;text-align:center;}
+.cart-total-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-top:0.5px solid var(--border);margin-bottom:14px;}
+.cart-total-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);}
+.cart-total-amount{font-size:26px;font-weight:300;color:var(--white);}
+.btn-checkout{width:100%;padding:14px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;background:var(--orange);color:var(--black);border:none;border-radius:2px;cursor:none;font-weight:700;transition:opacity 0.2s;margin-bottom:8px;}
 .btn-checkout:hover{opacity:0.88;}
-.btn-paypal{width:100%;padding:13px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;background:#F6BE00;color:#000000;border:none;border-radius:2px;cursor:none;transition:opacity 0.2s;margin-bottom:16px;font-weight:700;}
-.btn-paypal:hover{opacity:0.88;}
-.security-badges{display:flex;flex-direction:column;gap:8px;}
-.security-badge{display:flex;gap:10px;align-items:center;font-size:11px;color:var(--muted);}
+.btn-clear{width:100%;padding:10px;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;background:transparent;color:var(--muted);border:0.5px solid var(--border);border-radius:2px;cursor:none;transition:all 0.2s;margin-bottom:14px;}
+.btn-clear:hover{border-color:var(--orange-border);color:var(--white);}
+.security-badges{display:flex;flex-direction:column;gap:6px;}
+.security-badge{display:flex;gap:8px;align-items:center;font-size:11px;color:var(--muted);}
 .security-badge::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--amber);flex-shrink:0;}
-.sidebar-divider{border:none;border-top:0.5px solid var(--border);margin:20px 0;}
-.promo-wrap{margin-bottom:20px;}
-.promo-label{font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
-.promo-row{display:flex;gap:8px;}
-.promo-input{flex:1;background:var(--black);border:0.5px solid var(--border);border-radius:2px;padding:10px 12px;color:var(--white);font-family:Arial,sans-serif;font-size:11px;outline:none;transition:border-color 0.2s;}
+.promo-wrap{margin-bottom:16px;}
+.promo-label{font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.promo-row{display:flex;gap:6px;}
+.promo-input{flex:1;background:var(--black);border:0.5px solid var(--border);border-radius:2px;padding:9px 12px;color:var(--white);font-family:Arial,sans-serif;font-size:11px;outline:none;transition:border-color 0.2s;}
 .promo-input:focus{border-color:var(--orange);}
-.promo-btn{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--orange);background:transparent;border:0.5px solid var(--orange-border);padding:10px 14px;border-radius:2px;cursor:none;transition:background 0.2s;}
+.promo-btn{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--orange);background:transparent;border:0.5px solid var(--orange-border);padding:9px 12px;border-radius:2px;cursor:none;transition:background 0.2s;white-space:nowrap;}
 .promo-btn:hover{background:var(--orange-dim);}
-.compare-section{padding:80px 48px;background:var(--surface);border-top:0.5px solid var(--border);}
-.compare-table{width:100%;border-collapse:collapse;margin-top:36px;}
-.compare-table th{font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);padding:14px 18px;text-align:left;border-bottom:0.5px solid var(--border);font-weight:400;}
-.compare-table th.featured-col{color:var(--orange);}
-.compare-table td{padding:14px 18px;font-size:13px;color:var(--white);border-bottom:0.5px solid var(--border);}
-.compare-table td.feat-name{color:var(--muted);font-size:12px;}
-.compare-table td.featured-col{background:var(--orange-dim);}
+.sidebar-divider{border:none;border-top:0.5px solid var(--border);margin:14px 0;}
+
+/* COMPARE */
+.compare-section{padding:60px 48px;background:var(--surface);border-top:0.5px solid var(--border);}
+.compare-table{width:100%;border-collapse:collapse;margin-top:28px;}
+.compare-table th{font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);padding:12px 16px;text-align:left;border-bottom:0.5px solid var(--border);font-weight:400;}
+.compare-table th.fc{color:var(--orange);}
+.compare-table td{padding:12px 16px;font-size:12px;color:var(--white);border-bottom:0.5px solid var(--border);}
+.compare-table td.fn{color:var(--muted);}
+.compare-table td.fc{background:var(--orange-dim);}
 .compare-table tr:last-child td{border-bottom:none;}
-.compare-price{font-size:22px;font-weight:300;}
-.check{color:var(--amber);}
-.cross{color:rgba(245,237,224,0.2);}
+.cp{font-size:20px;font-weight:300;}.ck{color:var(--amber);}.cx{color:rgba(245,237,224,0.2);}
 </style>
 </head>
 <body>
@@ -103,40 +140,121 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;hei
     <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
   </div>
-  <a class="nav-cta" href="create.html">Create Capsule</a>
+  <div style="display:flex;gap:12px;align-items:center;">
+    <a href="cart.html" style="position:relative;text-decoration:none;display:flex;align-items:center;">
+      <span style="font-size:20px;color:var(--white);">🛒</span>
+      <span id="cart-badge" style="display:none;position:absolute;top:-6px;right:-8px;background:var(--orange);color:var(--black);border-radius:50%;width:18px;height:18px;font-size:10px;font-weight:700;align-items:center;justify-content:center;">0</span>
+    </a>
+    <a class="nav-cta" href="create.html">Create Capsule</a>
+  </div>
 </nav>
+
 <div class="page-header">
-  <div class="breadcrumb">Aeterna <span>/ Shop</span></div>
-  <h1>Build your <em>capsule.</em></h1>
-  <p>Choose your storage, pick your capsule type, set your unlock date. One payment — preserved forever.</p>
+  <div class="breadcrumb" style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;display:flex;gap:8px;">Aeterna <span style="color:var(--orange);">/ Shop</span></div>
+  <h1 style="font-size:clamp(36px,5vw,64px);font-weight:300;margin-bottom:14px;">Build your <em style="font-style:italic;color:var(--orange);">capsule.</em></h1>
+  <p style="font-size:14px;color:var(--muted);max-width:480px;line-height:1.8;">Choose your storage, pick your capsule type, set your unlock date. One payment — preserved forever.</p>
 </div>
+
+<!-- SEARCH + FILTER BAR -->
+<div class="filter-bar">
+  <div class="search-wrap">
+    <input class="search-input" type="text" id="searchInput" placeholder="Search capsules e.g. memory, letter, legacy..." oninput="searchProducts()">
+    <button class="search-btn" onclick="searchProducts()">Search</button>
+  </div>
+  <div class="filter-tabs">
+    <button class="filter-tab active" onclick="filterProducts('all',this)">All</button>
+    <button class="filter-tab" onclick="filterProducts('starter',this)">Starter</button>
+    <button class="filter-tab" onclick="filterProducts('popular',this)">Popular</button>
+    <button class="filter-tab" onclick="filterProducts('premium',this)">Premium</button>
+  </div>
+  <span class="results-count" id="resultsCount">4 products</span>
+</div>
+
 <div class="shop-layout">
+  <!-- MAIN: PRODUCTS -->
   <div class="shop-main">
-    <div class="calc-section reveal">
-      <div class="section-eyebrow">Step 01</div>
-      <div class="section-title">Choose your <em>storage</em></div>
-      <div class="slider-wrap">
-        <div class="slider-header"><span class="slider-label">Storage size</span><div class="slider-value"><span id="sliderDisplay">5</span> <span>GB</span></div></div>
-        <input type="range" id="storageSlider" min="0" max="3" value="1" step="1">
-        <div class="slider-ticks"><span class="slider-tick">1 GB</span><span class="slider-tick">5 GB</span><span class="slider-tick">10 GB</span><span class="slider-tick">25 GB</span></div>
+    <div class="section-eyebrow">Choose your plan</div>
+    <div class="section-title">Select a <em>capsule</em></div>
+
+    <div class="products-grid" id="productsGrid">
+      <div class="product-card" data-category="starter" data-name="basic capsule 1gb memory letter">
+        <span class="product-tag">Starter</span>
+        <div class="product-name">Basic Capsule</div>
+        <div class="product-price">$1.00 <small>one-time</small></div>
+        <div class="product-storage">1 GB Storage</div>
+        <div class="product-features">
+          <div class="product-feature">Up to 500 photos</div>
+          <div class="product-feature">5–10 short videos</div>
+          <div class="product-feature">Unlimited text messages</div>
+          <div class="product-feature">AES-256 encryption</div>
+          <div class="product-feature">Email unlock notification</div>
+        </div>
+        <button class="btn-add-cart" onclick="addToCart({id:'basic',name:'Basic Capsule',storage:'1 GB',price:1})">Add to cart</button>
       </div>
-      <div class="calc-summary">
-        <div class="calc-stat"><div class="calc-stat-label">Price</div><div class="calc-stat-val accent" id="calcPrice">$3.00</div></div>
-        <div class="calc-stat"><div class="calc-stat-label">Est. photos</div><div class="calc-stat-val" id="calcPhotos">~2,500</div></div>
-        <div class="calc-stat"><div class="calc-stat-label">Est. videos</div><div class="calc-stat-val" id="calcVideos">~40</div></div>
+
+      <div class="product-card featured" data-category="popular" data-name="popular capsule 5gb memory letter anniversary">
+        <div class="product-badge">Most popular</div>
+        <span class="product-tag">Popular</span>
+        <div class="product-name">Standard Capsule</div>
+        <div class="product-price">$3.00 <small>one-time</small></div>
+        <div class="product-storage">5 GB Storage</div>
+        <div class="product-features">
+          <div class="product-feature">Up to 2,500 photos</div>
+          <div class="product-feature">30–50 videos</div>
+          <div class="product-feature">Voice recordings</div>
+          <div class="product-feature">AES-256 encryption</div>
+          <div class="product-feature">HD video support</div>
+        </div>
+        <button class="btn-add-cart" onclick="addToCart({id:'standard',name:'Standard Capsule',storage:'5 GB',price:3})">Add to cart</button>
       </div>
+
+      <div class="product-card" data-category="premium" data-name="premium capsule 10gb memory anniversary legacy">
+        <span class="product-tag">Premium</span>
+        <div class="product-name">Premium Capsule</div>
+        <div class="product-price">$5.00 <small>one-time</small></div>
+        <div class="product-storage">10 GB Storage</div>
+        <div class="product-features">
+          <div class="product-feature">Up to 5,000 photos</div>
+          <div class="product-feature">HD video support</div>
+          <div class="product-feature">Full media library</div>
+          <div class="product-feature">AES-256 encryption</div>
+          <div class="product-feature">Priority support</div>
+        </div>
+        <button class="btn-add-cart" onclick="addToCart({id:'premium',name:'Premium Capsule',storage:'10 GB',price:5})">Add to cart</button>
+      </div>
+
+      <div class="product-card" data-category="premium" data-name="ultimate capsule 25gb legacy anniversary memory">
+        <span class="product-tag">Ultimate</span>
+        <div class="product-name">Ultimate Capsule</div>
+        <div class="product-price">$10.00 <small>one-time</small></div>
+        <div class="product-storage">25 GB Storage</div>
+        <div class="product-features">
+          <div class="product-feature">Unlimited photos</div>
+          <div class="product-feature">4K video support</div>
+          <div class="product-feature">Full media archive</div>
+          <div class="product-feature">AES-256 encryption</div>
+          <div class="product-feature">VIP support</div>
+        </div>
+        <button class="btn-add-cart" onclick="addToCart({id:'ultimate',name:'Ultimate Capsule',storage:'25 GB',price:10})">Add to cart</button>
+      </div>
+
+      <div class="no-results" id="noResults">No capsules found. Try a different search.</div>
     </div>
-    <div class="type-section reveal">
+
+    <!-- CAPSULE TYPE -->
+    <div class="type-section">
       <div class="section-eyebrow">Step 02</div>
       <div class="section-title">Choose capsule <em>type</em></div>
       <div class="type-grid">
-        <div class="type-opt" onclick="selectType(this)"><div class="type-opt-tag">Memory Vault</div><div class="type-opt-name">Memory Capsule</div><p class="type-opt-desc">Photos, videos and moments from a specific time. Open years later and relive exactly how it felt.</p></div>
-        <div class="type-opt selected" onclick="selectType(this)"><div class="type-opt-tag">Future Letter</div><div class="type-opt-name">Letter Capsule</div><p class="type-opt-desc">Write a message to your future self or a loved one. Sealed today, delivered when the time is right.</p></div>
-        <div class="type-opt" onclick="selectType(this)"><div class="type-opt-tag">Anniversary</div><div class="type-opt-name">Anniversary Capsule</div><p class="type-opt-desc">A gift that grows in meaning over time. Perfect for weddings, milestones, and celebrations.</p></div>
-        <div class="type-opt" onclick="selectType(this)"><div class="type-opt-tag">Legacy</div><div class="type-opt-name">Legacy Capsule</div><p class="type-opt-desc">Leave something behind for the people you love. Messages, stories, and wisdom across generations.</p></div>
+        <div class="type-opt selected" onclick="selectType(this,'Memory Capsule')"><div class="type-opt-tag">Memory Vault</div><div class="type-opt-name">Memory Capsule</div><p class="type-opt-desc">Photos, videos and moments. Open years later and relive exactly how it felt.</p></div>
+        <div class="type-opt" onclick="selectType(this,'Letter Capsule')"><div class="type-opt-tag">Future Letter</div><div class="type-opt-name">Letter Capsule</div><p class="type-opt-desc">Write a message to your future self or a loved one. Sealed today.</p></div>
+        <div class="type-opt" onclick="selectType(this,'Anniversary Capsule')"><div class="type-opt-tag">Anniversary</div><div class="type-opt-name">Anniversary Capsule</div><p class="type-opt-desc">A gift that grows in meaning over time. Perfect for milestones.</p></div>
+        <div class="type-opt" onclick="selectType(this,'Legacy Capsule')"><div class="type-opt-tag">Legacy</div><div class="type-opt-name">Legacy Capsule</div><p class="type-opt-desc">Leave messages and wisdom behind for the people you love.</p></div>
       </div>
     </div>
-    <div class="date-section reveal">
+
+    <!-- DATE -->
+    <div class="date-section">
       <div class="section-eyebrow">Step 03</div>
       <div class="section-title">Set your <em>unlock date</em></div>
       <div class="date-presets">
@@ -146,92 +264,212 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;hei
         <button class="date-preset" onclick="setPreset(this,25)">25 years</button>
         <button class="date-preset" onclick="setPreset(this,0)">Custom</button>
       </div>
-      <div class="date-input-wrap">
-        <input type="date" id="unlockDate">
-        <div class="date-countdown" id="dateCountdown">Unlocks in 5 years</div>
-      </div>
+      <div class="field"><label style="font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px;">Unlock date</label><input type="date" id="unlockDate" style="width:100%;background:var(--surface);border:0.5px solid var(--border);border-radius:2px;padding:12px 14px;color:var(--white);font-family:Arial,sans-serif;font-size:12px;outline:none;color-scheme:dark;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--orange)'" onblur="this.style.borderColor='var(--border)'"></div>
+      <div class="date-info" id="dateInfo" style="margin-top:8px;">Unlocks in 5 years</div>
     </div>
-    <div class="reveal">
+
+    <!-- INCLUDES -->
+    <div>
       <div class="section-eyebrow">Every capsule includes</div>
       <div class="section-title">What's <em>inside</em></div>
       <div class="includes-grid">
-        <div class="include-item"><div class="include-dot"></div><div class="include-text"><h4>AES-256 encryption</h4><p>Your memories are encrypted at rest and in transit. Nobody can access them — not even us.</p></div></div>
-        <div class="include-item"><div class="include-dot"></div><div class="include-text"><h4>Countdown unlock timer</h4><p>Watch the days count down on your dashboard. The anticipation is part of the experience.</p></div></div>
-        <div class="include-item"><div class="include-dot"></div><div class="include-text"><h4>Email notification</h4><p>We'll email you the moment your capsule unlocks so you never miss the opening.</p></div></div>
-        <div class="include-item"><div class="include-dot"></div><div class="include-text"><h4>Shareable capsule link</h4><p>Share the unlocked capsule with loved ones using a private link — valid forever.</p></div></div>
-        <div class="include-item"><div class="include-dot"></div><div class="include-text"><h4>Download all content</h4><p>Once unlocked, download everything in one click. Your memories, on your device.</p></div></div>
-        <div class="include-item"><div class="include-dot"></div><div class="include-text"><h4>One-time payment</h4><p>Pay once, preserved forever. No monthly fees, no renewals, no surprises.</p></div></div>
+        <div class="include-item"><div class="include-dot"></div><div class="include-text"><h4>AES-256 encryption</h4><p>Encrypted at rest and in transit. Nobody can access them — not even us.</p></div></div>
+        <div class="include-item"><div class="include-dot"></div><div class="include-text"><h4>Countdown unlock timer</h4><p>Watch the days count down on your dashboard.</p></div></div>
+        <div class="include-item"><div class="include-dot"></div><div class="include-text"><h4>Email notification</h4><p>We'll email you the moment your capsule unlocks.</p></div></div>
+        <div class="include-item"><div class="include-dot"></div><div class="include-text"><h4>Shareable capsule link</h4><p>Share the unlocked capsule with loved ones — valid forever.</p></div></div>
+        <div class="include-item"><div class="include-dot"></div><div class="include-text"><h4>Download all content</h4><p>Once unlocked, download everything in one click.</p></div></div>
+        <div class="include-item"><div class="include-dot"></div><div class="include-text"><h4>One-time payment</h4><p>Pay once, preserved forever. No monthly fees.</p></div></div>
       </div>
     </div>
   </div>
+
+  <!-- SIDEBAR: CART -->
   <div class="shop-sidebar">
-    <div class="sidebar-title">Order summary</div>
-    <div class="order-card">
-      <div class="order-row"><span class="order-key">Storage</span><span class="order-val" id="summaryStorage">5 GB</span></div>
-      <div class="order-row"><span class="order-key">Capsule type</span><span class="order-val" id="summaryType">Letter Capsule</span></div>
-      <div class="order-row"><span class="order-key">Unlock date</span><span class="order-val" id="summaryDate">—</span></div>
-      <div class="order-row"><span class="order-key">Encryption</span><span class="order-val highlight">AES-256</span></div>
-      <div class="order-row"><span class="order-key">Subscription</span><span class="order-val highlight">None</span></div>
+    <div class="sidebar-title">
+      <span>Shopping cart</span>
+      <span id="cartCount" style="color:var(--orange);">0 items</span>
     </div>
-    <div class="promo-wrap">
-      <div class="promo-label">Promo code</div>
-      <div class="promo-row"><input class="promo-input" type="text" placeholder="Enter code"><button class="promo-btn" onclick="applyPromo()">Apply</button></div>
+
+    <div id="cartEmpty" class="cart-empty">
+      <div class="cart-empty-icon">🛒</div>
+      <div>Your cart is empty.<br>Add a capsule to get started.</div>
     </div>
-    <div class="order-total">
-      <div><div class="order-total-label">Total</div><div style="font-size:10px;color:var(--muted);margin-top:2px;">One-time payment</div></div>
-      <div class="order-total-amount" id="summaryPrice">$3.00 <small>USD</small></div>
+
+    <div id="cartItems" class="cart-items" style="display:none;"></div>
+
+    <div id="cartFooter" style="display:none;">
+      <div class="promo-wrap">
+        <div class="promo-label">Promo code</div>
+        <div class="promo-row">
+          <input class="promo-input" type="text" id="promoInput" placeholder="e.g. AETERNA10">
+          <button class="promo-btn" onclick="applyPromo()">Apply</button>
+        </div>
+        <div id="promoMsg" style="font-size:11px;margin-top:6px;display:none;"></div>
+      </div>
+      <div class="cart-total-row">
+        <span class="cart-total-label">Total</span>
+        <span class="cart-total-amount" id="cartTotal">$0.00</span>
+      </div>
+      <button class="btn-checkout" onclick="window.location.href='cart.html'">View cart & checkout →</button>
+      <button class="btn-clear" onclick="clearCart()">Clear cart</button>
     </div>
-    <button class="btn-checkout" onclick="window.location.href='create.html'">Proceed to checkout →</button>
-    <button class="btn-paypal" onclick="window.location.href='create.html'">Pay with PayPal</button>
+
+    <div class="sidebar-divider"></div>
     <div class="security-badges">
       <div class="security-badge">256-bit SSL encrypted checkout</div>
-      <div class="security-badge">No recurring charges</div>
-      <div class="security-badge">Instant capsule creation after payment</div>
+      <div class="security-badge">No recurring charges ever</div>
       <div class="security-badge">30-day refund policy</div>
+      <div class="security-badge">AES-256 encrypted storage</div>
     </div>
-    <hr class="sidebar-divider">
-    <div style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">Need help?</div>
-    <div style="font-size:12px;color:var(--muted);line-height:1.8;">Questions about your order?<br><a href="contact.html" style="color:var(--orange);text-decoration:none;">Contact our support team →</a></div>
   </div>
 </div>
+
+<!-- COMPARE TABLE -->
 <section class="compare-section">
-  <div class="eyebrow reveal">Compare plans</div>
-  <h2 class="section-h reveal">Everything <em>included,</em> always.</h2>
-  <table class="compare-table reveal">
-    <thead><tr><th style="width:36%">Feature</th><th>1 GB</th><th class="featured-col">5 GB ★</th><th>10 GB</th><th>25 GB</th></tr></thead>
+  <div class="eyebrow reveal" style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--amber);margin-bottom:10px;display:flex;align-items:center;gap:10px;"><span style="width:16px;height:0.5px;background:var(--amber);display:block;"></span>Compare plans</div>
+  <h2 style="font-size:clamp(24px,3vw,38px);font-weight:300;margin-bottom:28px;">Everything <em style="font-style:italic;color:var(--orange);">included,</em> always.</h2>
+  <table class="compare-table">
+    <thead><tr><th style="width:36%">Feature</th><th>Basic 1GB</th><th class="fc">Standard 5GB ★</th><th>Premium 10GB</th><th>Ultimate 25GB</th></tr></thead>
     <tbody>
-      <tr><td class="feat-name">Price</td><td><span class="compare-price">$1</span></td><td class="featured-col"><span class="compare-price">$3</span></td><td><span class="compare-price">$5</span></td><td><span class="compare-price">$10</span></td></tr>
-      <tr><td class="feat-name">Est. photos</td><td>~500</td><td class="featured-col">~2,500</td><td>~5,000</td><td>~12,500</td></tr>
-      <tr><td class="feat-name">Est. videos</td><td>~10</td><td class="featured-col">~40</td><td>~80</td><td>~200</td></tr>
-      <tr><td class="feat-name">AES-256 encryption</td><td><span class="check">✓</span></td><td class="featured-col"><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td class="feat-name">Countdown timer</td><td><span class="check">✓</span></td><td class="featured-col"><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td class="feat-name">HD video support</td><td><span class="cross">—</span></td><td class="featured-col"><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td class="feat-name">4K video support</td><td><span class="cross">—</span></td><td class="featured-col"><span class="cross">—</span></td><td><span class="cross">—</span></td><td><span class="check">✓</span></td></tr>
-      <tr><td class="feat-name">Subscription</td><td>None</td><td class="featured-col">None</td><td>None</td><td>None</td></tr>
+      <tr><td class="fn">Price</td><td><span class="cp">$1</span></td><td class="fc"><span class="cp">$3</span></td><td><span class="cp">$5</span></td><td><span class="cp">$10</span></td></tr>
+      <tr><td class="fn">Est. photos</td><td>~500</td><td class="fc">~2,500</td><td>~5,000</td><td>~12,500</td></tr>
+      <tr><td class="fn">Est. videos</td><td>~10</td><td class="fc">~40</td><td>~80</td><td>~200</td></tr>
+      <tr><td class="fn">AES-256 encryption</td><td><span class="ck">✓</span></td><td class="fc"><span class="ck">✓</span></td><td><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr>
+      <tr><td class="fn">Email notification</td><td><span class="ck">✓</span></td><td class="fc"><span class="ck">✓</span></td><td><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr>
+      <tr><td class="fn">HD video</td><td><span class="cx">—</span></td><td class="fc"><span class="ck">✓</span></td><td><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr>
+      <tr><td class="fn">4K video</td><td><span class="cx">—</span></td><td class="fc"><span class="cx">—</span></td><td><span class="cx">—</span></td><td><span class="ck">✓</span></td></tr>
+      <tr><td class="fn">Priority support</td><td><span class="cx">—</span></td><td class="fc"><span class="cx">—</span></td><td><span class="ck">✓</span></td><td><span class="ck">✓</span></td></tr>
     </tbody>
   </table>
 </section>
+
 <footer>
-  <div class="footer-inner">
+  <div class="footer-inner" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
     <div><div class="footer-logo">AETERNA</div><div class="footer-tagline">Where memories live forever</div></div>
     <span class="footer-copy">© 2026 Aeterna. All rights reserved.</span>
-    <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="contact.html">Contact</a></div>
+    <div class="footer-links"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a></div>
   </div>
 </footer>
+
+<script src="cart.js"></script>
 <script>
 const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
 document.addEventListener('mousemove',e=>{const x=e.clientX,y=e.clientY;cursor.style.transform=`translate(${x-4}px,${y-4}px)`;ring.style.transform=`translate(${x-16}px,${y-16}px)`;});
-const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0});
-document.querySelectorAll('.reveal').forEach(r=>{const rect=r.getBoundingClientRect();if(rect.top<window.innerHeight)r.classList.add('visible');else observer.observe(r);});
-const sizes=[{gb:1,price:1,photos:'~500',videos:'~10'},{gb:5,price:3,photos:'~2,500',videos:'~40'},{gb:10,price:5,photos:'~5,000',videos:'~80'},{gb:25,price:10,photos:'~12,500',videos:'~200'}];
-const slider=document.getElementById('storageSlider');
-function updateStorage(){const d=sizes[slider.value];document.getElementById('sliderDisplay').textContent=d.gb;document.getElementById('calcPrice').textContent=`$${d.price}.00`;document.getElementById('calcPhotos').textContent=d.photos;document.getElementById('calcVideos').textContent=d.videos;document.getElementById('summaryStorage').textContent=`${d.gb} GB`;document.getElementById('summaryPrice').innerHTML=`$${d.price}.00 <small>USD</small>`;}
-slider.addEventListener('input',updateStorage);updateStorage();
-function selectType(el){document.querySelectorAll('.type-opt').forEach(o=>o.classList.remove('selected'));el.classList.add('selected');document.getElementById('summaryType').textContent=el.querySelector('.type-opt-name').textContent;}
-function setPreset(btn,years){document.querySelectorAll('.date-preset').forEach(b=>b.classList.remove('active'));btn.classList.add('active');if(years===0){document.getElementById('unlockDate').value='';document.getElementById('dateCountdown').textContent='Choose a date';return;}const d=new Date();d.setFullYear(d.getFullYear()+years);document.getElementById('unlockDate').value=d.toISOString().split('T')[0];document.getElementById('dateCountdown').textContent=`Unlocks in ${years} year${years>1?'s':''}`;const opts={year:'numeric',month:'long',day:'numeric'};document.getElementById('summaryDate').textContent=d.toLocaleDateString('en-US',opts);}
-document.getElementById('unlockDate').addEventListener('change',function(){const d=new Date(this.value);if(!isNaN(d)){const diff=Math.round((d-new Date())/(1000*60*60*24*365)*10)/10;document.getElementById('dateCountdown').textContent=`Unlocks in ~${diff} years`;document.getElementById('summaryDate').textContent=d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});}});
-function applyPromo(){const code=document.querySelector('.promo-input').value.trim().toUpperCase();if(code==='AETERNA10')alert('Promo code applied! 10% discount added.');else if(code==='')alert('Please enter a promo code.');else alert('Invalid promo code. Try AETERNA10!');}
-(function(){const d=new Date();d.setFullYear(d.getFullYear()+5);document.getElementById('unlockDate').value=d.toISOString().split('T')[0];document.getElementById('summaryDate').textContent=d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});document.getElementById('dateCountdown').textContent='Unlocks in 5 years';})();
+
+// Init cart on load
+Cart.updateBadge();
+renderCart();
+
+function addToCart(item) {
+  // Add capsule type to item
+  const typeEl = document.querySelector('.type-opt.selected');
+  const dateVal = document.getElementById('unlockDate').value;
+  item.type = typeEl ? typeEl.querySelector('.type-opt-name').textContent : 'Memory Capsule';
+  item.unlockDate = dateVal || 'Not set';
+  item.id = item.id + '_' + Date.now(); // unique per add
+  Cart.add(item);
+  renderCart();
+  // Flash feedback
+  event.target.textContent = 'Added ✓';
+  setTimeout(() => event.target.textContent = 'Add to cart', 1200);
+}
+
+function renderCart() {
+  const items = Cart.items;
+  const empty = document.getElementById('cartEmpty');
+  const itemsEl = document.getElementById('cartItems');
+  const footer = document.getElementById('cartFooter');
+  const countEl = document.getElementById('cartCount');
+  const totalEl = document.getElementById('cartTotal');
+
+  countEl.textContent = Cart.count() + ' item' + (Cart.count() !== 1 ? 's' : '');
+
+  if (items.length === 0) {
+    empty.style.display = 'block';
+    itemsEl.style.display = 'none';
+    footer.style.display = 'none';
+  } else {
+    empty.style.display = 'none';
+    itemsEl.style.display = 'flex';
+    footer.style.display = 'block';
+    itemsEl.innerHTML = items.map(item => `
+      <div class="cart-item">
+        <div class="cart-item-header">
+          <div class="cart-item-name">${item.name}</div>
+          <button class="cart-item-remove" onclick="removeItem('${item.id}')">×</button>
+        </div>
+        <div class="cart-item-type">${item.type} · ${item.storage}</div>
+        <div class="cart-item-footer">
+          <div class="cart-item-price">$${(item.price * item.qty).toFixed(2)}</div>
+          <div class="qty-controls">
+            <button class="qty-btn" onclick="changeQty('${item.id}',-1)">−</button>
+            <span class="qty-num">${item.qty}</span>
+            <button class="qty-btn" onclick="changeQty('${item.id}',1)">+</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+    totalEl.textContent = '$' + Cart.total().toFixed(2);
+  }
+}
+
+function removeItem(id) { Cart.remove(id); renderCart(); }
+function changeQty(id, delta) {
+  const item = Cart.items.find(i => i.id === id);
+  if (item) { Cart.updateQty(id, item.qty + delta); renderCart(); }
+}
+function clearCart() { if(confirm('Clear all items from cart?')) { Cart.clear(); renderCart(); } }
+
+function applyPromo() {
+  const code = document.getElementById('promoInput').value.trim().toUpperCase();
+  const msg = document.getElementById('promoMsg');
+  msg.style.display = 'block';
+  if (code === 'AETERNA10') { msg.style.color = 'var(--amber)'; msg.textContent = '✓ 10% discount applied!'; }
+  else if (!code) { msg.style.color = 'var(--muted)'; msg.textContent = 'Please enter a code.'; }
+  else { msg.style.color = '#f87171'; msg.textContent = 'Invalid code. Try AETERNA10'; }
+}
+
+// SEARCH
+function searchProducts() {
+  const q = document.getElementById('searchInput').value.toLowerCase().trim();
+  const cards = document.querySelectorAll('.product-card[data-name]');
+  let visible = 0;
+  cards.forEach(c => {
+    const match = !q || c.dataset.name.includes(q);
+    c.style.display = match ? '' : 'none';
+    if (match) visible++;
+  });
+  document.getElementById('resultsCount').textContent = visible + ' product' + (visible !== 1 ? 's' : '');
+  document.getElementById('noResults').style.display = visible === 0 ? 'block' : 'none';
+}
+
+// FILTER TABS
+function filterProducts(cat, btn) {
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('searchInput').value = '';
+  const cards = document.querySelectorAll('.product-card[data-category]');
+  let visible = 0;
+  cards.forEach(c => {
+    const match = cat === 'all' || c.dataset.category === cat;
+    c.style.display = match ? '' : 'none';
+    if (match) visible++;
+  });
+  document.getElementById('resultsCount').textContent = visible + ' product' + (visible !== 1 ? 's' : '');
+  document.getElementById('noResults').style.display = visible === 0 ? 'block' : 'none';
+}
+
+function selectType(el, name) { document.querySelectorAll('.type-opt').forEach(o => o.classList.remove('selected')); el.classList.add('selected'); }
+
+function setPreset(btn, years) {
+  document.querySelectorAll('.date-preset').forEach(b => b.classList.remove('active')); btn.classList.add('active');
+  if (years === 0) { document.getElementById('unlockDate').value = ''; document.getElementById('dateInfo').textContent = 'Choose a custom date'; return; }
+  const d = new Date(); d.setFullYear(d.getFullYear() + years);
+  document.getElementById('unlockDate').value = d.toISOString().split('T')[0];
+  document.getElementById('dateInfo').textContent = `Unlocks in ${years} year${years>1?'s':''} — ${d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}`;
+}
+
+(function(){ const d=new Date(); d.setFullYear(d.getFullYear()+5); document.getElementById('unlockDate').value=d.toISOString().split('T')[0]; document.getElementById('dateInfo').textContent=`Unlocks in 5 years — ${d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}`; })();
 </script>
 </body>
 </html>

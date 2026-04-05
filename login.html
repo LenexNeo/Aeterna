@@ -7,39 +7,42 @@
 <title>Login — Aeterna</title>
 <link rel="stylesheet" href="aeterna.css">
 <style>
+@media(max-width:768px){.login-wrap{grid-template-columns:1fr;}.left-panel{display:none;}.right-panel{padding:100px 24px 40px;}}
 .login-wrap{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;}
 .left-panel{background:var(--surface);border-right:0.5px solid var(--border);display:flex;flex-direction:column;justify-content:space-between;padding:120px 56px 56px;position:relative;overflow:hidden;}
 .left-panel::after{content:'AETERNA';position:absolute;bottom:-40px;left:-10px;font-size:110px;font-weight:700;color:rgba(245,237,224,0.025);letter-spacing:0.08em;pointer-events:none;white-space:nowrap;}
-.panel-quote blockquote{font-size:clamp(22px,2.5vw,32px);font-weight:300;line-height:1.25;margin-bottom:16px;}
+.panel-quote blockquote{font-size:clamp(20px,2.2vw,30px);font-weight:300;line-height:1.25;margin-bottom:16px;}
 .panel-quote blockquote em{font-style:italic;color:var(--orange);}
 .panel-quote cite{font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);}
 .panel-stats{display:flex;gap:32px;}
 .pstat-num{font-size:26px;font-weight:300;}
 .pstat-label{font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-top:2px;}
 .right-panel{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:120px 56px 56px;}
-.form-wrap{width:100%;max-width:400px;}
-.form-tabs{display:flex;border-bottom:0.5px solid var(--border);margin-bottom:36px;}
+.form-wrap{width:100%;max-width:420px;}
+.form-tabs{display:flex;border-bottom:0.5px solid var(--border);margin-bottom:32px;}
 .tab{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);padding:0 0 14px;margin-right:28px;cursor:none;border:none;border-bottom:1px solid transparent;background:none;transition:color 0.2s,border-color 0.2s;}
 .tab.active{color:var(--white);border-bottom-color:var(--orange);}
-.form-title{font-size:32px;font-weight:300;margin-bottom:8px;}
+.form-title{font-size:30px;font-weight:300;margin-bottom:8px;}
 .form-title em{font-style:italic;color:var(--orange);}
-.form-sub{font-size:13px;color:var(--muted);margin-bottom:28px;line-height:1.7;}
+.form-sub{font-size:13px;color:var(--muted);margin-bottom:26px;line-height:1.7;}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.forgot{font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--orange);text-decoration:none;display:block;text-align:right;margin-top:-8px;margin-bottom:22px;}
-.btn-submit{width:100%;padding:15px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;background:var(--orange);color:var(--black);border:none;border-radius:2px;cursor:none;transition:opacity 0.2s;margin-bottom:14px;font-weight:700;}
+.forgot{font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--orange);text-decoration:none;display:block;text-align:right;margin-top:-8px;margin-bottom:20px;}
+.btn-submit{width:100%;padding:14px;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;background:var(--orange);color:var(--black);border:none;border-radius:2px;cursor:none;transition:opacity 0.2s;margin-bottom:12px;font-weight:700;}
 .btn-submit:hover{opacity:0.88;}
-.divider-or{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+.divider-or{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
 .divider-or span{font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);}
 .divider-or::before,.divider-or::after{content:'';flex:1;height:0.5px;background:var(--border);}
-.btn-google{width:100%;padding:13px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;background:transparent;color:var(--muted);border:0.5px solid var(--border);border-radius:2px;cursor:none;transition:all 0.2s;margin-bottom:24px;}
+.btn-google{width:100%;padding:12px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;background:transparent;color:var(--muted);border:0.5px solid var(--border);border-radius:2px;cursor:none;transition:all 0.2s;margin-bottom:22px;}
 .btn-google:hover{border-color:var(--orange-border);color:var(--white);}
 .form-footer{font-size:12px;color:var(--muted);text-align:center;}
 .form-footer a{color:var(--orange);text-decoration:none;}
-.terms-check{display:flex;gap:10px;align-items:flex-start;margin-bottom:18px;}
-.terms-check input[type=checkbox]{width:14px;height:14px;accent-color:var(--orange);margin-top:2px;cursor:none;}
+.terms-check{display:flex;gap:10px;align-items:flex-start;margin-bottom:16px;}
+.terms-check input[type=checkbox]{width:14px;height:14px;accent-color:var(--orange);margin-top:2px;cursor:none;flex-shrink:0;}
 .terms-check label{font-size:12px;color:var(--muted);line-height:1.5;}
 .terms-check a{color:var(--orange);text-decoration:none;}
 .hidden{display:none;}
+.error-msg{font-size:11px;color:#f87171;margin-top:-8px;margin-bottom:12px;display:none;}
+.success-bar{background:var(--amber-dim);border:0.5px solid rgba(255,170,77,0.25);border-radius:2px;padding:12px 16px;font-size:13px;color:var(--amber);margin-bottom:16px;display:none;}
 </style>
 </head>
 <body>
@@ -52,9 +55,10 @@
   </div>
   <a class="nav-cta" href="create.html">Create Capsule</a>
 </nav>
+
 <div class="login-wrap">
   <div class="left-panel">
-    <div><div class="eyebrow">Welcome back</div></div>
+    <div><div class="eyebrow">Your account</div></div>
     <div class="panel-quote">
       <blockquote>"The present moment always will have <em>been.</em>"</blockquote>
       <cite>— Aeterna Philosophy</cite>
@@ -65,54 +69,106 @@
       <div><div class="pstat-num">$1</div><div class="pstat-label">Starting price</div></div>
     </div>
   </div>
+
   <div class="right-panel">
     <div class="form-wrap">
       <div class="form-tabs">
-        <button class="tab active" onclick="showTab('login',this)">Sign in</button>
-        <button class="tab" onclick="showTab('register',this)">Create account</button>
+        <button class="tab active" id="loginTab" onclick="showTab('login')">Sign in</button>
+        <button class="tab" id="registerTab" onclick="showTab('register')">Create account</button>
       </div>
+
+      <!-- LOGIN FORM -->
       <div id="loginForm">
         <div class="form-title">Welcome <em>back.</em></div>
-        <p class="form-sub">Sign in to access your capsules.</p>
-        <div class="field"><label>Email address</label><input type="email" placeholder="you@example.com"></div>
-        <div class="field"><label>Password</label><input type="password" placeholder="••••••••"></div>
-        <a href="#" class="forgot" onclick="alert('A password reset link will be sent to your email.')">Forgot password?</a>
-        <button class="btn-submit" onclick="window.location.href='dashboard.html'">Sign in to Aeterna</button>
+        <p class="form-sub">Sign in to access your capsules and memories.</p>
+        <div class="success-bar" id="loginSuccess">Signed in successfully! Redirecting...</div>
+        <div class="field"><label style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px;">Email address</label><input type="email" id="loginEmail" placeholder="you@example.com" style="width:100%;background:var(--surface);border:0.5px solid var(--border);border-radius:2px;padding:13px 16px;color:var(--white);font-family:Arial,sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--orange)'" onblur="this.style.borderColor='var(--border)'"></div>
+        <div class="field" style="margin-bottom:8px;"><label style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px;">Password</label><input type="password" id="loginPass" placeholder="••••••••" style="width:100%;background:var(--surface);border:0.5px solid var(--border);border-radius:2px;padding:13px 16px;color:var(--white);font-family:Arial,sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--orange)'" onblur="this.style.borderColor='var(--border)'"></div>
+        <div class="error-msg" id="loginError">Incorrect email or password. Please try again.</div>
+        <a href="#" class="forgot" onclick="handleForgot(event)">Forgot password?</a>
+        <button class="btn-submit" onclick="handleLogin()">Sign in to Aeterna</button>
         <div class="divider-or"><span>or</span></div>
-        <button class="btn-google" onclick="alert('Google login coming soon!')">Continue with Google</button>
-        <div class="form-footer">No account? <a href="#" onclick="switchTab('register');return false;">Create one →</a></div>
+        <button class="btn-google" onclick="alert('Google login coming soon! Please use email login for now.')">Continue with Google</button>
+        <div class="form-footer">No account? <a href="#" onclick="showTab('register');return false;">Create one →</a></div>
       </div>
+
+      <!-- REGISTER FORM -->
       <div id="registerForm" class="hidden">
         <div class="form-title">Create your <em>vault.</em></div>
-        <p class="form-sub">Join Aeterna and start preserving memories today.</p>
+        <p class="form-sub">Join Aeterna and start preserving memories today. It's free to sign up.</p>
+        <div class="success-bar" id="registerSuccess">Account created! Welcome to Aeterna. Redirecting...</div>
         <div class="field-row">
-          <div class="field"><label>First name</label><input type="text" placeholder="Lehan"></div>
-          <div class="field"><label>Last name</label><input type="text" placeholder="Silva"></div>
+          <div class="field"><label style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px;">First name</label><input type="text" id="regFirst" placeholder="Lehan" style="width:100%;background:var(--surface);border:0.5px solid var(--border);border-radius:2px;padding:13px 16px;color:var(--white);font-family:Arial,sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--orange)'" onblur="this.style.borderColor='var(--border)'"></div>
+          <div class="field"><label style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px;">Last name</label><input type="text" id="regLast" placeholder="Silva" style="width:100%;background:var(--surface);border:0.5px solid var(--border);border-radius:2px;padding:13px 16px;color:var(--white);font-family:Arial,sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--orange)'" onblur="this.style.borderColor='var(--border)'"></div>
         </div>
-        <div class="field"><label>Email address</label><input type="email" placeholder="you@example.com"></div>
-        <div class="field"><label>Password</label><input type="password" placeholder="Min. 8 characters"></div>
-        <div class="field"><label>Confirm password</label><input type="password" placeholder="Repeat password"></div>
-        <div class="terms-check"><input type="checkbox" id="terms"><label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label></div>
-        <button class="btn-submit" onclick="window.location.href='dashboard.html'">Create my account</button>
+        <div class="field"><label style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px;">Email address</label><input type="email" id="regEmail" placeholder="you@example.com" style="width:100%;background:var(--surface);border:0.5px solid var(--border);border-radius:2px;padding:13px 16px;color:var(--white);font-family:Arial,sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--orange)'" onblur="this.style.borderColor='var(--border)'"></div>
+        <div class="field"><label style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px;">Password</label><input type="password" id="regPass" placeholder="Min. 8 characters" style="width:100%;background:var(--surface);border:0.5px solid var(--border);border-radius:2px;padding:13px 16px;color:var(--white);font-family:Arial,sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--orange)'" onblur="this.style.borderColor='var(--border)'"></div>
+        <div class="field"><label style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px;">Confirm password</label><input type="password" id="regConfirm" placeholder="Repeat password" style="width:100%;background:var(--surface);border:0.5px solid var(--border);border-radius:2px;padding:13px 16px;color:var(--white);font-family:Arial,sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='var(--orange)'" onblur="this.style.borderColor='var(--border)'"></div>
+        <div class="error-msg" id="regError">Please fill in all fields correctly.</div>
+        <div class="terms-check">
+          <input type="checkbox" id="agreeTerms">
+          <label for="agreeTerms">I agree to the <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a></label>
+        </div>
+        <button class="btn-submit" onclick="handleRegister()">Create my account</button>
         <div class="divider-or"><span>or</span></div>
         <button class="btn-google" onclick="alert('Google login coming soon!')">Continue with Google</button>
-        <div class="form-footer">Already have an account? <a href="#" onclick="switchTab('login');return false;">Sign in →</a></div>
+        <div class="form-footer">Already have an account? <a href="#" onclick="showTab('login');return false;">Sign in →</a></div>
       </div>
     </div>
   </div>
 </div>
-<footer>
-  <div class="footer-inner">
-    <div><div class="footer-logo">AETERNA</div><div class="footer-tagline">Where memories live forever</div></div>
-    <span class="footer-copy">© 2026 Aeterna. All rights reserved.</span>
-    <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="contact.html">Contact</a></div>
-  </div>
-</footer>
+
 <script>
 const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
 document.addEventListener('mousemove',e=>{const x=e.clientX,y=e.clientY;cursor.style.transform=`translate(${x-4}px,${y-4}px)`;ring.style.transform=`translate(${x-16}px,${y-16}px)`;});
-function showTab(name,btn){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');document.getElementById('loginForm').classList.toggle('hidden',name!=='login');document.getElementById('registerForm').classList.toggle('hidden',name!=='register');}
-function switchTab(name){const tabs=document.querySelectorAll('.tab');tabs.forEach(t=>t.classList.remove('active'));name==='login'?tabs[0].classList.add('active'):tabs[1].classList.add('active');document.getElementById('loginForm').classList.toggle('hidden',name!=='login');document.getElementById('registerForm').classList.toggle('hidden',name!=='register');}
+
+function showTab(name) {
+  document.getElementById('loginTab').classList.toggle('active', name==='login');
+  document.getElementById('registerTab').classList.toggle('active', name==='register');
+  document.getElementById('loginForm').classList.toggle('hidden', name!=='login');
+  document.getElementById('registerForm').classList.toggle('hidden', name!=='register');
+}
+
+function handleLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass = document.getElementById('loginPass').value.trim();
+  const errEl = document.getElementById('loginError');
+  const succEl = document.getElementById('loginSuccess');
+  errEl.style.display = 'none';
+  if (!email || !pass) { errEl.textContent = 'Please enter your email and password.'; errEl.style.display = 'block'; return; }
+  if (pass.length < 4) { errEl.textContent = 'Incorrect email or password.'; errEl.style.display = 'block'; return; }
+  // Save user to localStorage (simulated)
+  localStorage.setItem('aeterna_user', JSON.stringify({ email, name: email.split('@')[0] }));
+  succEl.style.display = 'block';
+  setTimeout(() => window.location.href = 'dashboard.html', 1200);
+}
+
+function handleRegister() {
+  const first = document.getElementById('regFirst').value.trim();
+  const last = document.getElementById('regLast').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const pass = document.getElementById('regPass').value.trim();
+  const confirm = document.getElementById('regConfirm').value.trim();
+  const agreed = document.getElementById('agreeTerms').checked;
+  const errEl = document.getElementById('regError');
+  const succEl = document.getElementById('registerSuccess');
+  errEl.style.display = 'none';
+  if (!first || !last || !email || !pass) { errEl.textContent = 'Please fill in all fields.'; errEl.style.display = 'block'; return; }
+  if (pass.length < 8) { errEl.textContent = 'Password must be at least 8 characters.'; errEl.style.display = 'block'; return; }
+  if (pass !== confirm) { errEl.textContent = 'Passwords do not match.'; errEl.style.display = 'block'; return; }
+  if (!agreed) { errEl.textContent = 'Please agree to the Terms & Conditions.'; errEl.style.display = 'block'; return; }
+  // Save to localStorage (simulated account)
+  localStorage.setItem('aeterna_user', JSON.stringify({ email, name: first + ' ' + last }));
+  succEl.style.display = 'block';
+  setTimeout(() => window.location.href = 'dashboard.html', 1500);
+}
+
+function handleForgot(e) {
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value.trim();
+  if (!email) { alert('Please enter your email address first.'); return; }
+  alert(`Password reset link sent to ${email}. Check your inbox.`);
+}
 </script>
 </body>
 </html>

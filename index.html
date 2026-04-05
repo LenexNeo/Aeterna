@@ -80,6 +80,34 @@
 .price-feature::before { content: ''; width: 4px; height: 4px; border-radius: 50%; background: var(--amber); flex-shrink: 0; }
 .price-btn { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); background: transparent; border: 0.5px solid var(--border); padding: 12px; border-radius: 2px; cursor: none; transition: all 0.2s; width: 100%; font-weight: 700; }
 .price-btn:hover, .price-card.featured .price-btn { background: var(--orange); border-color: var(--orange); color: var(--black); }
+
+@media(max-width:768px){
+  nav{padding:14px 20px;}
+  .nav-links{display:none;}
+  .nav-cta{padding:8px 14px;font-size:10px;}
+  .page-header{padding:100px 20px 40px;}
+  .how-grid{grid-template-columns:1fr;}
+  .types-grid{grid-template-columns:1fr;}
+  .pricing-inner{grid-template-columns:1fr;}
+  .pricing-cards{grid-template-columns:1fr;}
+  .hero{padding:100px 20px 60px;}
+  .hero-stats{flex-wrap:wrap;gap:24px;}
+  .dash-header-bar{flex-direction:column;align-items:flex-start;gap:16px;padding:100px 20px 32px;}
+  .stats-row{grid-template-columns:repeat(2,1fr);}
+  .dash-content{padding:24px 20px;}
+  .capsules-grid{grid-template-columns:1fr;}
+  .login-wrap{grid-template-columns:1fr;}
+  .left-panel{display:none;}
+  .right-panel{padding:100px 24px 40px;}
+  .manifesto{grid-template-columns:1fr;padding:60px 20px;}
+  .values-grid{grid-template-columns:1fr;}
+  .team-grid{grid-template-columns:1fr;}
+  .about-hero{padding:100px 20px 48px;}
+  .footer-inner{flex-direction:column;align-items:flex-start;gap:16px;}
+  .create-main{padding:140px 20px 60px;}
+  .type-grid{grid-template-columns:1fr;}
+  .tl-item{grid-template-columns:1fr;gap:8px;}
+}
 </style>
 </head>
 <body>
@@ -93,6 +121,7 @@
     <a href="dashboard.html">My Capsules</a>
     <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
+    <a href="login.html">Login</a>
   </div>
   <a class="nav-cta" href="create.html">Create Capsule</a>
 </nav>
@@ -183,7 +212,7 @@
   <div class="footer-inner">
     <div><div class="footer-logo">AETERNA</div><div class="footer-tagline">Where memories live forever</div></div>
     <span class="footer-copy">© 2026 Aeterna. All rights reserved.</span>
-    <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="contact.html">Contact</a></div>
+    <div class="footer-links"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a></div>
   </div>
 </footer>
 

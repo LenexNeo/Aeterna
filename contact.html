@@ -72,6 +72,34 @@ footer{background:var(--black);border-top:0.5px solid var(--border);padding:36px
 .footer-links{display:flex;gap:24px;}
 .footer-links a{font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,237,224,0.2);text-decoration:none;transition:color 0.2s;}
 .footer-links a:hover{color:var(--muted);}
+
+@media(max-width:768px){
+  nav{padding:14px 20px;}
+  .nav-links{display:none;}
+  .nav-cta{padding:8px 14px;font-size:10px;}
+  .page-header{padding:100px 20px 40px;}
+  .how-grid{grid-template-columns:1fr;}
+  .types-grid{grid-template-columns:1fr;}
+  .pricing-inner{grid-template-columns:1fr;}
+  .pricing-cards{grid-template-columns:1fr;}
+  .hero{padding:100px 20px 60px;}
+  .hero-stats{flex-wrap:wrap;gap:24px;}
+  .dash-header-bar{flex-direction:column;align-items:flex-start;gap:16px;padding:100px 20px 32px;}
+  .stats-row{grid-template-columns:repeat(2,1fr);}
+  .dash-content{padding:24px 20px;}
+  .capsules-grid{grid-template-columns:1fr;}
+  .login-wrap{grid-template-columns:1fr;}
+  .left-panel{display:none;}
+  .right-panel{padding:100px 24px 40px;}
+  .manifesto{grid-template-columns:1fr;padding:60px 20px;}
+  .values-grid{grid-template-columns:1fr;}
+  .team-grid{grid-template-columns:1fr;}
+  .about-hero{padding:100px 20px 48px;}
+  .footer-inner{flex-direction:column;align-items:flex-start;gap:16px;}
+  .create-main{padding:140px 20px 60px;}
+  .type-grid{grid-template-columns:1fr;}
+  .tl-item{grid-template-columns:1fr;gap:8px;}
+}
 </style>
 </head>
 <body>
@@ -93,12 +121,12 @@ footer{background:var(--black);border-top:0.5px solid var(--border);padding:36px
   <div class="contact-left">
     <div class="methods-label">Contact methods</div>
     <div class="contact-methods">
-      <div class="contact-method"><div class="method-icon">@</div><div><div class="method-label">Email</div><div class="method-val">hello@aeterna.io</div></div></div>
-      <div class="contact-method"><div class="method-icon">↗</div><div><div class="method-label">Support</div><div class="method-val">support@aeterna.io</div></div></div>
+      <div class="contact-method"><div class="method-icon">@</div><div><div class="method-label">Email</div><div class="method-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ef878a838380af8e8a9b8a9d818ec18680">[email&#160;protected]</a></div></div></div>
+      <div class="contact-method"><div class="method-icon">↗</div><div><div class="method-label">Support</div><div class="method-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8dfef8fdfde2fff9cdece8f9e8ffe3eca3e4e2">[email&#160;protected]</a></div></div></div>
       <div class="contact-method"><div class="method-icon">⏱</div><div><div class="method-label">Response time</div><div class="method-val">Within 24 hours</div></div></div>
       <div class="contact-method"><div class="method-icon">⚑</div><div><div class="method-label">Location</div><div class="method-val">Colombo, Sri Lanka</div></div></div>
     </div>
-    <div class="contact-note">We respond to all messages within 24 hours.<br>For urgent issues, email support@aeterna.io directly.</div>
+    <div class="contact-note">We respond to all messages within 24 hours.<br>For urgent issues, email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0f7c7a7f7f607d7b4f6e6a7b6a7d616e216660">[email&#160;protected]</a> directly.</div>
   </div>
   <div class="contact-right">
     <div class="form-title">Send us a <em>message</em></div>
@@ -129,13 +157,9 @@ footer{background:var(--black);border-top:0.5px solid var(--border);padding:36px
   <div class="footer-inner">
     <div><div class="footer-logo">AETERNA</div><div class="footer-tagline">Where memories live forever</div></div>
     <span class="footer-copy">© 2026 Aeterna. All rights reserved.</span>
-    <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="contact.html">Contact</a></div>
+    <div class="footer-links"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms</a><a href="contact.html">Contact</a></div>
   </div>
 </footer>
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
-document.addEventListener('mousemove',e=>{const x=e.clientX,y=e.clientY;cursor.style.transform=`translate(${x-4}px,${y-4}px)`;ring.style.transform=`translate(${x-16}px,${y-16}px)`;});
-function handleSubmit(){if(!document.getElementById('fname').value.trim()||!document.getElementById('femail').value.trim()||!document.getElementById('fmessage').value.trim()){alert('Please fill in your name, email, and message.');return;}document.getElementById('successMsg').style.display='block';document.getElementById('sendBtn').style.display='none';}
-</script>
-</body>
-</html>
+document.addEventListener('mousemove',e=>{const x=e.clientX,y=e.clientY;cursor.style.transform=`t
